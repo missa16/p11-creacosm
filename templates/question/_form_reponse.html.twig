@@ -1,0 +1,10 @@
+
+{% for question in form.Questions %}
+    {% for rep in question.Reponses %}
+        <li>
+            {{ rep.laReponse }}
+        </li>
+    {% endfor %}
+{% endfor %}
+
+

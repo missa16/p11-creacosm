@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Création d'un nouveau sondage{% endblock %}
+
+{% block body %}
+
+    <h1>Créer un nouveau sondage</h1>
+    {{ include('sondage/_form.html.twig') }}
+
+    <a href="{{ path('app_sondage_index') }}">Retour au menu</a>
+{% endblock %}
+
+
+{% block javascripts %}
+    {#{{ parent }}#}
+
+    {{ encore_entry_script_tags('manageQuestions') }}
+{% endblock %}

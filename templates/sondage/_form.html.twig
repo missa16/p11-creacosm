@@ -1,0 +1,46 @@
+{% import _self as formMacros2 %}
+{% macro printReponse(reponse) %}
+    {{ form_row(reponse.laReponse)  }}
+{% endmacro %}
+
+{% import _self as formMacros %}
+{% macro printQuestion(question) %}
+{#    {% set questionIntitule = form_widget(question.intitule) %}#}
+{#    {% set questionType = form_widget(question.TypeQuestion) %}#}
+    {% set questionReponsesPrototype = formMacros2.printReponse(question.Reponses.vars.prototype) %}
+    {{ form_row(question.intitule) }}
+    {{ form_row(question.TypeQuestion) }}
+    <ul class="reponses-{{ question.vars.name }}" data-prototype="{{ questionReponsesPrototype|e('html_attr') }}"
+        data-index="{{ question.Reponses|length ? question.Reponses|last.vars.name + 1 : 0 }}">
+        {% for rep in question.Reponses %}
+            <li>
+                {{formMacros2.printReponse(rep)}}
+            </li>
+
+{#               {{ form_row(rep.laReponse) }}#}
+
+        {% endfor %}
+    </ul>
+{#    <button type="button" class="add_ans_link" data-collection-holder-class=" reponses-{{ question.vars.name }}">Test une réponse</button>#}
+{% endmacro %}
+
+{{ form_start(form) }}
+    {{ form_row(form.intitule) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.imageCouverture) }}
+    {{ form_row(form.dateLancement) }}
+    {{ form_row(form.dateFin) }}
+
+<h3>Questions</h3>
+<ul class="row questions" data-prototype="{{ formMacros. printQuestion(form.Questions.vars.prototype)|e('html_attr') }}"
+    data-index="{{ form.Questions|length ? form.Questions|last.vars.name + 1 : 0 }}">
+    {% for question in form.Questions %}
+        <li>
+            {{formMacros.printQuestion(question)}}
+        </li>
+    {% endfor %}
+</ul>
+<button type="button" class="add_item_link" data-collection-holder-class="questions"><span class="bi bi-plus-circle"></span>Ajouter une question</button>
+{{ form_end(form) }}
+
+
