@@ -3,14 +3,14 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[ORM\Table(name: '`user`')]
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -30,13 +30,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\OneToMany(mappedBy: 'sonde', targetEntity: UserSondageResult::class, orphanRemoval: true)]
-    private Collection $sondagesRepondus;
+    #[ORM\Column(length: 255)]
+    private ?string $nom = null;
 
-    public function __construct()
-    {
-        $this->sondagesRepondus = new ArrayCollection();
-    }
+    #[ORM\Column(length: 255)]
+    private ?string $prenom = null;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $dateNaissance = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $formation = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $ville = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $genre = null;
 
     public function getId(): ?int
     {
@@ -108,32 +118,74 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    /**
-     * @return Collection<int, UserSondageResult>
-     */
-    public function getSondagesRepondus(): Collection
+    public function getNom(): ?string
     {
-        return $this->sondagesRepondus;
+        return $this->nom;
     }
 
-    public function addSondagesRepondu(UserSondageResult $sondagesRepondu): self
+    public function setNom(string $nom): self
     {
-        if (!$this->sondagesRepondus->contains($sondagesRepondu)) {
-            $this->sondagesRepondus->add($sondagesRepondu);
-            $sondagesRepondu->setSonde($this);
-        }
+        $this->nom = $nom;
 
         return $this;
     }
 
-    public function removeSondagesRepondu(UserSondageResult $sondagesRepondu): self
+    public function getPrenom(): ?string
     {
-        if ($this->sondagesRepondus->removeElement($sondagesRepondu)) {
-            // set the owning side to null (unless already changed)
-            if ($sondagesRepondu->getSonde() === $this) {
-                $sondagesRepondu->setSonde(null);
-            }
-        }
+        return $this->prenom;
+    }
+
+    public function setPrenom(string $prenom): self
+    {
+        $this->prenom = $prenom;
+
+        return $this;
+    }
+
+    public function getDateNaissance(): ?\DateTimeInterface
+    {
+        return $this->dateNaissance;
+    }
+
+    public function setDateNaissance(\DateTimeInterface $dateNaissance): self
+    {
+        $this->dateNaissance = $dateNaissance;
+
+        return $this;
+    }
+
+    public function getFormation(): ?string
+    {
+        return $this->formation;
+    }
+
+    public function setFormation(string $formation): self
+    {
+        $this->formation = $formation;
+
+        return $this;
+    }
+
+    public function getVille(): ?string
+    {
+        return $this->ville;
+    }
+
+    public function setVille(string $ville): self
+    {
+        $this->ville = $ville;
+
+        return $this;
+    }
+
+    public function getGenre(): ?string
+    {
+        return $this->genre;
+    }
+
+    public function setGenre(string $genre): self
+    {
+        $this->genre = $genre;
 
         return $this;
     }
