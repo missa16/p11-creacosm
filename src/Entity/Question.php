@@ -33,9 +33,15 @@ class Question
     #[Assert\Valid]
     private Collection $Reponses;
 
+    #[ORM\OneToMany(mappedBy: 'question', targetEntity: UserSondageReponse::class, orphanRemoval: true)]
+    private Collection $userSondageReponses;
+
+
+
     public function __construct()
     {
         $this->Reponses = new ArrayCollection();
+        $this->userSondageReponses = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -108,4 +114,38 @@ class Question
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, UserSondageReponse>
+     */
+    public function getUserSondageReponses(): Collection
+    {
+        return $this->userSondageReponses;
+    }
+
+    public function addUserSondageReponse(UserSondageReponse $userSondageReponse): self
+    {
+        if (!$this->userSondageReponses->contains($userSondageReponse)) {
+            $this->userSondageReponses->add($userSondageReponse);
+            $userSondageReponse->setQuestion($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserSondageReponse(UserSondageReponse $userSondageReponse): self
+    {
+        if ($this->userSondageReponses->removeElement($userSondageReponse)) {
+            // set the owning side to null (unless already changed)
+            if ($userSondageReponse->getQuestion() === $this) {
+                $userSondageReponse->setQuestion(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+
+
 }

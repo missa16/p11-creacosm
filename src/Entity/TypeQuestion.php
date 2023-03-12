@@ -16,6 +16,12 @@ class TypeQuestion
     #[ORM\Column(length: 255)]
     private ?string $intituleType = null;
 
+    #[ORM\Column(length: 255)]
+    private bool $isMultiple = false;
+
+    #[ORM\Column(length: 255)]
+    private bool $isExpanded = false;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -31,6 +37,42 @@ class TypeQuestion
         $this->intituleType = $intituleType;
 
         return $this;
+    }
+
+
+
+
+
+    /**
+     * @return bool
+     */
+    public function isMultiple(): bool
+    {
+        return $this->isMultiple;
+    }
+
+    /**
+     * @param bool $isMultiple
+     */
+    public function setIsMultiple(bool $isMultiple): void
+    {
+        $this->isMultiple = $isMultiple;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isExpanded(): bool
+    {
+        return $this->isExpanded;
+    }
+
+    /**
+     * @param bool $isExpanded
+     */
+    public function setIsExpanded(bool $isExpanded): void
+    {
+        $this->isExpanded = $isExpanded;
     }
 
 

@@ -1,0 +1,55 @@
+{#{% extends 'base.html.twig' %}#}
+
+{#{% block body %}#}
+{#    <h1>{{ sondage.intitule }}</h1>#}
+
+{#    {{ form_start(form) }}#}
+
+{#    {% for field in form %}#}
+{#        {{ form_row(field) }}#}
+{#    {% endfor %}#}
+
+{#    {{ form_end(form) }}#}
+{#{% endblock %}#}
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>{{ sondage.intitule }}</h1>
+
+    {% set totalQuestions = sondage.questions|length %}
+
+    <div id="question-container">
+        {{ form_start(form) }}
+
+        {% set questionNumber = 0 %}
+
+        {% for question in sondage.questions %}
+            {% set questionNumber = questionNumber + 1 %}
+            <div class="question" id="question-{{ questionNumber }}" {% if questionNumber != 1 %}style="display:none"{% endif %}>
+                {{ form_row(form['question_' ~ question.id]) }}
+                <button class="next-question-button" data-next-question="{{ questionNumber + 1 }}">
+                   Next question
+                </button>
+            </div>
+        {% endfor %}
+
+        <div id="confirmation-message" style="display:none">
+            Merci d'avoir complété le sondage !
+            {{ form_row(form.submit, { 'label': 'Envoyer mes réponses' }) }}
+        </div>
+
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('nextQuestion') }}
+{% endblock %}
+
+{# {% if questionNumber+1 == sondage.questions|length %}#}
+{#     Envoyer mes réponses#}
+{# {% else %}#}
+{#     Question suivante#}
+{# {% endif %}#}

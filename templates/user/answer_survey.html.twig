@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Répondre au sondage{% endblock %}
+
+
+{% block body %}
+    <h1>Thème : </h1>
+
+    <h2>Nom du sondage : </h2>
+    <h3>{{ sondage.intitule }}</h3>
+
+    <h2>Nombre de questions : </h2>
+    <h3>{{ sondage.Questions.count}}</h3>
+
+    <a href="{{ path('app_sondage_answer_questions', {'id': sondage.id}) }}">Commencer</a>
+
+
+    <a href="{{ path('app_sondage_index') }}">Retour au menu</a>
+{% endblock %}

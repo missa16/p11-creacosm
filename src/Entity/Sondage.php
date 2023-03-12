@@ -52,9 +52,16 @@ class Sondage
     #[Assert\Valid]
     private Collection $Questions;
 
+    #[ORM\OneToMany(mappedBy: 'sondage', targetEntity: UserSondageResult::class, orphanRemoval: true)]
+    private Collection $lesSondes;
+
+
+
     public function __construct()
     {
         $this->Questions = new ArrayCollection();
+        $this->lesSondes = new ArrayCollection();
+
     }
 
 
@@ -188,6 +195,42 @@ class Sondage
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, UserSondageResult>
+     */
+    public function getLesSondes(): Collection
+    {
+        return $this->lesSondes;
+    }
+
+    public function addLesSonde(UserSondageResult $lesSonde): self
+    {
+        if (!$this->lesSondes->contains($lesSonde)) {
+            $this->lesSondes->add($lesSonde);
+            $lesSonde->setSondage($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLesSonde(UserSondageResult $lesSonde): self
+    {
+        if ($this->lesSondes->removeElement($lesSonde)) {
+            // set the owning side to null (unless already changed)
+            if ($lesSonde->getSondage() === $this) {
+                $lesSonde->setSondage(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+
+
+
+
 
 
 }

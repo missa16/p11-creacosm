@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ReponseRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ReponseRepository::class)]
@@ -19,6 +21,15 @@ class Reponse
     #[ORM\ManyToOne(inversedBy: 'Reponses')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Question $Question = null;
+
+    #[ORM\ManyToMany(targetEntity: UserSondageReponse::class, mappedBy: 'reponses')]
+    private Collection $userSondageReponses;
+
+    public function __construct()
+    {
+        $this->userSondageReponses = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -53,5 +64,35 @@ class Reponse
     {
         return $this->laReponse;
     }
+
+    /**
+     * @return Collection<int, UserSondageReponse>
+     */
+    public function getUserSondageReponses(): Collection
+    {
+        return $this->userSondageReponses;
+    }
+
+    public function addUserSondageReponse(UserSondageReponse $userSondageReponse): self
+    {
+        if (!$this->userSondageReponses->contains($userSondageReponse)) {
+            $this->userSondageReponses->add($userSondageReponse);
+            $userSondageReponse->addReponse($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserSondageReponse(UserSondageReponse $userSondageReponse): self
+    {
+        if ($this->userSondageReponses->removeElement($userSondageReponse)) {
+            $userSondageReponse->removeReponse($this);
+        }
+
+        return $this;
+    }
+
+
+
 
 }
