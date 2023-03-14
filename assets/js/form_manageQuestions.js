@@ -11,13 +11,15 @@ function addAnswerFormDeleteLink(item) {
     });
 }
 
+
+
 function addAnswer(btn) {
     //console.log(btn.currentTarget.dataset.collectionHolderClass)
     let collectionHolder = document.querySelector('.'+btn.currentTarget.dataset.collectionHolderClass);
-    //let collectionHolder = document.querySelector('.' + collectionHolderClass);
-    console.log(collectionHolder);
-
-    //console.log(collectionHolder)
+    let questionIndex = collectionHolder.parentElement.dataset.indice;
+    let answerIndex = collectionHolder.dataset.index;
+    console.log("indice de la question" + collectionHolder.parentElement.dataset.indice)
+    console.log("l'indice de la réponse" + collectionHolder.dataset.index)
     let item = document.createElement('li');
     item.innerHTML = collectionHolder
         .dataset
@@ -27,6 +29,10 @@ function addAnswer(btn) {
             //e.currentTarget.dataset.indice
             collectionHolder.dataset.index
         );
+    let div = item.querySelector('div');
+    div.innerHTML = `<label for="sondage_Questions_${questionIndex}_Reponses_${answerIndex}_laReponse" class="form-label required">La reponse</label> <input type="text" id="sondage_Questions_${questionIndex}_Reponses_${answerIndex}_laReponse" name="sondage[Questions][${questionIndex}][Reponses][${answerIndex}][laReponse]" required="required" class="form-control">`
+
+    console.log("non"+item.innerHTML);
     collectionHolder.appendChild(item);
     //e.currentTarget.dataset.indice++
     collectionHolder.dataset.index++;
@@ -57,6 +63,7 @@ function addQuestionFormDeleteLink(item) {
 }
 
 function addFormToCollection (e)  {
+
     let collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
     let item = document.createElement('li');
     item.innerHTML = collectionHolder
@@ -67,9 +74,9 @@ function addFormToCollection (e)  {
             collectionHolder.dataset.index
         );
     collectionHolder.appendChild(item);
+    item.dataset.indice=collectionHolder.dataset.index.toString();
     collectionHolder.dataset.index++;
     addQuestionFormDeleteLink(item)
-    //item.dataset.indice=collectionHolder.dataset.index.toString();;
     //let reponses = document.querySelector('li ul');
     //reponses.classList.add('reponses-'+collectionHolder.dataset.index);
     //console.log(reponses.dataset.collectionHolderClass);
@@ -101,14 +108,20 @@ document
 //         }
 //     )
 
- document
-     .querySelectorAll('.add_ans_link')
+document.querySelectorAll('.add_ans_link')
     .forEach(btn => {
-            btn.addEventListener("click", function(){
-                addAnswer(btn);
-            }
-            )}
-    );
+        btn.addEventListener("click", addAnswer)
+    })
+
+
+ // document
+ //     .querySelectorAll('.add_ans_link')
+ //    .forEach(btn => {
+ //            btn.addEventListener("click", function(){
+ //                addAnswer(btn);
+ //            }
+ //            )}
+ //    );
 
 // Supprimer une réponse
 document
