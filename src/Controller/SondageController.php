@@ -2,25 +2,18 @@
 
 namespace App\Controller;
 
-use App\Entity\Question;
 use App\Entity\Sondage;
 use App\Entity\User;
-
 use App\Entity\UserSondageReponse;
 use App\Entity\UserSondageResult;
-use App\Form\RepondreSondageType;
-
-use App\Form\SondageType;
-
+use App\Form\creationSondage\SondageType;
+use App\Form\repondreSondage\RepondreSondageType;
 use App\Repository\QuestionRepository;
 use App\Repository\ReponseRepository;
 use App\Repository\SondageRepository;
-
 use App\Repository\UserSondageReponseRepository;
 use App\Repository\UserSondageResultRepository;
-use AppBundle\Form\QuestionEmbededForm;
 use DateTimeImmutable;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

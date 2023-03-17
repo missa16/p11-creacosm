@@ -55,6 +55,9 @@ class Sondage
     #[ORM\OneToMany(mappedBy: 'sondage', targetEntity: UserSondageResult::class, orphanRemoval: true)]
     private Collection $lesSondes;
 
+    #[ORM\ManyToOne(inversedBy: 'Sondage')]
+    private ?CategorieSondage $categorieSondage = null;
+
 
 
     public function __construct()
@@ -222,6 +225,18 @@ class Sondage
                 $lesSonde->setSondage(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCategorieSondage(): ?CategorieSondage
+    {
+        return $this->categorieSondage;
+    }
+
+    public function setCategorieSondage(?CategorieSondage $categorieSondage): self
+    {
+        $this->categorieSondage = $categorieSondage;
 
         return $this;
     }
