@@ -58,6 +58,12 @@ class Sondage
     #[ORM\ManyToOne(inversedBy: 'Sondage')]
     private ?CategorieSondage $categorieSondage = null;
 
+    #[ORM\ManyToOne(inversedBy: 'sondageCrees')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $sondeur = null;
+
+
+
 
 
     public function __construct()
@@ -240,6 +246,20 @@ class Sondage
 
         return $this;
     }
+
+    public function getSondeur(): ?User
+    {
+        return $this->sondeur;
+    }
+
+    public function setSondeur(?User $sondeur): self
+    {
+        $this->sondeur = $sondeur;
+
+        return $this;
+    }
+
+
 
 
 

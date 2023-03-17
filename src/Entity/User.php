@@ -3,14 +3,15 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+#[ORM\Table(name: '`user`')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -36,17 +37,25 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $prenom = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $dateNaissance = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $formation = null;
 
     #[ORM\Column(length: 255)]
     private ?string $ville = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $genre = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $formation = null;
+
+    #[ORM\OneToMany(mappedBy: 'sondeur', targetEntity: Sondage::class, orphanRemoval: true)]
+    private Collection $sondageCrees;
+
+    public function __construct()
+    {
+        $this->sondageCrees = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -154,18 +163,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getFormation(): ?string
-    {
-        return $this->formation;
-    }
-
-    public function setFormation(string $formation): self
-    {
-        $this->formation = $formation;
-
-        return $this;
-    }
-
     public function getVille(): ?string
     {
         return $this->ville;
@@ -183,9 +180,51 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->genre;
     }
 
-    public function setGenre(string $genre): self
+    public function setGenre(?string $genre): self
     {
         $this->genre = $genre;
+
+        return $this;
+    }
+
+    public function getFormation(): ?string
+    {
+        return $this->formation;
+    }
+
+    public function setFormation(?string $formation): self
+    {
+        $this->formation = $formation;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Sondage>
+     */
+    public function getSondageCrees(): Collection
+    {
+        return $this->sondageCrees;
+    }
+
+    public function addSondageCree(Sondage $sondageCree): self
+    {
+        if (!$this->sondageCrees->contains($sondageCree)) {
+            $this->sondageCrees->add($sondageCree);
+            $sondageCree->setSondeur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSondageCree(Sondage $sondageCree): self
+    {
+        if ($this->sondageCrees->removeElement($sondageCree)) {
+            // set the owning side to null (unless already changed)
+            if ($sondageCree->getSondeur() === $this) {
+                $sondageCree->setSondeur(null);
+            }
+        }
 
         return $this;
     }

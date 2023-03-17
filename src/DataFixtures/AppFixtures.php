@@ -7,17 +7,38 @@ use App\Entity\Question;
 use App\Entity\Reponse;
 use App\Entity\Sondage;
 use App\Entity\TypeQuestion;
+use App\Entity\User;
 use App\Repository\ReponseRepository;
 use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
+    private UserPasswordHasherInterface $passwordHasher;
+
+    public function __construct(UserPasswordHasherInterface $passwordHasher)
+    {
+        $this->passwordHasher = $passwordHasher;
+    }
     public function load(ObjectManager $manager): void
     {
 
-        // Mise  en place des types de question
+        // Mise en place d'un sondeur
+        $sondeur = new User();
+        $role =  ['ROLE_SONDEUR'];
+        $sondeur->setEmail('james.bond@skyfall.com')
+            ->setPassword($this->passwordHasher->hashPassword(
+                $sondeur,'password'))
+            ->setRoles($role)
+            ->setNom('Bond')
+            ->setPrenom('James')
+            ->setDateNaissance(new DateTimeImmutable())
+            ->setVille('Orélans');
+        $manager->persist($sondeur);
+
+        // Mise en place des types de question
         $allTypes=[];
         $type1= new TypeQuestion();
         $type1
@@ -65,6 +86,7 @@ class AppFixtures extends Fixture
         $sondage = new Sondage();
         $sondage->setIntitule("Un trés beau sondage")
             ->setDescription("oui oui")
+            ->setSondeur($sondeur)
             ->setCategorieSondage($cat2)
             ->setDateLancement(new DateTimeImmutable())
             ->setDateFin(new DateTimeImmutable())

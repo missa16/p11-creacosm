@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Sondage{% endblock %}
+{% block title %}Détails du sondage{% endblock %}
 
 {% block body %}
-    <h1>Sondage</h1>
+    <h1>Détails du sondage</h1>
 
     <table class="table">
         <tbody>
@@ -42,9 +42,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_sondage_index') }}">back to list</a>
+    <a href="{{ path('app_sondeur_my_surveys') }}">back to list</a>
 
-    <a href="{{ path('app_sondage_edit', {'id': sondage.id}) }}">edit</a>
+    <a href="{{ path('app_sondeur_edit', {'id': sondage.id}) }}">edit</a>
 
-    {{ include('sondage/_delete_form.html.twig') }}
+    {{ include('sondeur/_delete_form.html.twig') }}
 {% endblock %}

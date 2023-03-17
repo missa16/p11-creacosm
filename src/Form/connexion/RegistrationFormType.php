@@ -5,6 +5,7 @@ namespace App\Form\connexion;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -42,7 +43,9 @@ class RegistrationFormType extends AbstractType
                     'Femme' => 'femme',
                     'Homme' => 'homme',
                 ],])
-            ->add('dateNaissance')
+            ->add('dateNaissance',DateType::class,[
+                'widget'=>'single_text'
+            ])
             ->add('ville')
             ->add('formation')
         ;
