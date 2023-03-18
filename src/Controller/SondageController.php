@@ -49,9 +49,7 @@ class SondageController extends AbstractController
     public function answerQuestions(EntityManagerInterface $entityManager, Request $request, Sondage $sondage, QuestionRepository $questionRepository, ReponseRepository $reponseRepository, UserSondageResultRepository $userSondageResultRepository, UserSondageReponseRepository $userSondageReponseRepository): Response
     {
         // A enlever lors de la creation du form d'authentification
-        $user = new User();
-        $user->setEmail('lol@gmail.com');
-        $user->setPassword('123');
+        $user = $this->getUser();
 
         //Enregistrement des réponses
 
@@ -65,6 +63,7 @@ class SondageController extends AbstractController
 
             $userSondageResult = new UserSondageResult();
             $userSondageResult->setSondage($sondage);
+            $userSondageResult->setSonde($user);
 
             foreach ($form->getData() as $questionId => $reponsesIds) {
                 $userSondageReponse = new UserSondageReponse();

@@ -12,10 +12,11 @@
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
+
         {{ include('composants/_nav_bar.html.twig') }}
     </head>
 
-    <body style="background-color: #8fc4b7;">
+    <body>
     {% for message in app.flashes('success') %}
         <div class="alert alert-success" style="margin-top: 5%">
             {{ message }}

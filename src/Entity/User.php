@@ -52,6 +52,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'sondeur', targetEntity: Sondage::class, orphanRemoval: true)]
     private Collection $sondageCrees;
 
+    #[ORM\OneToMany(mappedBy: 'sondagesRepondus', targetEntity: UserSondageResult::class, orphanRemoval: true)]
+    private Collection $sondagesRepondus;
+
     public function __construct()
     {
         $this->sondageCrees = new ArrayCollection();
@@ -226,6 +229,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             }
         }
 
+        return $this;
+    }
+
+
+    /**
+     * @return Collection<int, UserSondageResult>
+     */
+    public function getSondagesRepondus(): Collection
+    {
+        return $this->sondagesRepondus;
+    }
+
+    public function addSondageRepondu(UserSondageResult $sondageRepondu): self
+    {
+        if (!$this->sondagesRepondus->contains($sondageRepondu)) {
+            $this->sondagesRepondus->add($sondageRepondu);
+            $sondageRepondu->setSonde($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSondageRepondu(UserSondageResult $sondageRepondu): self
+    {
+        if ($this->sondagesRepondus->removeElement($sondageRepondu)) {
+            // set the owning side to null (unless already changed)
+            if ($sondageRepondu->getSonde() === $this) {
+                $sondageRepondu->setSonde(null);
+            }
+        }
         return $this;
     }
 }

@@ -20,11 +20,11 @@
         {% for sondage in sondages %}
             <tr>
                 <td>{{ sondage.id }}</td>
-                <td>{{ sondage.intitule }}</td>
+                <td><a href="{{ path('app_sondeur_show', {'id': sondage.id}) }}">{{ sondage.intitule }}</a></td>
                 <td>{{ sondage.etatSondage }}</td>
                 <td>
-                    <a href="{{ path('app_sondeur_show', {'id': sondage.id}) }}">show</a>
                     <a href="{{ path('app_sondeur_edit', {'id': sondage.id}) }}">edit</a>
+                    <a href="{{ path('app_sondeur_stats_survey', {'id': sondage.id}) }}">Statistiques</a>
                 </td>
             </tr>
         {% else %}
