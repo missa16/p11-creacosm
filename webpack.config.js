@@ -47,6 +47,11 @@ Encore
     // enables hashed filenames (e.g. app.abc123.css)
     .enableVersioning(Encore.isProduction())
 
+    .copyFiles({
+        from:'./assets/images',
+        to:'images/[path][name].[ext]'
+    })
+
     // configure Babel
     // .configureBabel((config) => {
     //     config.plugins.push('@babel/a-babel-plugin');
@@ -57,6 +62,7 @@ Encore
         config.useBuiltIns = 'usage';
         config.corejs = '3.23';
     })
+
 
     // enables Sass/SCSS support
     //.enableSassLoader()

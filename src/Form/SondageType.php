@@ -43,7 +43,7 @@ class SondageType extends AbstractType
             ])
             ->add('Enregistrer',SubmitType::class,[
                 'attr'=> [
-                    'class'=> 'btn btn-success'
+                    'class'=> 'button-enregister'
                 ]
             ])
             ->addEventListener(FormEvents::PRE_SUBMIT,function ($event){

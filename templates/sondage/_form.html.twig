@@ -1,12 +1,11 @@
-
 {% import _self as formMacros2 %}
 {% macro printReponse(reponse) %}
-   {{ form_row(reponse.laReponse)  }}
+    {{ form_row(reponse.laReponse) }}
 {% endmacro %}
 
 {% import _self as formMacros %}
 {% macro printQuestion(question) %}
-    {% set questionReponsesPrototype = formMacros2.printReponse(question.Reponses.vars.prototype)%}
+    {% set questionReponsesPrototype = formMacros2.printReponse(question.Reponses.vars.prototype) %}
     {{ form_row(question.intitule) }}
     {{ form_row(question.TypeQuestion) }}
     <ul class="reponses-{{ question.vars.name }}" data-prototype="{{ questionReponsesPrototype|e('html_attr') }}"
@@ -14,30 +13,82 @@
 
         {% for rep in question.Reponses %}
             <li>
-                {{ form_row(rep.laReponse)  }}
-{#                {{formMacros2.printReponse(rep)}}#}
+                {{ form_row(rep.laReponse) }}
+                {#                {{formMacros2.printReponse(rep)}} #}
             </li>
         {% endfor %}
     </ul>
 {% endmacro %}
 
 {{ form_start(form) }}
-    {{ form_row(form.intitule) }}
-    {{ form_row(form.description) }}
-    {{ form_row(form.imageCouverture) }}
-    {{ form_row(form.dateLancement) }}
-    {{ form_row(form.dateFin) }}
+<div class="grid">
+    <h3 class="size-25">Généralités :</h3>
+    <div>
+        <div class="card-q">
+            <div class="rectangle"></div>
+            <div class="content-q">
+                <div> {{ form_row(form.intitule) }}
+                </div>
+                <div> {{ form_row(form.description) }}
+                </div>
+                <div> {{ form_row(form.imageCouverture) }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <h3 class="size-25">Dates :</h3>
 
-<h3>Questions</h3>
-<ul class="row questions" data-prototype="{{ formMacros. printQuestion(form.Questions.vars.prototype)|e('html_attr') }}"
-    data-index="{{ form.Questions|length ? form.Questions|last.vars.name + 1 : 0 }}">
-    {% for question in form.Questions %}
-        <li data-indice="{{ question.vars.name }}">
-            {{formMacros.printQuestion(question)}}
-        </li>
-    {% endfor %}
-</ul>
-<button type="button" class="add_item_link" data-collection-holder-class="questions"><span class="bi bi-plus-circle"></span>Ajouter une question</button>
-{{ form_end(form) }}
+    <div>
+        <div class="card-q">
+            <div class="rectangle"></div>
+            <div class="content-q">
+                <div> {{ form_row(form.dateLancement) }}
+                </div>
+                <div> {{ form_row(form.dateFin) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h3 class="size-25">Questions :</h3>
+    <div>
+        <div class="card-q">
+            <div class="rectangle"></div>
+            <div class="content-q">
+                <ul class="row questions"
+                    data-prototype="{{ formMacros. printQuestion(form.Questions.vars.prototype)|e('html_attr') }}"
+                    data-index="{{ form.Questions|length ? form.Questions|last.vars.name + 1 : 0 }}">
+                    {% for question in form.Questions %}
+                        <li class="flex align-items-end" data-indice="{{ question.vars.name }}">
+                            {{ formMacros.printQuestion(question) }}
+                        </li>
+                    {% endfor %}
+                </ul>
+                <div class="df jcc">
+                    <button type="button" class="button-enregister add_item_link"
+                            data-collection-holder-class="questions"><span
+                                class="bi bi-plus-circle"></span>Ajouter une question
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div class="card-q">
+            <div class="rectangle"></div>
+            <div class="content-q">
+                <div class="df jcc">
+                    {{ form_row(form.Enregistrer) }}
+                    <div>
+                        <a href="{{ path('app_sondage_index') }}"><img class="retour" src="{{ asset('build/images/bouton-retour.png') }}"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    {{ form_end(form) }}
 
 
