@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="UTF-8">
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
@@ -11,12 +11,24 @@
 
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
-
-
         {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
 
+        {{ include('composants/_nav_bar.html.twig') }}
+    </head>
+
+    <body>
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success" style="margin-top: 5%">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    {% for message in app.flashes('error')  %}
+        <div class="alert alert-danger" style="margin-top: 5%">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% block body %}
+    {% endblock %}
     </body>
 </html>

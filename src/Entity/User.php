@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -30,12 +31,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\OneToMany(mappedBy: 'sonde', targetEntity: UserSondageResult::class, orphanRemoval: true)]
+    #[ORM\Column(length: 255)]
+    private ?string $nom = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $prenom = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $dateNaissance = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $ville = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $genre = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $formation = null;
+
+    #[ORM\OneToMany(mappedBy: 'sondeur', targetEntity: Sondage::class, orphanRemoval: true)]
+    private Collection $sondageCrees;
+
+    #[ORM\OneToMany(mappedBy: 'sondagesRepondus', targetEntity: UserSondageResult::class, orphanRemoval: true)]
     private Collection $sondagesRepondus;
 
     public function __construct()
     {
-        $this->sondagesRepondus = new ArrayCollection();
+        $this->sondageCrees = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -108,6 +130,109 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): self
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getPrenom(): ?string
+    {
+        return $this->prenom;
+    }
+
+    public function setPrenom(string $prenom): self
+    {
+        $this->prenom = $prenom;
+
+        return $this;
+    }
+
+    public function getDateNaissance(): ?\DateTimeInterface
+    {
+        return $this->dateNaissance;
+    }
+
+    public function setDateNaissance(\DateTimeInterface $dateNaissance): self
+    {
+        $this->dateNaissance = $dateNaissance;
+
+        return $this;
+    }
+
+    public function getVille(): ?string
+    {
+        return $this->ville;
+    }
+
+    public function setVille(string $ville): self
+    {
+        $this->ville = $ville;
+
+        return $this;
+    }
+
+    public function getGenre(): ?string
+    {
+        return $this->genre;
+    }
+
+    public function setGenre(?string $genre): self
+    {
+        $this->genre = $genre;
+
+        return $this;
+    }
+
+    public function getFormation(): ?string
+    {
+        return $this->formation;
+    }
+
+    public function setFormation(?string $formation): self
+    {
+        $this->formation = $formation;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Sondage>
+     */
+    public function getSondageCrees(): Collection
+    {
+        return $this->sondageCrees;
+    }
+
+    public function addSondageCree(Sondage $sondageCree): self
+    {
+        if (!$this->sondageCrees->contains($sondageCree)) {
+            $this->sondageCrees->add($sondageCree);
+            $sondageCree->setSondeur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSondageCree(Sondage $sondageCree): self
+    {
+        if ($this->sondageCrees->removeElement($sondageCree)) {
+            // set the owning side to null (unless already changed)
+            if ($sondageCree->getSondeur() === $this) {
+                $sondageCree->setSondeur(null);
+            }
+        }
+
+        return $this;
+    }
+
+
     /**
      * @return Collection<int, UserSondageResult>
      */
@@ -116,25 +241,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->sondagesRepondus;
     }
 
-    public function addSondagesRepondu(UserSondageResult $sondagesRepondu): self
+    public function addSondageRepondu(UserSondageResult $sondageRepondu): self
     {
-        if (!$this->sondagesRepondus->contains($sondagesRepondu)) {
-            $this->sondagesRepondus->add($sondagesRepondu);
-            $sondagesRepondu->setSonde($this);
+        if (!$this->sondagesRepondus->contains($sondageRepondu)) {
+            $this->sondagesRepondus->add($sondageRepondu);
+            $sondageRepondu->setSonde($this);
         }
 
         return $this;
     }
 
-    public function removeSondagesRepondu(UserSondageResult $sondagesRepondu): self
+    public function removeSondageRepondu(UserSondageResult $sondageRepondu): self
     {
-        if ($this->sondagesRepondus->removeElement($sondagesRepondu)) {
+        if ($this->sondagesRepondus->removeElement($sondageRepondu)) {
             // set the owning side to null (unless already changed)
-            if ($sondagesRepondu->getSonde() === $this) {
-                $sondagesRepondu->setSonde(null);
+            if ($sondageRepondu->getSonde() === $this) {
+                $sondageRepondu->setSonde(null);
             }
         }
-
         return $this;
     }
 }

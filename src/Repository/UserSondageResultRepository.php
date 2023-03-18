@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\UserSondageResult;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Validator\Constraints\Collection;
 
 /**
  * @extends ServiceEntityRepository<UserSondageResult>
@@ -63,4 +64,5 @@ class UserSondageResultRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
 }

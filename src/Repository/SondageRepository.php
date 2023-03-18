@@ -3,8 +3,11 @@
 namespace App\Repository;
 
 use App\Entity\Sondage;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
+use PhpParser\Node\Expr\Array_;
 
 /**
  * @extends ServiceEntityRepository<Sondage>
@@ -63,4 +66,15 @@ class SondageRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+    public function findSondes(Sondage $sondage) : array
+    {
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.lesSondes = :val')
+            ->setParameter('val', $sondage)
+            ->orderBy('s.id', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult();
+    }
+
 }

@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Form;
+namespace App\Form\creationSondage;
 
-use App\Entity\Question;
+use App\Entity\CategorieSondage;
 use App\Entity\Sondage;
-use AppBundle\Form\QuestionEmbededForm;
+use App\Entity\TypeQuestion;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -12,9 +13,8 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SondageType extends AbstractType
 {
@@ -23,6 +23,10 @@ class SondageType extends AbstractType
         $builder
             ->add('intitule')
             ->add('description',TextareaType::class)
+            ->add('categorieSondage',EntityType::class,[
+                'class'=>CategorieSondage::class,
+                'choice_label'=>'nomCategorie',
+            ])
             ->add('imageCouverture',FileType::class,[
                 'label' =>' Photo de couverture du sondage (Image)',
                 'mapped' => false,

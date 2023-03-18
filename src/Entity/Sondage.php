@@ -55,6 +55,15 @@ class Sondage
     #[ORM\OneToMany(mappedBy: 'sondage', targetEntity: UserSondageResult::class, orphanRemoval: true)]
     private Collection $lesSondes;
 
+    #[ORM\ManyToOne(inversedBy: 'Sondage')]
+    private ?CategorieSondage $categorieSondage = null;
+
+    #[ORM\ManyToOne(inversedBy: 'sondageCrees')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $sondeur = null;
+
+
+
 
 
     public function __construct()
@@ -225,6 +234,32 @@ class Sondage
 
         return $this;
     }
+
+    public function getCategorieSondage(): ?CategorieSondage
+    {
+        return $this->categorieSondage;
+    }
+
+    public function setCategorieSondage(?CategorieSondage $categorieSondage): self
+    {
+        $this->categorieSondage = $categorieSondage;
+
+        return $this;
+    }
+
+    public function getSondeur(): ?User
+    {
+        return $this->sondeur;
+    }
+
+    public function setSondeur(?User $sondeur): self
+    {
+        $this->sondeur = $sondeur;
+
+        return $this;
+    }
+
+
 
 
 
