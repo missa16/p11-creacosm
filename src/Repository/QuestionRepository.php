@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Question;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use PhpParser\Node\Expr\Array_;
 
 /**
  * @extends ServiceEntityRepository<Question>
@@ -63,4 +64,37 @@ class QuestionRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+    public function findStatsGlobales(Question $question) : array
+    {
+        // Les réponses possibles
+        $toutesLesReponses = $question->getReponses(); // une collection ou toutes les objets reponses sont repertorié
+        $reponsesPossibles=[];
+        foreach ( $toutesLesReponses as $i => $rep){
+            $reponsesPossibles[]=$rep->getLaReponse();
+        }
+
+        $userSondageReponses= $question->getUserSondageReponses();
+        $responsesCounts = array_fill(0, count($reponsesPossibles), 0);
+
+        foreach ($userSondageReponses as $userSondageReponse) {
+            $reponsesSonde = $userSondageReponse->getReponses();
+            foreach ($reponsesSonde as $reponseSonde) {
+                $reponseIndex = array_search($reponseSonde->getLaReponse(), $reponsesPossibles);
+                if ($reponseIndex !== false) {
+                    $responsesCounts[$reponseIndex]++;
+                }
+            }
+        }
+
+        $chart_data = [
+            'labels' => $reponsesPossibles,
+            'datasets' => [
+                [
+                    'data' => $responsesCounts,
+                ],
+            ],
+        ];
+        //$question->addStatQuestion();
+        return $chart_data;
+    }
 }

@@ -5,8 +5,10 @@ namespace App\Entity;
 use App\Repository\QuestionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Form\FormTypeInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: QuestionRepository::class)]
@@ -36,12 +38,16 @@ class Question
     #[ORM\OneToMany(mappedBy: 'question', targetEntity: UserSondageReponse::class, orphanRemoval: true)]
     private Collection $userSondageReponses;
 
+    private Collection $statsQuestion;
+
+
 
 
     public function __construct()
     {
         $this->Reponses = new ArrayCollection();
         $this->userSondageReponses = new ArrayCollection();
+        $this->statsQuestion = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -146,6 +152,38 @@ class Question
     }
 
 
+
+    public function addStatQuestion(string $stat): self
+    {
+
+        $this->statsQuestion = new ArrayCollection();
+        $this->statsQuestion->add($stat);
+        return $this;
+    }
+
+    public function removeStatQuestion(string $stat): self
+    {
+        $this->statsQuestion->removeElement($stat);
+            // set the owning side to null (unless already changed)
+        return $this;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getStatsQuestion(): Collection
+    {
+        return $this->statsQuestion;
+    }
+
+    /**
+     * @param Collection $statsQuestion
+     */
+    public function setStatsQuestion(Collection $statsQuestion): void
+    {
+
+        $this->statsQuestion = $statsQuestion;
+    }
 
 
 }

@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Sondage;
 use App\Entity\User;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
@@ -66,15 +67,121 @@ class SondageRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
-    public function findSondes(Sondage $sondage) : array
+    public function findAgeSondes(Sondage $sondage) : array
     {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.lesSondes = :val')
-            ->setParameter('val', $sondage)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult();
+        $results = $sondage->getLesSondes();
+        $ages=[];  // initialise un tableau ou tous les ages sont repertoriés
+        $labels = ['0-17 ans ','18-24 ans ','25-30 ans', '40 et +']; // les differents labels
+        foreach ( $results as $result){
+            $sonde= $result->getSonde();
+            $dateNaissance = $sonde->getDateNaissance();
+            $age = $dateNaissance->diff(new DateTime())->y;
+            $ages[]=$age;
+        }
+        $intervals = [
+            ['min' => 0, 'max' => 18],
+            ['min' => 19, 'max' => 24],
+            ['min' => 25, 'max' => 30],
+            ['min' => 40, 'max' => 100],
+        ];
+
+        $counts = array_fill(0, count($intervals), 0);
+        foreach ($ages as $age) {
+            foreach ($intervals as $i => $interval) {
+                if ($age >= $interval['min'] && $age <= $interval['max']) {
+                    $counts[$i]++;
+                    break;
+                }
+            }
+        }
+        $chart_data = [
+            'labels' => $labels,
+            'datasets' => [
+                [
+                    'data' => $counts,
+                ],
+            ],
+        ];
+        return $chart_data;  // indice 0 : les différents interval d'age, indice 1 le compte de personne pour chaque intervalle
     }
 
+    public function findFormationSondes(Sondage $sondage,FormationRepository $formationRepository) : array
+    {
+        $results = $sondage->getLesSondes();
+        $sondesFormation = [];  // un tableau ou toutes les formations des sondes sont repertories
+        foreach ( $results as $result){
+            $sonde= $result->getSonde();
+            $sondeF = $sonde->getFormation();
+            $sondesFormation[]=$sondeF;
+        }
+
+        $formations=$formationRepository->findAll();  // initialise un tableau ou toutes les formations sont repertoriés
+        $labels=[] ;
+        foreach ( $formations as $formation){ // initialisation des différents labels
+            $intitule = $formation->getNomFormation();
+            $labels[]=$intitule;
+        }
+
+        $counts = array_fill(0, count($formations), 0);
+        foreach ($sondesFormation as $sondeFormation) {
+            foreach ($formations as $i => $formation) {
+                if ($sondeFormation == $formation) {
+                    $counts[$i]++;
+                    break;
+                }
+            }
+        }
+
+        $chart_data = [
+            'labels' => $labels,
+            'datasets' => [
+                [
+                    'data' => $counts,
+                ],
+            ],
+        ];
+        return $chart_data;
+
+    }
+
+    public function findGenreSondes(Sondage $sondage) : array
+    {
+        $results = $sondage->getLesSondes();
+        $genres=[];  // initialise un tableau ou tous les ages sont repertoriés
+        $labels = ['Femme','Homme']; // les différents labels
+        foreach ( $results as $result){
+            $sonde= $result->getSonde();
+            $genreSonde= $sonde->getGenre();
+            $genres[]=$genreSonde;
+        }
+        $intervals = [
+            ['min' => 0, 'max' => 18],
+            ['min' => 19, 'max' => 24],
+            ['min' => 25, 'max' => 30],
+            ['min' => 40, 'max' => 100],
+        ];
+
+        $counts = array_fill(0, count($intervals), 0);
+        foreach ($genres as $genreSonde) {
+            foreach ($labels as $i => $label) {
+                if ($genreSonde == $label) {
+                    $counts[$i]++;
+                    break;
+                }
+            }
+        }
+        $chart_data = [
+            'labels' => $labels,
+            'datasets' => [
+                [
+                    'data' => $counts,
+                ],
+            ],
+        ];
+        return $chart_data;  // indice 0 : les différents interval d'age, indice 1 le compte de personne pour chaque intervalle
+    }
+
+
+
 }
+
