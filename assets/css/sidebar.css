@@ -1,0 +1,59 @@
+
+.grid-container {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 6fr; /* Première colonne = 1/3, deuxième colonne = 2/3 */
+    /*grid-template-rows: 100vh;*/
+    grid-gap: 20px; /* Espacement entre les colonnes */
+}
+
+.sidebar {
+    position: static;
+    grid-column: 1; /* La sidebar occupe la première colonne */
+    height: 100%; /* La deuxième colonne occupe toute la hauteur de la grille */
+    background-color: #f1f1f1;
+
+}
+
+/* Logo */
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+    margin-bottom: 20px;
+}
+
+.logo img {
+    max-height: 120px;
+    max-width: 80%;
+}
+
+/* Links */
+.links {
+    display: flex;
+    flex-direction: column;
+}
+
+.links a {
+    color: #333;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.links a i {
+    margin-right: 10px;
+}
+
+.links a:hover{
+    /*color: #0B65AB;*/
+    color:green;
+}
+
+.content {
+    grid-column: 2; /* Le contenu occupe la deuxième colonne */
+    display: grid;
+    grid-gap: 20px; /* Espacement entre les lignes */
+
+}
