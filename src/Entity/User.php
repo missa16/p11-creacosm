@@ -46,14 +46,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $genre = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $formation = null;
+
 
     #[ORM\OneToMany(mappedBy: 'sondeur', targetEntity: Sondage::class, orphanRemoval: true)]
     private Collection $sondageCrees;
 
     #[ORM\OneToMany(mappedBy: 'sondagesRepondus', targetEntity: UserSondageResult::class, orphanRemoval: true)]
     private Collection $sondagesRepondus;
+
+    #[ORM\ManyToOne(inversedBy: 'Inscrit')]
+    private ?Formation $formation = null;
 
     public function __construct()
     {
@@ -190,17 +192,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getFormation(): ?string
-    {
-        return $this->formation;
-    }
 
-    public function setFormation(?string $formation): self
-    {
-        $this->formation = $formation;
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, Sondage>
@@ -259,6 +251,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $sondageRepondu->setSonde(null);
             }
         }
+        return $this;
+    }
+
+    public function getFormation(): ?Formation
+    {
+        return $this->formation;
+    }
+
+    public function setFormation(?Formation $formation): self
+    {
+        $this->formation = $formation;
+
         return $this;
     }
 }

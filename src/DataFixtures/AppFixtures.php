@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\CategorieSondage;
+use App\Entity\Formation;
 use App\Entity\Question;
 use App\Entity\Reponse;
 use App\Entity\Sondage;
@@ -24,6 +25,25 @@ class AppFixtures extends Fixture
     }
     public function load(ObjectManager $manager): void
     {
+        $formations=[];
+        // Mise en place des différentes formations
+        $formation1 = new Formation();
+        $formation1->setNomFormation('Employé');
+        $formations[]=$formation1;
+
+        $formation2 = new Formation();
+        $formation2->setNomFormation('Étudiant');
+        $formations[]=$formation2;
+
+        $formation3 = new Formation();
+        $formation3->setNomFormation('Retraités');
+        $formations[]=$formation3;
+
+        $size= count($formations);
+        for ($i=0; $i<$size; $i++){
+            $manager->persist($formations[$i]);
+        }
+
 
         // Mise en place d'un sondeur
         $sondeur = new User();
@@ -35,8 +55,26 @@ class AppFixtures extends Fixture
             ->setNom('Bond')
             ->setPrenom('James')
             ->setDateNaissance(new DateTimeImmutable())
-            ->setVille('Orélans');
+            ->setVille('Orléans');
         $manager->persist($sondeur);
+
+        // Mise en place d'un sondé
+        $sonde = new User();
+        $role =  ['ROLE_SONDE'];
+        $sonde->setEmail('bob.leponge@carre.com')
+            ->setPassword($this->passwordHasher->hashPassword(
+                $sonde,'password'))
+            ->setRoles($role)
+            ->setNom('Leponge')
+            ->setGenre('Homme')
+            ->setPrenom('Bob')
+            ->setDateNaissance(new DateTimeImmutable())
+            ->setVille('Bikini Bottom')
+            ->setFormation($formation2);
+        $manager->persist($sonde);
+
+
+
 
         // Mise en place des types de question
         $allTypes=[];
