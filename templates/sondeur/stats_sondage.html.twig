@@ -8,23 +8,33 @@
     <h3> Nombre de personnes ayant répondu : {{ sondage.lesSondes.count }} </h3>
 
     <div>
-        <canvas id="myChart"></canvas>
+        <canvas id="ageChart" data-chart="{{ ageChart }}"></canvas>
     </div>
 
-    {{ dump(results) }}
+    <div>
+        <canvas id="formationChart" data-chart="{{ formationChart }}"></canvas>
+    </div>
+
+    <div>
+        <canvas id="genreChart" data-chart="{{ genreChart }}"></canvas>
+    </div>
+
+
+    <div>
+        {% for question in sondage.Questions %}
+            <h2>{{ question.intitule }}</h2>
+{#            {{ question.StatsQuestion[0] }}#}
+            <canvas data-question="{{ question.intitule }}" class="chartQuestion" data-chart="{{ question.StatsQuestion[0] }}"></canvas>
+        {% endfor %}
+
+    </div>
 
 {% endblock %}
+
 
 {% block javascripts %}
-{#    <script>#}
-{#        let ctx = document.getElementById('myChart').getContext('2d');#}
-{#        #}{#var chartData = {{ chart_data|raw }};#}
-{#        #}{#let chartOptions = {{ chart_options|raw }};#}
-{#        let myChart = new Chart(ctx, {#}
-{#            type: 'bar',#}
-{#            data: {{ chart_data|raw }},#}
-{#            options: {{ chart_options|raw }}#}
-{#        );#}
-{#    </script>#}
+    {{ parent() }}
+    {{ encore_entry_script_tags('renderChart') }}
 {% endblock %}
 
+{#<canvas data-question="{{ question.intitule }}" class="chartQuestion" data-chart="{{ chartQuestion }}"></canvas>#}

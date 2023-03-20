@@ -2,7 +2,10 @@
 
 namespace App\Form\connexion;
 
+use App\Entity\CategorieSondage;
+use App\Entity\Formation;
 use App\Entity\User;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -47,8 +50,10 @@ class RegistrationFormType extends AbstractType
                 'widget'=>'single_text'
             ])
             ->add('ville')
-            ->add('formation')
-        ;
+            ->add('formation',EntityType::class,[
+                'class'=>Formation::class,
+                'choice_label'=>'nomFormation',
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
