@@ -1,7 +1,9 @@
-import {Chart} from "chart.js";
+
 
 // Fonction generatrice de chart
-function makeChart(chartHTML,typeChart, titreGraphe){
+import Chart from "chart.js/auto";
+
+function makeChart(chartHTML, typeChart, titreGraphe){
     let chartCtx = chartHTML.getContext('2d');
     let chartDATA = JSON.parse(chartHTML.dataset.chart)
     new Chart(chartCtx, {

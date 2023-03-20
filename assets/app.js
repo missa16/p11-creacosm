@@ -8,9 +8,14 @@
 // any CSS you import will output into a single css file (app.css in this case)
 import './styles/app.css';
 import './css/button.css';
+import './css/sidebar.css';
+import './css/accueil.css';
 import './css/creer-sondage.css';
 import './css/titre.css';
 import './css/image.css';
+import './css/inscription.css';
+import './css/connexion.css';
+
 // start the Stimulus application
 import './bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';

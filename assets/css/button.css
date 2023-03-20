@@ -1,26 +1,13 @@
-.button{
-    background-color: rgba(51, 51, 51, 0.05);
-    border-radius: 8px;
-    border-width: 0;
-    color: #333333;
-    cursor: pointer;
-    display: inline-block;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 20px;
-    list-style: none;
-    margin: 10px;
-    padding: 10px 18px;
-    text-align: center;
-    transition: all 200ms;
-    vertical-align: baseline;
-    white-space: nowrap;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
+a{
+    text-decoration: none;
 }
 
+.c-white{
+    color:white;
+}
+.c-white:hover{
+    color:#DEE3CF;
+}
 .button-delete{
     min-height: 37.5px;
     margin-bottom: 1rem;
@@ -40,8 +27,41 @@
     border-radius: 8px;
     color: white;
 }
-.button-enregister{
+
+
+.button, .button:hover{
+    /*background-color: rgba(51, 51, 51, 0.05);*/
+    color:white;
+    border-radius: 8px;
+    border-width: 0;
+    cursor: pointer;
+    display: inline-block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    list-style: none;
+    margin: 10px;
+    padding: 10px 18px;
+    text-align: center;
+    transition: all 200ms;
+    vertical-align: baseline;
+    white-space: nowrap;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+.button{
     background-color: #38414A;
+}
+.button:hover{
+    background-color: #B3A8A2;
+}
+
+.button a {
+    color: white;
+}
+.button-enregister, .button-enregister:hover{
     border-radius: 8px;
     border-width: 0;
     color: white;
@@ -61,4 +81,13 @@
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
+}
+
+.button-enregister{
+    background-color: #38414A;
+}
+
+.button-enregister:hover{
+    background-color: #B3A8A2;
+
 }
