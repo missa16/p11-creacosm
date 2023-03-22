@@ -37,12 +37,12 @@ p{
 }
 
 .background {
-    position: absolute;
+    position: relative;
     top: 0;
     left: 0;
     width: 100%; /* pour occuper toute la largeur de la div parente */
     height: 100%; /* pour occuper toute la hauteur de la div parente */
-    z-index: -1; /* pour positionner l'élément en arrière-plan */
+    z-index: 1; /* pour positionner l'élément en arrière-plan */
     background-image: url('../images/produit_bio.jpg');
     background-repeat: no-repeat;
     background-size: cover;
@@ -92,7 +92,7 @@ p{
     top: 80%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 25;
+    z-index: 85;
     cursor: pointer;
 }
 
