@@ -25,6 +25,15 @@
                 <td>
                     <a href="{{ path('app_sondeur_edit', {'id': sondage.id}) }}">edit</a>
                     <a href="{{ path('app_sondeur_stats_survey', {'id': sondage.id}) }}">Statistiques</a>
+                    <form action="{{ path('app_sondeur_export', {'id': sondage.id}) }}" method="GET">
+                        <label for="export-format">Exporter au format</label>
+                        <select name="format" id="export-format">
+                            <option value="ods">ODS</option>
+                            <option value="xlsx">XLSX</option>
+                            <option value="csv">CSV</option>
+                        </select>
+                        <button type="submit">Exporter</button>
+                    </form>
                 </td>
             </tr>
         {% else %}
