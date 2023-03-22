@@ -11,7 +11,6 @@ use App\Repository\SondageRepository;
 use App\Repository\UserRepository;
 use App\Service\GenerateFile;
 use DateTimeImmutable;
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Csv;
 use PhpOffice\PhpSpreadsheet\Writer\Exception;
 use PhpOffice\PhpSpreadsheet\Writer\Ods;
@@ -143,7 +142,6 @@ class SondeurController extends AbstractController
         $spreadsheet= $generateFile->export($sondage);
         $nomSondage= $sondage->getIntitule();
         $nomFichier= str_replace(' ', '', $nomSondage);
-
         $format= $request->query->get('format');
         switch ($format){
             case 'ods':
@@ -170,7 +168,6 @@ class SondeurController extends AbstractController
         $response->setContentDisposition(
             ResponseHeaderBag::DISPOSITION_ATTACHMENT, $filename);
         return $response;
-
     }
 
 }

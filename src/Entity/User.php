@@ -51,15 +51,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'sondeur', targetEntity: Sondage::class, orphanRemoval: true)]
     private Collection $sondageCrees;
 
-    #[ORM\OneToMany(mappedBy: 'sondagesRepondus', targetEntity: UserSondageResult::class, orphanRemoval: true)]
-    private Collection $sondagesRepondus;
+
 
     #[ORM\ManyToOne(inversedBy: 'Inscrit')]
     private ?Formation $formation = null;
 
+    #[ORM\OneToMany(mappedBy: 'sonde', targetEntity: UserSondageResult::class, orphanRemoval: true)]
+    private Collection $sondagesRepondus;
+
     public function __construct()
     {
         $this->sondageCrees = new ArrayCollection();
+        $this->sondagesRepondus = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -225,34 +228,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
 
-    /**
-     * @return Collection<int, UserSondageResult>
-     */
-    public function getSondagesRepondus(): Collection
-    {
-        return $this->sondagesRepondus;
-    }
 
-    public function addSondageRepondu(UserSondageResult $sondageRepondu): self
-    {
-        if (!$this->sondagesRepondus->contains($sondageRepondu)) {
-            $this->sondagesRepondus->add($sondageRepondu);
-            $sondageRepondu->setSonde($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSondageRepondu(UserSondageResult $sondageRepondu): self
-    {
-        if ($this->sondagesRepondus->removeElement($sondageRepondu)) {
-            // set the owning side to null (unless already changed)
-            if ($sondageRepondu->getSonde() === $this) {
-                $sondageRepondu->setSonde(null);
-            }
-        }
-        return $this;
-    }
 
     public function getFormation(): ?Formation
     {
@@ -262,6 +238,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setFormation(?Formation $formation): self
     {
         $this->formation = $formation;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, UserSondageResult>
+     */
+    public function getSondagesRepondus(): Collection
+    {
+        return $this->sondagesRepondus;
+    }
+
+    public function addSondagesRepondu(UserSondageResult $sondagesRepondu): self
+    {
+        if (!$this->sondagesRepondus->contains($sondagesRepondu)) {
+            $this->sondagesRepondus->add($sondagesRepondu);
+            $sondagesRepondu->setSonde($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSondagesRepondu(UserSondageResult $sondagesRepondu): self
+    {
+        if ($this->sondagesRepondus->removeElement($sondagesRepondu)) {
+            // set the owning side to null (unless already changed)
+            if ($sondagesRepondu->getSonde() === $this) {
+                $sondagesRepondu->setSonde(null);
+            }
+        }
 
         return $this;
     }

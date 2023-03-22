@@ -25,6 +25,7 @@ Encore
     .addEntry('manageQuestions','./assets/js/form_manageQuestions.js')
     .addEntry('nextQuestion','./assets/js/form_nextQuestion.js')
     .addEntry('renderChart','./assets/js/render_chart.js')
+    .addEntry('historique','./assets/js/historique.js')
 
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)

@@ -13,6 +13,9 @@
     <h2>Nombre de questions : </h2>
     <h3>{{ sondage.Questions.count}}</h3>
 
+    <h2>Temps estimé: </h2>
+    <h3>{{temps}}</h3>
+
     <a href="{{ path('app_sondage_answer_questions', {'id': sondage.id}) }}">Commencer</a>
 
 

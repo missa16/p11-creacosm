@@ -1,16 +1,3 @@
-{#{% extends 'base.html.twig' %}#}
-
-{#{% block body %}#}
-{#    <h1>{{ sondage.intitule }}</h1>#}
-
-{#    {{ form_start(form) }}#}
-
-{#    {% for field in form %}#}
-{#        {{ form_row(field) }}#}
-{#    {% endfor %}#}
-
-{#    {{ form_end(form) }}#}
-{#{% endblock %}#}
 
 {% extends 'base.html.twig' %}
 
@@ -48,8 +35,3 @@
     {{ encore_entry_script_tags('nextQuestion') }}
 {% endblock %}
 
-{# {% if questionNumber+1 == sondage.questions|length %}#}
-{#     Envoyer mes réponses#}
-{# {% else %}#}
-{#     Question suivante#}
-{# {% endif %}#}

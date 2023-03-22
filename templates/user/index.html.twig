@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page d'accueil CREACOSM{% endblock %}
+
+{% block body %}
+
+
+    <a href="{{ path('app_sondage_now') }}">Voir les nouveaux sondage</a>
+
+    <a href="{{ path('app_sondage_historique') }}">Historiques des sondages</a>
+
+{% endblock %}
