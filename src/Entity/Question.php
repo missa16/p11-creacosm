@@ -38,7 +38,8 @@ class Question
     #[ORM\OneToMany(mappedBy: 'question', targetEntity: UserSondageReponse::class, orphanRemoval: true)]
     private Collection $userSondageReponses;
 
-    private Collection $statsQuestion;
+    #[ORM\OneToMany(mappedBy: 'Question', targetEntity: StatsQuestion::class)]
+    private Collection $statsQuestions;
 
 
 
@@ -48,6 +49,7 @@ class Question
         $this->Reponses = new ArrayCollection();
         $this->userSondageReponses = new ArrayCollection();
         $this->statsQuestion = new ArrayCollection();
+        $this->statsQuestions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -153,36 +155,35 @@ class Question
 
 
 
-    public function addStatQuestion(string $stat): self
-    {
 
-        $this->statsQuestion = new ArrayCollection();
-        $this->statsQuestion->add($stat);
+    /**
+     * @return Collection<int, StatsQuestion>
+     */
+    public function getStatsQuestions(): Collection
+    {
+        return $this->statsQuestions;
+    }
+
+    public function addStatsQuestion(StatsQuestion $statsQuestion): self
+    {
+        if (!$this->statsQuestions->contains($statsQuestion)) {
+            $this->statsQuestions->add($statsQuestion);
+            $statsQuestion->setQuestion($this);
+        }
+
         return $this;
     }
 
-    public function removeStatQuestion(string $stat): self
+    public function removeStatsQuestion(StatsQuestion $statsQuestion): self
     {
-        $this->statsQuestion->removeElement($stat);
+        if ($this->statsQuestions->removeElement($statsQuestion)) {
             // set the owning side to null (unless already changed)
+            if ($statsQuestion->getQuestion() === $this) {
+                $statsQuestion->setQuestion(null);
+            }
+        }
+
         return $this;
-    }
-
-    /**
-     * @return Collection
-     */
-    public function getStatsQuestion(): Collection
-    {
-        return $this->statsQuestion;
-    }
-
-    /**
-     * @param Collection $statsQuestion
-     */
-    public function setStatsQuestion(Collection $statsQuestion): void
-    {
-
-        $this->statsQuestion = $statsQuestion;
     }
 
 

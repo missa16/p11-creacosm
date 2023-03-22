@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Sondage;
+use App\Entity\StatsQuestion;
 use App\Entity\User;
 use App\Entity\UserSondageResult;
 use App\Form\creationSondage\SondageType;
@@ -115,11 +116,14 @@ class SondeurController extends AbstractController
         $genreChart = $sondageRepository->findGenreSondes($sondage);
 
         $questions = $sondage->getQuestions();
-        $chartQuestions = [];
-        foreach ( $questions as $question){
-            $stats= $questionRepository->findStatsGlobales($question);
-            $question->addStatQuestion(json_encode($stats));
-            ;
+        foreach ( $questions as $i=> $question){
+            $statsGles= json_encode($questionRepository->findStatsGlobales($question));
+            $statsGlobalesQuestion= new StatsQuestion();
+            $statsGlobalesQuestion
+                ->setNomStat("Stat globale")
+                ->setDataJson($statsGles);
+            $question->addStatsQuestion($statsGlobalesQuestion);
+
         }
 
 
@@ -128,7 +132,6 @@ class SondeurController extends AbstractController
             'ageChart' => json_encode($ageChart),
             'formationChart' => json_encode($formationChart),
             'genreChart' => json_encode($genreChart),
-            'chartQuestions'=>$chartQuestions
         ]);
 
     }

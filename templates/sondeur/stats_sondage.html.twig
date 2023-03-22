@@ -19,12 +19,19 @@
         <canvas id="genreChart" data-chart="{{ genreChart }}"></canvas>
     </div>
 
+    <div>
+        <canvas id="mixChart" data-chart="{{ genreChart }}"></canvas>
+    </div>
+
+
+
 
     <div>
         {% for question in sondage.Questions %}
             <h2>{{ question.intitule }}</h2>
-{#            {{ question.StatsQuestion[0] }}#}
-            <canvas data-question="{{ question.intitule }}" class="chartQuestion" data-chart="{{ question.StatsQuestion[0] }}"></canvas>
+
+            <canvas data-question="{{ question.intitule }}" class="chartQuestion" data-chart="{{ question.StatsQuestions[0].dataJson }}"></canvas>
+{#            <canvas data-question="{{ question.intitule }}" class="chartQuestionMix" data-chart="{{question.StatsQuestions[1].dataJson }}"></canvas>#}
         {% endfor %}
 
     </div>
