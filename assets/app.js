@@ -7,12 +7,17 @@
 
 // any CSS you import will output into a single css file (app.css in this case)
 import './styles/app.css';
+import './css/grid.css';
 import './css/button.css';
 import './css/sidebar.css';
-import './css/accueil.css';
-import './css/creer-sondage.css';
 import './css/titre.css';
 import './css/image.css';
+
+
+import './css/accueil.css';
+import './css/creer-sondage.css';
+import './css/start-reponse.css';
+import './css/repondre-sondage.css';
 import './css/inscription.css';
 import './css/connexion.css';
 

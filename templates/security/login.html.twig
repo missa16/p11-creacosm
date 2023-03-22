@@ -3,15 +3,12 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
-    <form method="post">
+    <form method="post" class="form">
         {% if error %}
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
         {% endif %}
-
-
-
-        <div class="grid-container">
-            <div class="row">   <img src="{{ asset('build/images/connexion.jpg') }}" class="beaute"/>
+        <div class="grid-container-1">
+            <div class="row"><img src="{{ asset('build/images/connexion.jpg') }}" class="beaute"/>
             </div>
             <div class="content">
                 <div class="row">
@@ -20,11 +17,11 @@
                                 s'inscrire
                             </a></button>
 
-                        {% if app.user %}
-                            <div class="">
-                                  <button class="button"><a class="text-decoration-none a" href="{{ path('app_logout') }}">se deconnecter</a></button>
-                            </div>
-                        {% endif %}
+                        {#                        {% if app.user %} #}
+                        {#                            <div class=""> #}
+                        {#                                  <button class="button"><a class="text-decoration-none a" href="{{ path('app_logout') }}">se deconnecter</a></button> #}
+                        {#                            </div> #}
+                        {#                        {% endif %} #}
                     </div>
                 </div>
                 <div class="row">
@@ -40,17 +37,18 @@
                                        class="form-control" autocomplete="username" required autofocus>
                             </div>
 
-                                <div class="mb-2">
-                                    <label for="inputPassword">Mot de passe</label>
-                                    <input type="password" name="password" id="inputPassword" class="form-control"
-                                           autocomplete="current-password" required>
-                                </div>
+                            <div class="mb-2">
+                                <label for="inputPassword">Mot de passe</label>
+                                <input type="password" name="password" id="inputPassword" class="form-control"
+                                       autocomplete="current-password" required>
+                            </div>
+
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" class="button-enregister">Connexion</button>
                         </div>
-                        <div class="gt-1 df jcc">
-                            <button class="button-enregister">Connexion</button>
-                            <input type="hidden" name="_csrf_token"
-                                   value="{{ csrf_token('authenticate') }}"
-                            >
+                        <input type="hidden" name="_csrf_token"
+                               value="{{ csrf_token('authenticate') }}"
+                        >
                         </div>
                     </form>
                     <div class="df jcc">

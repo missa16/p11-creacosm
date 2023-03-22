@@ -9,14 +9,17 @@
 
 
 {% block body %}
-    <div class="grid-container">
+    <div class="grid-container-1">
         <div class="row">
             <img src="{{ asset('build/images/savon_cosm.jpg') }}" class="beaute"/>
         </div>
         <div class="content">
             <div class="row">
                 <div class="df jce">
-                    <button class="button">connexion</button>
+                    <button class="button"><a class="text-decoration-none a" href="{{ path('app_login') }}">
+                            connexion
+                        </a></button>
+
                 </div>
             </div>
             <div class="row">
@@ -24,7 +27,7 @@
             </div>
 
             <div class="form">
-                <form>
+
                     {{ form_start(registrationForm) }}
                     <div class="grid-form">
                         <div>
@@ -62,7 +65,7 @@
                         <button  type="submit" class="button-enregister">Valider</button>
                     </div>
                     {{ form_end(registrationForm) }}
-                </form>
+
             </div>
         </div>
     </div>

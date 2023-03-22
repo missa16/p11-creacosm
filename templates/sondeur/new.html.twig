@@ -9,18 +9,22 @@
 
 {% block body %}
     <div class="grid-container-nav">
-            {{ include('composants/_nav_bar.html.twig') }}
+        {{ include('composants/_nav_bar.html.twig') }}
         <div class="content">
             <div class="row">
                 <div class="df jce">
-                    <button class="button">deconnexion</button>
+                                            {% if app.user %}
+                                                <div class="">
+                                                      <button class="button"><a class="text-decoration-none a" href="{{ path('app_logout') }}">se deconnecter</a></button>
+                                                </div>
+                                            {% endif %}
                 </div>
             </div>
             <div class="row">
                 <h1 class="size-40 df jcc">Création d'un sondage</h1>
-                <div class="logo">
-                    <img src="{{ asset('build/images/ampoule.png') }}"/>
-                </div>
+{#                <div class="logo">#}
+{#                    <img src="{{ asset('build/images/ampoule.png') }}"/>#}
+{#                </div>#}
             </div>
             <div class="row">
                 {{ include('sondeur/_form.html.twig') }}

@@ -8,13 +8,7 @@
 
 /* responsive form*/
 
-.grid-form {
-    display: grid;
-    justify-content: center;
-    grid-template-columns: 0.8fr;
-    margin:0.8rem;
-    gap:10px;
-}
+
 @media screen and (max-width: 768px) {
     body{
         overflow-y: visible;

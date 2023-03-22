@@ -29,6 +29,9 @@
             <div class="content-q">
                 <div> {{ form_row(form.intitule) }}
                 </div>
+                <div>
+                    {{ form_row(form.categorieSondage) }}
+                </div>
                 <div> {{ form_row(form.description) }}
                 </div>
                 <div> {{ form_row(form.imageCouverture) }}
@@ -55,7 +58,7 @@
         <div class="card-q">
             <div class="rectangle"></div>
             <div class="content-q">
-                <ul class="row questions"
+                <ul class="questions"
                     data-prototype="{{ formMacros. printQuestion(form.Questions.vars.prototype)|e('html_attr') }}"
                     data-index="{{ form.Questions|length ? form.Questions|last.vars.name + 1 : 0 }}">
                     {% for question in form.Questions %}

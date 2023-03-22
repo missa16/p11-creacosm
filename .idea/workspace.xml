@@ -5,38 +5,42 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8e4283c2-3944-4641-8b5c-38a421b8f741" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_19_03_2023_19_36__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_19_03_2023_19_36__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_20_03_2023_10_34__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_20_03_2023_10_34__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_20_03_2023_10_34__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_20_03_2023_10_34__Changes_1.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/accueil.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/accueil.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/css/button.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/button.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/css/connexion.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/connexion.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/css/creer-sondage.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/creer-sondage.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/css/image.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/image.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/inscription.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/inscription.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/css/sidebar.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/sidebar.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/render_chart.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/render_chart.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/composants/_nav_bar.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/composants/_nav_bar.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/titre.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/titre.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/registration/register.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registration/register.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/security/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/login.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/sondage/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/sondage/index.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/sondeur/_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/sondeur/_form.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/sondeur/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/sondeur/index.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/sondeur/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/sondeur/new.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/user/answer_survey.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/answer_survey.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="template-sondage" />
+        <entry key="$PROJECT_DIR$" value="inscription-connexion" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -173,15 +177,15 @@
       <path value="$PROJECT_DIR$/vendor/monolog/monolog" />
       <path value="$PROJECT_DIR$/vendor/twig/extra-bundle" />
       <path value="$PROJECT_DIR$/vendor/vich/uploader-bundle" />
+      <path value="$PROJECT_DIR$/vendor/cmen/google-charts-bundle" />
       <path value="$PROJECT_DIR$/vendor/symfony/webpack-encore-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/ux-chartjs" />
       <path value="$PROJECT_DIR$/vendor/doctrine/doctrine-fixtures-bundle" />
       <path value="$PROJECT_DIR$/vendor/doctrine/data-fixtures" />
       <path value="$PROJECT_DIR$/vendor/jms/metadata" />
-      <path value="$PROJECT_DIR$/vendor/cmen/google-charts-bundle" />
-      <path value="$PROJECT_DIR$/vendor/symfony/ux-chartjs" />
     </include_path>
   </component>
-  <component name="ProjectId" id="2MxG3LzTGxN0OfoRYkM7gS3QEa0" />
+  <component name="ProjectId" id="2NKMMOZQwZqdx23rUfOnUrEaNZW" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -197,7 +201,6 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "reference.webide.settings.project.settings.php",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -206,12 +209,11 @@
     ]
   }
 }]]></component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\sophi\Documents\MIAGE\p11-creacosm\assets\images" />
-    </key>
-  </component>
   <component name="RunManager">
+    <configuration default="true" type="ComposerRunConfigurationType" factoryName="Composer Script">
+      <option name="pathToComposerJson" value="$PROJECT_DIR$/composer.json" />
+      <method v="2" />
+    </configuration>
     <configuration name="phpunit.xml.dist" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner scope="XML" />
       <method v="2" />
@@ -220,32 +222,16 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="c44b4fe4-b9f7-4c4b-8782-b4a652c657c8" name="Changes" comment="" />
-      <created>1678701620378</created>
+      <changelist id="8e4283c2-3944-4641-8b5c-38a421b8f741" name="Changes" comment="" />
+      <created>1679408277131</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1678701620378</updated>
-      <workItem from="1678701622586" duration="7014000" />
-      <workItem from="1679069195286" duration="31293000" />
-      <workItem from="1679222116582" duration="2156000" />
-      <workItem from="1679251088217" duration="4305000" />
-      <workItem from="1679255558993" duration="5261000" />
-      <workItem from="1679305471640" duration="3473000" />
+      <updated>1679408277131</updated>
+      <workItem from="1679408280382" duration="17096000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
   </component>
 </project>

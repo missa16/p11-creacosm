@@ -1,11 +1,4 @@
 /*sondeur*/
-
-.grid-container-2{
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    grid-gap: 20px;
-    height: 85vh;
-}
 .content-sond {
     grid-column: 2; /* Le contenu occupe la deuxième colonne */
     display: grid;
