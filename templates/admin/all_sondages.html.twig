@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tous les sondages{% endblock %}
+
+{% block body %}
+    <h1>Tous les sondages</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Intitule</th>
+            <th>EtatSondage</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for sondage in sondages %}
+            <tr>
+
+                <td><a href="{{ path('app_admin_show', {'id': sondage.id}) }}">{{ sondage.intitule }}</a></td>
+                <td>{{ sondage.etatSondage }}</td>
+                <td>
+                    <a href="{{ path('app_admin_stats_survey', {'id': sondage.id}) }}">Statistiques</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}

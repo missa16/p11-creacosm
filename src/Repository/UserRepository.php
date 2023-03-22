@@ -85,4 +85,19 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     {
         return $user->getSondageCrees();
     }
+
+    public function findSondeurs(): array
+    {
+        $users = $this->findAll();
+        $sondeurs = [];
+        foreach ($users as $user) {
+            $roles = $user->getRoles();
+            if (in_array('ROLE_SONDEUR', $roles)) {
+                $sondeurs[] = $user;
+            }
+        }
+
+        return $sondeurs;
+
+    }
 }
