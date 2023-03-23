@@ -12,6 +12,7 @@
 }
 
 
+
 .grid-container-nav,.grid-container-nav-1 {
     position: relative;
     display: grid;
@@ -20,6 +21,31 @@
     /*grid-template-rows: 100vh;*/
 
 }
+
+.grid-container-q {
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 50px 1fr;
+    grid-template-columns: 1fr;
+    grid-gap: 10px;
+}
+
+
+.grid-container-sub {
+    height: 100%;
+    background-color: #fff;
+    padding: 20px;
+    font-size: 30px;
+    /*text-align: center;*/
+}
+
+.grid-item-q {
+    background-color: #fff;
+    padding: 20px;
+    font-size: 30px;
+    /*text-align: center;*/
+}
+
 
 .grid-container-nav{
     grid-gap: 20px; /* Espacement entre les colonnes */

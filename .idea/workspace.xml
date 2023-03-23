@@ -6,14 +6,21 @@
   <component name="ChangeListManager">
     <list default="true" id="8e4283c2-3944-4641-8b5c-38a421b8f741" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/grid.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/grid.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/image.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/image.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/sidebar.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/sidebar.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/css/start-reponse.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/start-reponse.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/titre.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/titre.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/user/answer_survey.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/answer_survey.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/user/answer_survey_question.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/answer_survey_question.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings">
+  <component name="ComposerSettings" doNotAsk="true">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
   </component>
@@ -170,30 +177,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/sophi/Documents/MIAGE/framework web/cours4",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/sophi/Documents/MIAGE/framework web/cours4&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "postgresql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
     ]
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\sophi\Documents\MIAGE\p11-creacosm\assets\images" />
+    </key>
+  </component>
   <component name="RunManager">
-    <configuration default="true" type="ComposerRunConfigurationType" factoryName="Composer Script">
-      <option name="pathToComposerJson" value="$PROJECT_DIR$/composer.json" />
-      <method v="2" />
-    </configuration>
     <configuration name="phpunit.xml.dist" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner scope="XML" />
       <method v="2" />
@@ -207,7 +215,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1679408277131</updated>
-      <workItem from="1679408280382" duration="17408000" />
+      <workItem from="1679408280382" duration="17728000" />
+      <workItem from="1679486958085" duration="8189000" />
     </task>
     <servers />
   </component>

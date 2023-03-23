@@ -12,7 +12,9 @@ h2{
     font-size: 1.5em;
     padding: 0;
 }
-
+p, h5,form{
+    font-family: 'Montserrat', sans-serif;
+}
 
 .h-5{
     height: 6rem;

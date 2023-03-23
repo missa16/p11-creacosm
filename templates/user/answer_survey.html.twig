@@ -16,21 +16,23 @@
                     </div>
                 </div>
                 <div class="child-1"></div>
-                <div class="child-1">
-                    <p class="df jcc">Thème :{{ sondage.intitule }}</p>
+                <div class="child-1 df jcc aic">
+                    <h2 class="">Thème : {{ sondage.intitule }}</h2>
                 </div>
                 <div class="child df jcc">
                     <div class="card-1 df jcc fd aic ">
-                        <p class=" ">Total questions</p>
+                        <h5 class=" ">Total questions</h5>
                         <p>{{ sondage.Questions.count }}</p>
                     </div>
                     <div class="card-2 df jcc fd aic ">
-                        <p>Temps estimé</p>
+                        <h5>Temps estimé</h5>
                         <p>10-15min</p>
                     </div>
-                    <div class="child-2">
+                    <div class="child-2 d-flex">
+                        <div>
                         <button class="button-start"> <a class="c-white" href="{{ path('app_sondage_answer_questions', {'id': sondage.id}) }}">Commencer</a></button>
-                        <a  class="" href="{{ path('app_sondage_index') }}">Retour au menu</a>
+                        </div>
+                            <a class="back" href="{{ path('app_sondage_index') }}"><img class="back-50" src="{{ asset('build/images/bouton-retour.png') }}"></a>
                     </div>
                 </div>
 

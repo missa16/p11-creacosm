@@ -13,13 +13,14 @@ import './css/sidebar.css';
 import './css/titre.css';
 import './css/image.css';
 
-
+import './css/inscription.css';
+import './css/connexion.css';
 import './css/accueil.css';
 import './css/creer-sondage.css';
 import './css/start-reponse.css';
 import './css/repondre-sondage.css';
-import './css/inscription.css';
-import './css/connexion.css';
+import './css/questionnaire.css';
+
 
 // start the Stimulus application
 import './bootstrap';
