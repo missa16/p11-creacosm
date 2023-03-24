@@ -26,6 +26,7 @@ Encore
     .addEntry('nextQuestion','./assets/js/form_nextQuestion.js')
     .addEntry('renderChart','./assets/js/render_chart.js')
     .addEntry('historique','./assets/js/historique.js')
+    .addEntry('nextStats','./assets/js/form_nextStats.js')
 
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
@@ -37,6 +38,11 @@ Encore
     // will require an extra script tag for runtime.js
     // but, you probably want this, unless you're building a single-page app
     .enableSingleRuntimeChunk()
+
+    .copyFiles({
+        from:'./assets/images',
+        to : 'images/[path][name].[ext]'
+    })
 
     /*
      * FEATURE CONFIG
