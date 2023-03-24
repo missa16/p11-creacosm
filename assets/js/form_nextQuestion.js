@@ -17,7 +17,6 @@ nextQuestionButtons.forEach(button => {
 
         if (nextQuestion == null ) {
             document.getElementById('confirmation-message').style.display = 'block';
-
         }
         currentQuestion.style.display = 'none';
         nextQuestion.style.display = 'block';

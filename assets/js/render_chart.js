@@ -29,17 +29,45 @@ function makeChart(chartHTML, typeChart, titreGraphe){
     });
 }
 
-// Graphique des ages
-const chartAgeHTML = document.getElementById('ageChart');
-makeChart(chartAgeHTML,'bar','Age moyens des sondés');
 
-// Graphique des formations
-const chartFormationHTML = document.getElementById('formationChart');
-makeChart(chartFormationHTML,'bar','Activité professionnelle des sondés');
+// const select = document.getElementById("stats");
+// select.addEventListener("change", e => {
+//     let value = e.target.value
+//     selectVal(value)
+// })
+// console.log(select)
+// function selectVal(val){
+//     switch (val) {
+//         case 'age':
+// const chartAgeHTML = document.getElementById('ageChart');
+// makeChart(chartAgeHTML,'bar','Age moyens des sondés');
+//             break;
+//         case 'formation':
+//             const chartFormationHTML = document.getElementById('formationChart');
+//             makeChart(chartFormationHTML,'bar','Activité professionnelle des sondés');
+//             break;
+//         case 'genre':
+//            // const chartGenreHTML = document.getElementById('genreChart');
+//  makeChart(chartGenreHTML,'bar','Genre des sondés');
+//         default:
+//
+//     }
+// }
 
-// Graphique des genres
-const chartGenreHTML = document.getElementById('genreChart');
-makeChart(chartGenreHTML,'bar','Genre des sondés');
+
+
+
+// // Graphique des ages
+// const chartAgeHTML = document.getElementById('ageChart');
+// makeChart(chartAgeHTML,'bar','Age moyens des sondés');
+//
+// // Graphique des formations
+//const chartFormationHTML = document.getElementById('formationChart');
+//makeChart(chartFormationHTML,'bar','Activité professionnelle des sondés');
+
+// // Graphique des genres
+// const chartGenreHTML = document.getElementById('genreChart');
+// makeChart(chartGenreHTML,'bar','Genre des sondés');
 
 
 // Graphique classique des questions

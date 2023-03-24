@@ -107,7 +107,7 @@ class SondeurController extends AbstractController
         return $this->redirectToRoute('app_sondeur_my_surveys', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/mes-sondages/{id}/stats', name: 'app_sondeur_stats_survey', methods: ['GET', 'POST'])]
+        #[Route('/mes-sondages/{id}/stats', name: 'app_sondeur_stats_survey', methods: ['GET', 'POST'])]
     public function statSondage(SondageRepository $sondageRepository,FormationRepository $formationRepository,QuestionRepository $questionRepository, Sondage $sondage): Response
     {
         $ageChart= $sondageRepository->findAgeSondes($sondage);
@@ -125,9 +125,10 @@ class SondeurController extends AbstractController
 
         return $this->render('sondeur/stats_sondage.html.twig', [
             'sondage' => $sondage,
-            'ageChart' => json_encode($ageChart),
-            'formationChart' => json_encode($formationChart),
-            'genreChart' => json_encode($genreChart),
+            'globalesCharts' => ['age'=>json_encode($ageChart),'formation'=>json_encode($formationChart),'genre'=>json_encode($genreChart)],
+            //'ageChart' => json_encode($ageChart),
+            //'formationChart' => json_encode($formationChart),
+            //'genreChart' => json_encode($genreChart),
             'chartQuestions'=>$chartQuestions
         ]);
 

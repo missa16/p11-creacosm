@@ -72,7 +72,7 @@ function addQuestionFormDeleteLink(item) {
     let addAnswerFormButton = document.createElement('button');
     addAnswerFormButton.innerHTML = "<span class='bi  bi-plus-circle'>Ajouter une réponse</span>";
     addAnswerFormButton.classList.add("add_ans_link", "button-add");
-    addAnswerFormButton.style.flexGrow=1
+    addAnswerFormButton.style.flexGrow=1;
     let reponses = item.querySelector('ul');
     addAnswerFormButton.dataset.collectionHolderClass = reponses.className;
     // item.append(addAnswerFormButton);

@@ -19,10 +19,7 @@ html, body {
     height: 100%; /* La deuxième colonne occupe toute la hauteur de la grille */
 }
 
-.row {
-    height: 100%;
-    padding: 20px;
-}
+
 
 .df{
     display: flex;
