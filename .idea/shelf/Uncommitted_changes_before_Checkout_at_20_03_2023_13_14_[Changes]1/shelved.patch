@@ -1,0 +1,98 @@
+Index: .idea/dataSources.xml
+===================================================================
+diff --git a/.idea/dataSources.xml b/.idea/dataSources.xml
+deleted file mode 100644
+--- a/.idea/dataSources.xml	
++++ /dev/null	
+@@ -1,12 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+-    <data-source source="LOCAL" name="creacosm@localhost" uuid="c1e90d47-6757-45d2-8c4e-42dc7765acea">
+-      <driver-ref>postgresql</driver-ref>
+-      <synchronize>true</synchronize>
+-      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+-      <jdbc-url>jdbc:postgresql://localhost:5432/creacosm</jdbc-url>
+-      <working-dir>$ProjectFileDir$</working-dir>
+-    </data-source>
+-  </component>
+-</project>
+\ No newline at end of file
+Index: migrations/Version20230319203827.php
+===================================================================
+diff --git a/migrations/Version20230319203827.php b/migrations/Version20230319203827.php
+deleted file mode 100644
+--- a/migrations/Version20230319203827.php	
++++ /dev/null	
+@@ -1,33 +0,0 @@
+-<?php
+-
+-declare(strict_types=1);
+-
+-namespace DoctrineMigrations;
+-
+-use Doctrine\DBAL\Schema\Schema;
+-use Doctrine\Migrations\AbstractMigration;
+-
+-/**
+- * Auto-generated Migration: Please modify to your needs!
+- */
+-final class Version20230319203827 extends AbstractMigration
+-{
+-    public function getDescription(): string
+-    {
+-        return '';
+-    }
+-
+-    public function up(Schema $schema): void
+-    {
+-        // this up() migration is auto-generated, please modify it to your needs
+-        $this->addSql('ALTER TABLE question DROP stats_question');
+-    }
+-
+-    public function down(Schema $schema): void
+-    {
+-        // this down() migration is auto-generated, please modify it to your needs
+-        $this->addSql('CREATE SCHEMA public');
+-        $this->addSql('ALTER TABLE question ADD stats_question TEXT DEFAULT NULL');
+-        $this->addSql('COMMENT ON COLUMN question.stats_question IS \'(DC2Type:array)\'');
+-    }
+-}
+Index: migrations/Version20230319205043.php
+===================================================================
+diff --git a/migrations/Version20230319205043.php b/migrations/Version20230319205043.php
+deleted file mode 100644
+--- a/migrations/Version20230319205043.php	
++++ /dev/null	
+@@ -1,31 +0,0 @@
+-<?php
+-
+-declare(strict_types=1);
+-
+-namespace DoctrineMigrations;
+-
+-use Doctrine\DBAL\Schema\Schema;
+-use Doctrine\Migrations\AbstractMigration;
+-
+-/**
+- * Auto-generated Migration: Please modify to your needs!
+- */
+-final class Version20230319205043 extends AbstractMigration
+-{
+-    public function getDescription(): string
+-    {
+-        return '';
+-    }
+-
+-    public function up(Schema $schema): void
+-    {
+-        // this up() migration is auto-generated, please modify it to your needs
+-
+-    }
+-
+-    public function down(Schema $schema): void
+-    {
+-        // this down() migration is auto-generated, please modify it to your needs
+-        $this->addSql('CREATE SCHEMA public');
+-    }
+-}
