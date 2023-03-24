@@ -18,9 +18,10 @@
                 <button class="next-question-button" data-next-question="{{ questionNumber + 1 }}">
                    Next question
                 </button>
+
             </div>
         {% endfor %}
-
+        <a href="{{ path('app_sondage_save_avances', {'id': sondage.id}) }}">Sauvegarder et revenir plus tard</a>
         <div id="confirmation-message" style="display:none">
             Merci d'avoir complété le sondage !
             {{ form_row(form.submit, { 'label': 'Envoyer mes réponses' }) }}

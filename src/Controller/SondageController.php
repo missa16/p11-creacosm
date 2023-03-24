@@ -38,8 +38,9 @@ class SondageController extends AbstractController
     #[Route('/sondages', name: 'app_sondage_now', methods: ['GET'])]
     public function sondagesNow(SondageRepository $sondageRepository): Response
     {
+        $user = $this->getUser();
         return $this->render('user/sondages_en_cours.html.twig', [
-            'sondages' => $sondageRepository->findAllSondageEnCours(),
+            'sondages' => $sondageRepository->findAllSondageEnCours($user),
         ]);
     }
 
@@ -123,6 +124,23 @@ class SondageController extends AbstractController
             'form' => $form
         ]);
 
+    }
+
+
+    #[Route('/{id}/save-avances', name: 'app_sondage_save_avances', methods: ['GET'])]
+    public function comeBackLater(Request $request, Sondage $sondage): Response
+    {
+       // $user = $this->getUser();
+
+        $form = $this->createForm(RepondreSondageType::class, null, [
+            'sondage' => $sondage,
+        ]);
+
+        $form->handleRequest($request);
+
+        return $this->render('user/back_later.html.twig', [
+            'form' => $form
+        ]);
     }
 }
 

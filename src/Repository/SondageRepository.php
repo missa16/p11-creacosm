@@ -183,14 +183,19 @@ class SondageRepository extends ServiceEntityRepository
         return $chart_data;  // indice 0 : les différents interval d'age, indice 1 le compte de personne pour chaque intervalle
     }
 
-    public function findAllSondageEnCours(): array
+    public function findAllSondageEnCours($user): array
     {
 
         $sondages = $this->findAll();
         $now = new \DateTimeImmutable();
         $sondagesEnCours= [];
         foreach ($sondages as $sondage){
-            if ($sondage->getDateFin()<$now){
+            $usersSondageResult = $sondage->getLesSondes();
+            $sondes=[];
+            foreach ($usersSondageResult as $userSondageResult) {
+                $sondes[]=$userSondageResult->getSonde();
+            }
+            if ( !(in_array($user,$sondes)) && $sondage->getDateFin()<$now  ){
                 $sondagesEnCours[]=$sondage;
             }
         }

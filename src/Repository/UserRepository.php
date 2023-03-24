@@ -101,8 +101,5 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
     }
 
-    public function findSondagesRepondus(User $user): Collection
-    {
-        return $user->getSondagesRepondus();
-    }
+
 }
