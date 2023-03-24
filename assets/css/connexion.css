@@ -1,0 +1,119 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+
+/**, ::after, ::before{*/
+/*    box-sizing: unset;*/
+/*}*/
+
+
+.content {
+    grid-column: 2; /* Le contenu occupe la deuxième colonne */
+    display: grid;
+    grid-template-rows: 70px 80px auto auto auto auto auto;
+    grid-gap: 20px; /* Espacement entre les lignes */
+    height: 100%; /* La deuxième colonne occupe toute la hauteur de la grille */
+}
+
+
+
+.df{
+    display: flex;
+}
+
+.jcc{
+    justify-content: center;
+}
+
+.jce{
+    justify-content: end;
+}
+
+h1{
+    font-size: 2.5rem;
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: .5rem;
+    font-weight: 500;
+    line-height: 1.2;
+    color: var(--bs-heading-color,inherit);
+}
+
+p{
+    font-family: 'Montserrat', sans-serif;
+}
+.a{
+    font-family: 'Montserrat', sans-serif;
+    color:black;
+}
+
+.tdn{
+    text-decoration: none !important;
+}
+
+
+/* responsive form*/
+
+.mb-2{
+    margin-bottom: 0.5rem;
+}
+
+
+label {
+    display: block;
+    margin-left:20px;
+    margin-bottom: 0.5em;
+    font-family: 'Montserrat', sans-serif;
+
+}
+
+
+
+.c-black{
+    color:black;
+
+}
+
+input,
+textarea,select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    line-height: 1.5;
+    box-sizing: border-box;
+}
+@media screen and (max-width: 768px) {
+    body{
+        overflow-y: visible;
+    }
+
+    .grid-container{
+        grid-template-rows: 96vh;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .grid-form {
+        grid-template-columns: repeat(1, 1fr);
+
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .grid-form {
+        grid-template-columns: repeat(2, 1fr);
+
+    }
+}
+
+
+
+
+
+
+

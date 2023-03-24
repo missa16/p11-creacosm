@@ -1,17 +1,40 @@
 {% extends 'base.html.twig' %}
-
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/creer-sondage.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/button.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/titre.css') }}"/>
+{% endblock %}
 {% block title %}Création d'un nouveau sondage{% endblock %}
 
 {% block body %}
-
-    <h1>Créer un nouveau sondage</h1>
-    {{ include('sondeur/_form.html.twig') }}
-
-    <a href="{{ path('app_sondeur_my_surveys') }}">Retour au menu</a>
+    <div class="grid-container-nav">
+        {{ include('composants/_nav_bar.html.twig') }}
+        <div class="content">
+            <div class="row">
+                <div class="df jce">
+                                            {% if app.user %}
+                                                <div class="">
+                                                      <button class="button"><a class="text-decoration-none a" href="{{ path('app_logout') }}">se deconnecter</a></button>
+                                                </div>
+                                            {% endif %}
+                </div>
+            </div>
+            <div class="row">
+                <h1 class="size-40 df jcc">Création d'un sondage</h1>
+{#                <div class="logo">#}
+{#                    <img src="{{ asset('build/images/ampoule.png') }}"/>#}
+{#                </div>#}
+            </div>
+            <div class="row">
+                {{ include('sondeur/_form.html.twig') }}
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 
 {% block javascripts %}
-    {#{{ parent }}#}
+    {# {{ parent }} #}
     {{ encore_entry_script_tags('manageQuestions') }}
 {% endblock %}

@@ -3,30 +3,65 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
-<form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+    <form method="post" class="form">
+        {% if error %}
+            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+        <div class="grid-container-1">
+            <div class="row"><img src="{{ asset('build/images/connexion.jpg') }}" class="beaute"/>
+            </div>
+            <div class="content">
+                <div class="row">
+                    <div class="df jce">
+                        <button class="button"><a class="text-decoration-none a" href="{{ path('app_register') }}">
+                                s'inscrire
+                            </a></button>
 
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                        {#                        {% if app.user %} #}
+                        {#                            <div class=""> #}
+                        {#                                  <button class="button"><a class="text-decoration-none a" href="{{ path('app_logout') }}">se deconnecter</a></button> #}
+                        {#                            </div> #}
+                        {#                        {% endif %} #}
+                    </div>
+                </div>
+                <div class="row">
+                    <h1 class="df jcc">Connexion</h1>
+                </div>
+
+                <div class="row">
+                    <form>
+                        <div>
+                            <div>
+                                <label for="inputEmail">Email</label>
+                                <input type="email" value="{{ last_username }}" name="username" id="inputUsername"
+                                       class="form-control" autocomplete="username" required autofocus>
+                            </div>
+
+                            <div class="mb-2">
+                                <label for="inputPassword">Mot de passe</label>
+                                <input type="password" name="password" id="inputPassword" class="form-control"
+                                       autocomplete="current-password" required>
+                            </div>
+
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" class="button-enregister">Connexion</button>
+                        </div>
+                        <input type="hidden" name="_csrf_token"
+                               value="{{ csrf_token('authenticate') }}"
+                        >
+                        </div>
+                    </form>
+                    <div class="df jcc">
+                        <a class="text-decoration-none a" href="{{ path('app_register') }}">
+                            Vous n'avez pas de compte ? Inscrivez-vous
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
-    {% endif %}
 
-    <a href="{{ path('app_register') }}">S'inscrire</a>
-
-    <h1 class="h3 mb-3 font-weight-normal">Bienvenue</h1>
-    <label for="inputEmail">Email</label>
-    <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" autocomplete="username" required autofocus>
-    <label for="inputPassword">Mot de passe</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
-
-    {#
+        {#    <a href="{{ path('app_register') }}">S'inscrire</a> #}
+        {#
         Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
         See https://symfony.com/doc/current/security/remember_me.html
 
@@ -35,23 +70,7 @@
                 <input type="checkbox" name="_remember_me"> Remember me
             </label>
         </div>
-    #}
+        #}
 
-    <p>
-        <a href="#">Mot de passe oublié</a>
-    </p>
-
-    <p>
-        <button class="btn btn-lg btn-primary" type="submit">
-            Connexion
-        </button>
-    </p>
-
-    <p>
-        <b><a href="{{ path('app_register') }}">
-            Vous n'avez pas de compte ? Inscrivez-vous
-            </a></b>
-    </p>
-
-</form>
+    </form>
 {% endblock %}

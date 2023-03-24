@@ -1,26 +1,74 @@
 {% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('css/inscription.css') }}" rel="stylesheet">
+{% endblock %}
+
 
 {% block title %}Register{% endblock %}
 
+
 {% block body %}
-    <h1>Inscription</h1>
+    <div class="grid-container-1">
+        <div class="row">
+            <img src="{{ asset('build/images/savon_cosm.jpg') }}" class="beaute"/>
+        </div>
+        <div class="content">
+            <div class="row">
+                <div class="df jce">
+                    <button class="button"><a class="text-decoration-none a" href="{{ path('app_login') }}">
+                            connexion
+                        </a></button>
 
-    {{ form_start(registrationForm) }}
-    {{ form_row(registrationForm.nom) }}
-    {{ form_row(registrationForm.prenom) }}
+                </div>
+            </div>
+            <div class="row">
+                <h1 class="df jcc">Inscription</h1>
+            </div>
 
-    {{ form_row(registrationForm.email) }}
+            <div class="form">
 
-    {{ form_row(registrationForm.plainPassword, {label: 'Password'}) }}
+                    {{ form_start(registrationForm) }}
+                    <div class="grid-form">
+                        <div>
+                            {{ form_row(registrationForm.nom) }}
+                        </div>
+                        <div>
+                            {{ form_row(registrationForm.prenom) }}
+                        </div>
+                    </div>
+                    <div class="grid-form">
+                        <div>
+                            {{ form_row(registrationForm.genre) }}
+                        </div>
+                        <div>
+                            {{ form_row(registrationForm.dateNaissance) }}
+                        </div>
+                    </div>
+                    <div class="grid-form">
+                        <div>
+                            {{ form_row(registrationForm.formation) }}
+                        </div>
+                        <div>
+                            {{ form_row(registrationForm.ville)}}
+                        </div>
+                    </div>
+                    <div class="grid-form">
+                        <div>
+                            {{ form_row(registrationForm.email) }}
+                        </div>
+                        <div>
+                            {{ form_row(registrationForm.plainPassword, {label: 'Mot de passe'}) }}
+                        </div>
+                    </div>
+                    <div class="gt-1 df jcc">
+                        <button  type="submit" class="button-enregister">Valider</button>
+                    </div>
+                    {{ form_end(registrationForm) }}
+
+            </div>
+        </div>
+    </div>
 
 
-    {{ form_row(registrationForm.genre) }}
-    {{ form_row(registrationForm.dateNaissance) }}
-
-    {{ form_row(registrationForm.formation) }}
-    {{ form_row(registrationForm.ville)}}
-
-
-    <button type="submit" class="btn btn-success">Valider</button>
-    {{ form_end(registrationForm) }}
 {% endblock %}

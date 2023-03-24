@@ -1,32 +1,73 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>{{ sondage.intitule }}</h1>
 
-    {% set totalQuestions = sondage.questions|length %}
 
-    <div id="question-container">
-        {{ form_start(form) }}
 
-        {% set questionNumber = 0 %}
+<div class="container-q">
+    <div class="col-q"><img class="img-q" src="{{ asset('build/images/bio.jpg') }}" /></div>
+    <div class="col-q grid-container-q">
+        <div class="grid-item-q"></div>
+        <div class="grid-item-q">
+            <div class="grid-container-sub">
+                <div class="grid-item-q d-flex justify-content-center">
+                    <h1>{{ sondage.intitule }}</h1>
+                </div>
+                <div class="grid-item-q d-flex flex-column">
 
-        {% for question in sondage.questions %}
-            {% set questionNumber = questionNumber + 1 %}
-            <div class="question" id="question-{{ questionNumber }}" {% if questionNumber != 1 %}style="display:none"{% endif %}>
-                {{ form_row(form['question_' ~ question.id]) }}
-                <button class="next-question-button" data-next-question="{{ questionNumber + 1 }}">
-                   Next question
-                </button>
+                    {% set totalQuestions = sondage.questions|length %}
+                    <div id="question-container">
+                        {{ form_start(form) }}
+
+                        {% set questionNumber = 0 %}
+
+                        {% for question in sondage.questions %}
+                            {% set questionNumber = questionNumber + 1 %}
+                            <div class="question" id="question-{{ questionNumber }}" {% if questionNumber != 1 %}style="display:none"{% endif %}>
+                                {{ form_row(form['question_' ~ question.id]) }}
+
+                                <button class="next-question-button button" data-next-question="{{ questionNumber + 1 }}">
+                                    Next question
+                                </button>
+                            </div>
+                        {% endfor %}
+
+                        <div id="confirmation-message" style="display:none">
+                            Merci d'avoir complété le sondage !
+                            {{ form_row(form.submit, { 'label': 'Envoyer mes réponses' }) }}
+                        </div>
+
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+
             </div>
-        {% endfor %}
+            <!--  <div><input type="checkbox" id="horns" name="horns"></div> -->
 
-        <div id="confirmation-message" style="display:none">
-            Merci d'avoir complété le sondage !
-            {{ form_row(form.submit, { 'label': 'Envoyer mes réponses' }) }}
         </div>
-
-        {{ form_end(form) }}
     </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 {% endblock %}
 
 

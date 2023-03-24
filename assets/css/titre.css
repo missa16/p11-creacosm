@@ -1,0 +1,33 @@
+h1, h3{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+}
+
+h2{
+    font-family: 'Montserrat', sans-serif;
+}
+
+.card h2 {
+    margin: 0.8rem;
+    font-size: 1.5em;
+    padding: 0;
+}
+p, h5,form{
+    font-family: 'Montserrat', sans-serif;
+}
+
+.h-5{
+    height: 6rem;
+}
+
+.size-40{
+    font-size: 40px;
+}
+.size-30{
+    font-size: 30px;
+}
+
+.size-25{
+    font-size: 25px;
+}
+

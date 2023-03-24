@@ -1,0 +1,43 @@
+/*sondeur*/
+.content-sond {
+    grid-column: 2; /* Le contenu occupe la deuxième colonne */
+    display: grid;
+    grid-template-rows: 70px auto auto; /* Deux lignes de hauteur automatique */
+    grid-gap: 20px; /* Espacement entre les lignes */
+    height: 100%; /* La deuxième colonne occupe toute la hauteur de la grille */
+}
+.col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box {
+    position: relative;
+    text-align: center;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.box img {
+    display: block;
+    /* width: 100%; */
+    height: auto;
+}
+
+.box .text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 1.2rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px #000000;
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+}

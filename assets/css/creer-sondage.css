@@ -1,0 +1,227 @@
+html,body {
+    height: 100%;
+
+}
+
+
+.sidebar {
+    position: static;
+    grid-column: 1; /* La sidebar occupe la première colonne */
+    height: 100%; /* La deuxième colonne occupe toute la hauteur de la grille */
+    background-color: #f1f1f1;
+
+}
+
+/* Logo */
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+    margin-bottom: 20px;
+}
+
+.logo img {
+    max-height: 120px;
+    max-width: 80%;
+}
+
+/* Links */
+.links {
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+.content {
+    grid-column: 2; /* Le contenu occupe la deuxième colonne */
+    display: grid;
+    grid-gap: 20px; /* Espacement entre les lignes */
+
+}
+
+.jce{
+    justify-content: flex-end;
+}
+
+.aic{
+    align-items: center;
+}
+
+.df{
+    display: flex;
+
+}
+
+.jcc{
+    justify-content: center;
+}
+
+
+
+.row-q {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-q {
+    height: 100%;
+    background: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: row;
+}
+
+.rectangle {
+    width: 2%;
+    height: 100%;
+    /*background: #0B65AB;*/
+    background: #EFDCD8;
+}
+
+.content-q{
+    flex: 1;
+    padding: 20px;
+    width: 70vw;
+}
+
+.content-q h2 {
+    margin-top: 0;
+}
+
+
+.column-2{
+    /*background: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);*/
+    padding: auto;
+}
+
+.column-3, .colonne-4{
+    /* background: #fff;
+     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);*/
+    border-radius: 10px;
+    padding: 1vw;
+}
+
+.column-3{
+    margin-top: 1em;
+}
+
+.checkbox {
+    margin: 10px 0;
+}
+
+
+.text-field {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* styles pour la div contenant le champ texte */
+.text-field-container {
+    margin-bottom: 20px;
+}
+
+/* styles pour le label */
+.text-field-label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* styles pour le formulaire */
+#form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f0f0f0;
+}
+.button-enregister{
+    background-color: #38414A;
+    border-radius: 8px;
+    border-width: 0;
+    color: white;
+    cursor: pointer;
+    display: inline-block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    list-style: none;
+    margin: 10px;
+    padding: 10px 8vw;
+    text-align: center;
+    transition: all 200ms;
+    vertical-align: baseline;
+    white-space: nowrap;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+/* Style de base pour la liste déroulante */
+#choix{
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Style pour le label */
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Style pour la liste déroulante lorsque ouverte */
+#select-menu:focus {
+    outline: none;
+    box-shadow: 0 0 5px #00BFFF;
+}
+
+/* Style pour les options de la liste déroulante */
+#select-menu option {
+    font-size: 16px;
+}
+
+
+/* partie ajouter des question*/
+
+ul{
+    list-style: none;
+}
+
+
+@media (max-width: 768px) {
+    .card {
+        max-width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    .card {
+        max-width: 100%;
+    }
+    .text-field-label {
+        font-size: 12px;
+    }
+
+    .text-field {
+        font-size: 14px;
+    }
+}
+
+
+
+/* Responsive layout */
+@media only screen and (max-width: 768px) {
+
+}

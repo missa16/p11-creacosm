@@ -1,0 +1,148 @@
+a{
+    text-decoration: none;
+}
+
+.c-white{
+    color:white;
+}
+.c-white:hover{
+    color:#DEE3CF;
+}
+.button-delete{
+    min-height: 37.5px;
+    margin-bottom: 1rem;
+    background: #ff9284;
+    border: #ff9284;
+    border-radius: 8px;
+    color: white;
+}
+
+.button-add{
+    margin-left:2em;
+    width:15rem;
+    min-height: 37.5px;
+    margin-bottom: 1rem;
+    background: #7dbfed;
+    border: #7dbfed;
+    border-radius: 8px;
+    color: white;
+}
+
+
+.button, .button:hover{
+    /*background-color: rgba(51, 51, 51, 0.05);*/
+    color:white;
+    border-radius: 8px;
+    border-width: 0;
+    cursor: pointer;
+    display: inline-block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    list-style: none;
+    margin: 10px;
+    padding: 10px 18px;
+    text-align: center;
+    transition: all 200ms;
+    vertical-align: baseline;
+    white-space: nowrap;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+.button{
+    background-color: #38414A;
+}
+.button:hover{
+    background-color: #B3A8A2;
+}
+
+.button a {
+    color: white;
+}
+.button-enregister, .button-enregister:hover{
+    border-radius: 8px;
+    border-width: 0;
+    color: white;
+    cursor: pointer;
+    display: inline-block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    list-style: none;
+    margin: 10px;
+    padding: 10px 8vw;
+    text-align: center;
+    transition: all 200ms;
+    vertical-align: baseline;
+    white-space: nowrap;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.button-enregister{
+    background-color: #38414A;
+}
+
+.button-enregister:hover{
+    background-color: #B3A8A2;
+
+}
+
+.button-t {
+    display: inline-block;
+    background: #ffffff33;
+    color: #000000;
+    padding: 10px 20px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    font-weight: bold;
+    font-size: 1em;
+    transition: all 0.3s ease-in-out;
+    border: none;
+    outline: none;
+}
+/* Style pour le hover */
+.button-t:hover {
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    transform: translateY(-5px);
+}
+.card .button-t{
+    margin: 0.8rem;
+}
+
+.button-start{
+    /* From https://css.glass */
+    background: rgba(0, 0, 0, 0.27);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(18.2px);
+    -webkit-backdrop-filter: blur(18.2px);
+    border-radius: 8px;
+    border-width: 0;
+    cursor: pointer;
+    display: inline-block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    list-style: none;
+    margin: 10px;
+    padding: 10px 100px;
+    text-align: center;
+    transition: all 200ms;
+    vertical-align: baseline;
+    white-space: nowrap;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+/* Style pour les écrans de petite taille */
+@media (max-width: 767px) {
+    .button-t,p{
+        font-size: 0.4rem;
+    }
+}

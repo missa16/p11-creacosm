@@ -5,19 +5,62 @@
 
 
 {% block body %}
-    <h1>Thème : </h1>
+    <div class="grid-container-nav-1">
+        {{ include('composants/_nav_bar.html.twig') }}
+        <div class="content-8  background parent div-parente">
+            <div class="row ">
+                <div class="df jce">
+                    <div class="">
+                        <button class="button"><a class="text-decoration-none a" href="{{ path('app_logout') }}">se
+                                deconnecter</a></button>
+                    </div>
+                </div>
+                <div class="child-1"></div>
+                <div class="child-1 df jcc aic">
+                    <h2 class="">Thème : {{ sondage.intitule }}</h2>
+                </div>
+                <div class="child df jcc">
+                    <div class="card-1 df jcc fd aic ">
+                        <h5 class=" ">Total questions</h5>
+                        <p>{{ sondage.Questions.count }}</p>
+                    </div>
+                    <div class="card-2 df jcc fd aic ">
+                        <h5>Temps estimé</h5>
+                        <p>10-15min</p>
+                    </div>
+                    <div class="child-2 d-flex">
+                        <div>
+                        <button class="button-start"> <a class="c-white" href="{{ path('app_sondage_answer_questions', {'id': sondage.id}) }}">Commencer</a></button>
+                        </div>
+                            <a class="back" href="{{ path('app_sondage_index') }}"><img class="back-50" src="{{ asset('build/images/bouton-retour.png') }}"></a>
+                    </div>
+                </div>
 
-    <h2>Nom du sondage : </h2>
-    <h3>{{ sondage.intitule }}</h3>
-
-    <h2>Nombre de questions : </h2>
-    <h3>{{ sondage.Questions.count}}</h3>
-
-    <h2>Temps estimé: </h2>
-    <h3>{{temps}}</h3>
-
-    <a href="{{ path('app_sondage_answer_questions', {'id': sondage.id}) }}">Commencer</a>
+            </div>
+        </div>
+    </div>
 
 
-    <a href="{{ path('app_sondage_index') }}">Retour au menu</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+{#    #}
+
+{#    <h2>Nom du sondage : </h2>#}
+{#    <h3>{{ sondage.intitule }}</h3>#}
+
+{#    <h2>Nombre de questions : </h2>#}
+{#    <h3>{{ sondage.Questions.count }}</h3>#}
+
+
 {% endblock %}

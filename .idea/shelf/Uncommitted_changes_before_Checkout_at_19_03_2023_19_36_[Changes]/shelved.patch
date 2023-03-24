@@ -1,0 +1,91 @@
+Index: assets/app.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/*\r\n * Welcome to your app's main JavaScript file!\r\n *\r\n * We recommend including the built version of this JavaScript file\r\n * (and its CSS file) in your base layout (base.html.twig).\r\n */\r\n\r\n// any CSS you import will output into a single css file (app.css in this case)\r\nimport './styles/app.css';\r\nimport './css/button.css';\r\nimport './css/creer-sondage.css';\r\nimport './css/titre.css';\r\nimport './css/image.css';\r\n// start the Stimulus application\r\nimport './bootstrap';\r\nimport 'bootstrap/dist/css/bootstrap.min.css';\r\nimport 'bootstrap-icons/font/bootstrap-icons.css';\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/assets/app.js b/assets/app.js
+--- a/assets/app.js	
++++ b/assets/app.js	
+@@ -9,6 +9,7 @@
+ import './styles/app.css';
+ import './css/button.css';
+ import './css/creer-sondage.css';
++import './css/sidebar.css';
+ import './css/titre.css';
+ import './css/image.css';
+ // start the Stimulus application
+Index: assets/css/creer-sondage.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>html,body {\r\n    height: 100%;\r\n    overflow-x: scroll;\r\n}\r\n\r\n.grid-container {\r\n    position: relative;\r\n    display: grid;\r\n    grid-template-columns: 1fr 6fr; /* Première colonne = 1/3, deuxième colonne = 2/3 */\r\n    /*grid-template-rows: 100vh;*/\r\n    grid-gap: 20px; /* Espacement entre les colonnes */\r\n}\r\n\r\n.sidebar {\r\n    position: static;\r\n    grid-column: 1; /* La sidebar occupe la première colonne */\r\n    height: 100%; /* La deuxième colonne occupe toute la hauteur de la grille */\r\n    background-color: #f1f1f1;\r\n\r\n}\r\n\r\n/* Logo */\r\n.logo {\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    height: 150px;\r\n    margin-bottom: 20px;\r\n}\r\n\r\n.logo img {\r\n    max-height: 120px;\r\n    max-width: 80%;\r\n}\r\n\r\n/* Links */\r\n.links {\r\n    display: flex;\r\n    flex-direction: column;\r\n}\r\n\r\n.links a {\r\n    color: #333;\r\n    padding: 10px 20px;\r\n    text-decoration: none;\r\n    font-size: 18px;\r\n}\r\n\r\n.links a i {\r\n    margin-right: 10px;\r\n}\r\n\r\n.links a:hover{\r\n    /*color: #0B65AB;*/\r\n    color:green;\r\n}\r\n\r\n.content {\r\n    grid-column: 2; /* Le contenu occupe la deuxième colonne */\r\n    display: grid;\r\n    grid-gap: 20px; /* Espacement entre les lignes */\r\n\r\n}\r\n\r\n.jce{\r\n    justify-content: flex-end;\r\n}\r\n\r\n.aic{\r\n    align-items: center;\r\n}\r\n\r\n.df{\r\n    display: flex;\r\n\r\n}\r\n\r\n.jcc{\r\n    justify-content: center;\r\n}\r\n\r\n.grid-item {\r\n    border: 1px solid black;\r\n    text-align: center;\r\n    padding: 10px;\r\n}\r\n\r\n.grid-column2 {\r\n    display: grid;\r\n    grid-template-columns: 1fr;\r\n    grid-template-rows: auto repeat(4, 1fr);\r\n    justify-content: center;\r\n    align-items: center;\r\n    position: relative;\r\n    overflow: auto;\r\n}\r\n\r\n.grid {\r\n    display: grid;\r\n    grid-template-columns: 1fr;\r\n    gap: 20px;\r\n}\r\n\r\n.row-q {\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n}\r\n\r\n.card-q {\r\n    height: 100%;\r\n    background: #fff;\r\n    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);\r\n    display: flex;\r\n    flex-direction: row;\r\n}\r\n\r\n.rectangle {\r\n    width: 2%;\r\n    height: 100%;\r\n    /*background: #0B65AB;*/\r\n    background: #EFDCD8;\r\n}\r\n\r\n.content-q{\r\n    flex: 1;\r\n    padding: 20px;\r\n    width: 70vw;\r\n}\r\n\r\n.content-q h2 {\r\n    margin-top: 0;\r\n}\r\n\r\n.grid-2{\r\n    display: grid;\r\n    grid-template-columns: 1fr;\r\n    gap: 20px;\r\n}\r\n\r\n.row-2 {\r\n    display: grid;\r\n    grid-template-columns: 1fr 1fr;\r\n}\r\n\r\n\r\n.row-3 {\r\n    display: grid;\r\n    grid-template-columns: 1fr 1fr 1fr;\r\n}\r\n.column-2{\r\n    /*background: #fff;\r\n    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);*/\r\n    padding: auto;\r\n}\r\n\r\n.column-3, .colonne-4{\r\n    /* background: #fff;\r\n     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);*/\r\n    border-radius: 10px;\r\n    padding: 1vw;\r\n}\r\n\r\n.column-3{\r\n    margin-top: 1em;\r\n}\r\n\r\n.checkbox {\r\n    margin: 10px 0;\r\n}\r\n\r\n\r\n.text-field {\r\n    width: 100%;\r\n    padding: 10px;\r\n    font-size: 16px;\r\n    border: 1px solid #ccc;\r\n    border-radius: 5px;\r\n    box-sizing: border-box;\r\n}\r\n\r\n/* styles pour la div contenant le champ texte */\r\n.text-field-container {\r\n    margin-bottom: 20px;\r\n}\r\n\r\n/* styles pour le label */\r\n.text-field-label {\r\n    display: block;\r\n    margin-bottom: 5px;\r\n    font-size: 14px;\r\n    font-weight: bold;\r\n}\r\n\r\n/* styles pour le formulaire */\r\n#form {\r\n    max-width: 600px;\r\n    margin: 0 auto;\r\n    padding: 20px;\r\n    background-color: #f0f0f0;\r\n}\r\n.button-enregister{\r\n    background-color: #38414A;\r\n    border-radius: 8px;\r\n    border-width: 0;\r\n    color: white;\r\n    cursor: pointer;\r\n    display: inline-block;\r\n    font-family: 'Montserrat', sans-serif;\r\n    font-size: 14px;\r\n    font-weight: 500;\r\n    line-height: 20px;\r\n    list-style: none;\r\n    margin: 10px;\r\n    padding: 10px 8vw;\r\n    text-align: center;\r\n    transition: all 200ms;\r\n    vertical-align: baseline;\r\n    white-space: nowrap;\r\n    user-select: none;\r\n    -webkit-user-select: none;\r\n    touch-action: manipulation;\r\n}\r\n\r\n/* Style de base pour la liste déroulante */\r\n#choix{\r\n    width: 100%;\r\n    padding: 12px;\r\n    border: 1px solid #ccc;\r\n    border-radius: 4px;\r\n    box-sizing: border-box;\r\n}\r\n\r\n/* Style pour le label */\r\nlabel {\r\n    display: block;\r\n    margin-bottom: 5px;\r\n}\r\n\r\n/* Style pour la liste déroulante lorsque ouverte */\r\n#select-menu:focus {\r\n    outline: none;\r\n    box-shadow: 0 0 5px #00BFFF;\r\n}\r\n\r\n/* Style pour les options de la liste déroulante */\r\n#select-menu option {\r\n    font-size: 16px;\r\n}\r\n\r\n\r\n/* partie ajouter des question*/\r\n\r\nul{\r\n    list-style: none;\r\n}\r\n\r\n\r\n@media (max-width: 768px) {\r\n    .card {\r\n        max-width: 90%;\r\n    }\r\n}\r\n\r\n@media (max-width: 480px) {\r\n    .card {\r\n        max-width: 100%;\r\n    }\r\n    .text-field-label {\r\n        font-size: 12px;\r\n    }\r\n\r\n    .text-field {\r\n        font-size: 14px;\r\n    }\r\n}\r\n\r\n\r\n\r\n/* Responsive layout */\r\n@media only screen and (max-width: 768px) {\r\n\r\n}\r\n
+===================================================================
+diff --git a/assets/css/creer-sondage.css b/assets/css/creer-sondage.css
+--- a/assets/css/creer-sondage.css	
++++ b/assets/css/creer-sondage.css	
+@@ -3,64 +3,6 @@
+     overflow-x: scroll;
+ }
+ 
+-.grid-container {
+-    position: relative;
+-    display: grid;
+-    grid-template-columns: 1fr 6fr; /* Première colonne = 1/3, deuxième colonne = 2/3 */
+-    /*grid-template-rows: 100vh;*/
+-    grid-gap: 20px; /* Espacement entre les colonnes */
+-}
+-
+-.sidebar {
+-    position: static;
+-    grid-column: 1; /* La sidebar occupe la première colonne */
+-    height: 100%; /* La deuxième colonne occupe toute la hauteur de la grille */
+-    background-color: #f1f1f1;
+-
+-}
+-
+-/* Logo */
+-.logo {
+-    display: flex;
+-    justify-content: center;
+-    align-items: center;
+-    height: 150px;
+-    margin-bottom: 20px;
+-}
+-
+-.logo img {
+-    max-height: 120px;
+-    max-width: 80%;
+-}
+-
+-/* Links */
+-.links {
+-    display: flex;
+-    flex-direction: column;
+-}
+-
+-.links a {
+-    color: #333;
+-    padding: 10px 20px;
+-    text-decoration: none;
+-    font-size: 18px;
+-}
+-
+-.links a i {
+-    margin-right: 10px;
+-}
+-
+-.links a:hover{
+-    /*color: #0B65AB;*/
+-    color:green;
+-}
+-
+-.content {
+-    grid-column: 2; /* Le contenu occupe la deuxième colonne */
+-    display: grid;
+-    grid-gap: 20px; /* Espacement entre les lignes */
+-
+-}
+ 
+ .jce{
+     justify-content: flex-end;

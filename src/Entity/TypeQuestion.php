@@ -22,6 +22,9 @@ class TypeQuestion
     #[ORM\Column(length: 255)]
     private bool $isExpanded = false;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $label = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -73,6 +76,18 @@ class TypeQuestion
     public function setIsExpanded(bool $isExpanded): void
     {
         $this->isExpanded = $isExpanded;
+    }
+
+    public function getLabel(): ?string
+    {
+        return $this->label;
+    }
+
+    public function setLabel(?string $label): self
+    {
+        $this->label = $label;
+
+        return $this;
     }
 
 

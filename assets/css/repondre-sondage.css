@@ -1,0 +1,90 @@
+.gtc{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+
+/*.grid-item-2 {*/
+/*    backdrop-filter: blur(20px); !* Add a background blur effect *!*/
+/*    border-radius: 10px; !* Sepxt the border radius *!*/
+/*    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3); !* Add a subtle box shadow *!*/
+/*    color: rgb(8, 0, 0); !* Set the text color *!*/
+/*    font-size: 18px; !* Set the font size *!*/
+/*    padding: 10%;*/
+/*    text-align: center;*/
+/*    opacity: 0.8;*/
+/*}*/
+
+.ma-{
+    margin: 1em;
+}
+
+p{
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Style pour la carte */
+.card {
+    display: flex;
+    flex-direction: column;
+    max-height: 300px;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-image: linear-gradient(to right, #ECEBF0 0%, 37.31343150138855%, #EDF1F0 74.6268630027771%, 87.31343150138855%, #D8D7DD 100%);
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+}
+/* Style pour l'image */
+.card img {
+    width: 100%;
+    float: none;
+    margin-right: 0;
+    margin-bottom: 10px;
+}
+
+/* Style pour les paragraphes */
+.card p {
+    margin: 0.8rem;
+    padding: 0;
+}
+/* Style pour les écrans de petite taille */
+@media (max-width: 767px) {
+    .card img {
+        width: 100%;
+        float: none;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+}
+
+/*.grid-container {*/
+/*    display: grid;*/
+/*    grid-template-columns: 1fr 6fr; !* Première colonne = 1/3, deuxième colonne = 2/3 *!*/
+/*    grid-gap: 20px; !* Espacement entre les colonnes *!*/
+/*}*/
+/*.content {*/
+/*    grid-column: 2; !* Le contenu occupe la deuxième colonne *!*/
+/*    display: grid;*/
+/*    grid-template-rows: 20px auto auto; !* Deux lignes de hauteur automatique *!*/
+/*    grid-gap: 20px; !* Espacement entre les lignes *!*/
+/*    height: 100%; !* La deuxième colonne occupe toute la hauteur de la grille *!*/
+/*}*/
+
+
+.dg{
+    display: grid;
+}
+
+.eng{
+    width: 90%; max-width: 800px; margin: 0 auto; background-color: #eee; overflow: hidden; border-radius: 30px;
+}
+
+
+@media only screen and (max-width: 768px) {
+    .grid-container-5 {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(4, 1fr);
+        gap: 50px;
+    }
+}
+

@@ -1,0 +1,142 @@
+.grid-container-1 {
+    display: grid;
+    grid-template-rows: 100vh;
+    grid-template-columns: 4fr 5fr; /* Première colonne = 1/3, deuxième colonne = 2/3 */
+    grid-gap: 20px; /* Espacement entre les colonnes */
+}
+.grid-container-2{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-gap: 20px;
+    height: 85vh;
+}
+
+.grid-container-3{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-gap: 20px;
+    height: 100vh;
+}
+
+.grid-container-4{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 100px 300px 1fr;
+    grid-gap: 20px;
+
+}
+
+.grid-container-5 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 160px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.grid-container-6{
+    display: grid;
+    grid-template-columns: repeat(3, minmax(300px, 1fr));
+    grid-gap: 20px;
+    grid-template-rows: 100vh;
+}
+
+
+.grid-container-nav,.grid-container-nav-1 {
+    position: relative;
+    display: grid;
+    height: 100vh;
+    grid-template-columns: 1fr 6fr; /* Première colonne = 1/3, deuxième colonne = 2/3 */
+    /*grid-template-rows: 100vh;*/
+
+}
+
+.grid-container-q {
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 50px 1fr;
+    grid-template-columns: 1fr;
+    grid-gap: 10px;
+}
+
+
+.grid-container-sub {
+    height: 100%;
+    background-color: #fff;
+    padding: 20px;
+    font-size: 30px;
+    /*text-align: center;*/
+}
+
+.grid-item-q {
+    background-color: #fff;
+    padding: 20px;
+    font-size: 30px;
+    /*text-align: center;*/
+}
+
+
+.grid-container-nav{
+    grid-gap: 20px; /* Espacement entre les colonnes */
+}
+
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+.grid-2{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+.row {
+    height: 100%;
+    padding: 20px;
+}
+.row-stat-1{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.row-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+
+.row-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.grid-item {
+    border: 1px solid black;
+    text-align: center;
+    padding: 10px;
+}
+
+.grid-column2 {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto repeat(4, 1fr);
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: auto;
+}
+
+
+.grid-form {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 0.8fr;
+    margin:0.8rem;
+    gap:10px;
+}
+
+

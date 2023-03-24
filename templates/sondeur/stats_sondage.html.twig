@@ -3,45 +3,71 @@
 {% block title %}Statistiques d'un sondage {% endblock %}
 
 {% block body %}
+<div class="grid-container-nav">
+    {{ include('composants/_nav_bar.html.twig') }}
+    <div class="">
+        <div class="grid-container-4">
+            <div class="row-stat">
+            <h3 class="d-flex justify-content-center">Pour le sondage : {{ sondage.intitule }}</h3>
+            </div>
+                <div class="row-stat-1">
+                    <div class="col-stat">
+                        <div class="card">
+                            <h5 class="d-flex justify-content-center"> Nombre de personnes ayant répondu :</h5>
+                                <p class="d-flex justify-content-center">{{ sondage.lesSondes.count }}</p>
+                        </div>
+                    </div>
 
-<h1>Pour le sondage : {{ sondage.intitule }}</h1>
-    <h3> Nombre de personnes ayant répondu : {{ sondage.lesSondes.count }} </h3>
+                    <div class="col-stat">
+                        <div>
+                            <select name="stats" id="stats">
+                                {% for nom,chart in globalesCharts %}
+                                    <option value="{{nom}}" data-chart="{{ chart }}" >{{nom}}</option>
+                                {%  endfor %}
+                            </select>
+                        </div>
+                        <div class="card">
+                            <canvas id="chartGlobale" ></canvas>
+                        </div>
+                </div>
+                <div class="row-stat">
+                    <div class="col-stat">    {% set totalQuestions = sondage.questions|length %}
+                        <div id="question-container">
+                            {% set questionNumber = 0 %}
+                            {% for question in sondage.Questions %}
+                                {% set questionNumber = questionNumber + 1 %}
+                                <div class="question" id="question-{{ questionNumber }}"
+                                     {% if questionNumber != 1 %}style="display:none"{% endif %}>
+                                    <h5>{{ question.intitule }}</h5>
+                                    <canvas data-question="{{ question.intitule }}" data-type="{{ question.TypeQuestion.label }}" class="chartQuestion"
+                                            data-chart="{{ question.StatsQuestion[0] }}"></canvas>
+                                    <button class="next-question-stat button"
+                                            data-next-question="{{ questionNumber + 1 }}">
+                                        Next question
+                                    </button>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-    <div>
-        <canvas id="ageChart" data-chart="{{ ageChart }}"></canvas>
+        </div>
+
     </div>
 
-    <div>
-        <canvas id="formationChart" data-chart="{{ formationChart }}"></canvas>
-    </div>
+    {#    <div> #}
+    {#        <canvas id="formationChart" data-chart="{{ formationChart }}"></canvas> #}
+    {#    </div> #}
 
-    <div>
-        <canvas id="genreChart" data-chart="{{ genreChart }}"></canvas>
-    </div>
-
-    <div>
-        <canvas id="mixChart" data-chart="{{ genreChart }}"></canvas>
-    </div>
+    {#    <div> #}
+    {#        <canvas id="genreChart" data-chart="{{ genreChart }}"></canvas> #}
+    {#    </div> #}
+    {% endblock %}
 
 
-
-
-    <div>
-        {% for question in sondage.Questions %}
-            <h2>{{ question.intitule }}</h2>
-
-            <canvas data-question="{{ question.intitule }}" class="chartQuestion" data-chart="{{ question.StatsQuestions[0].dataJson }}"></canvas>
-{#            <canvas data-question="{{ question.intitule }}" class="chartQuestionMix" data-chart="{{question.StatsQuestions[1].dataJson }}"></canvas>#}
-        {% endfor %}
-
-    </div>
-
-{% endblock %}
-
-
-{% block javascripts %}
+    {% block javascripts %}
     {{ parent() }}
     {{ encore_entry_script_tags('renderChart') }}
+    {{ encore_entry_script_tags('nextStats') }}
 {% endblock %}
-
-{#<canvas data-question="{{ question.intitule }}" class="chartQuestion" data-chart="{{ chartQuestion }}"></canvas>#}
