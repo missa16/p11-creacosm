@@ -4,7 +4,7 @@
 
 {% block body %}
 
-<h1>Pour le sondage : {{ sondage.intitule }}</h1>
+    <h1>Pour le sondage : {{ sondage.intitule }}</h1>
     <h3> Nombre de personnes ayant répondu : {{ sondage.lesSondes.count }} </h3>
 
     <div>
@@ -31,7 +31,7 @@
             <h2>{{ question.intitule }}</h2>
 
             <canvas data-question="{{ question.intitule }}" class="chartQuestion" data-chart="{{ question.StatsQuestions[0].dataJson }}"></canvas>
-{#            <canvas data-question="{{ question.intitule }}" class="chartQuestionMix" data-chart="{{question.StatsQuestions[1].dataJson }}"></canvas>#}
+            {#            <canvas data-question="{{ question.intitule }}" class="chartQuestionMix" data-chart="{{question.StatsQuestions[1].dataJson }}"></canvas>#}
         {% endfor %}
 
     </div>

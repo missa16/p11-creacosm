@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sondage en cours{% endblock %}
+
+{% block body %}
+    <h1>Sondage en cours</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Intitule</th>
+            <th>EtatSondage</th>
+            <th>Description</th>
+            <th>ImageCouverture</th>
+            <th>DateFin</th>
+            <th>Actions</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for sondage in sondages %}
+            <tr>
+
+                <td>{{ sondage.intitule }}</td>
+                <td>{{ sondage.etatSondage }}</td>
+                <td>{{ sondage.description }}</td>
+                <td>{{ sondage.imageCouverture }}</td>
+                <td>{{ sondage.dateFin|date('d-m-Y') }}</td>
+                <td>
+                    <a href="{{ path('app_sondage_answer', {'id': sondage.id}) }}">Répondre au sondage</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">Aucun sondage en cours pour le moment</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

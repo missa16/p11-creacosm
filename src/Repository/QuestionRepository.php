@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Question;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\Query;
 use Doctrine\Persistence\ManagerRegistry;
 use PhpParser\Node\Expr\Array_;
 
@@ -97,4 +98,9 @@ class QuestionRepository extends ServiceEntityRepository
         //$question->addStatQuestion();
         return $chart_data;
     }
+
+
+
+// fin de la classe
 }
+

@@ -58,6 +58,19 @@ class AppFixtures extends Fixture
             ->setVille('Orléans');
         $manager->persist($sondeur);
 
+        // Mise en place d'un sondeur
+        $admin = new User();
+        $role =  ['ROLE_ADMIN'];
+        $admin->setEmail('admin@creacosm.com')
+            ->setPassword($this->passwordHasher->hashPassword(
+                $admin,'password'))
+            ->setRoles($role)
+            ->setNom('ADMIN')
+            ->setPrenom('ADMIN')
+            ->setDateNaissance(new DateTimeImmutable())
+            ->setVille('Orléans');
+        $manager->persist($admin);
+
         // Mise en place d'un sondé
         $sonde = new User();
         $role =  ['ROLE_SONDE'];

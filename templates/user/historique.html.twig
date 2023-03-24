@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sondage terminées{% endblock %}
+
+{% block body %}
+    <h1>Historique de mes sondages</h1>
+
+    <h2>Sondages terminés</h2>
+    <ul>
+        {% for sondage in sondages %}
+
+            <li class="sondageDone">
+               <div>
+                   <a href="#"> {{ sondage.sondage.intitule }} </a>
+
+                   {{ sondage.dateReponse|date('d-m-Y')}}
+               </div>
+                <div class="reponses" style="display: none">
+                    {% for userSondageReponse in sondage.allReponses %}
+                        {{ userSondageReponse.question.intitule }}
+                       <ul>
+                           {% for rep in userSondageReponse.reponses %}
+                              <li> {{ rep.laReponse }}</li>
+                           {% endfor %}
+
+                       </ul>
+                    {% endfor %}
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('historique') }}
+{% endblock %}

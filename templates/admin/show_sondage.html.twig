@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails du sondage{% endblock %}
+
+{% block body %}
+    <h1>Détails du sondage</h1>
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ sondage.id }}</td>
+        </tr>
+        <tr>
+            <th>Intitule</th>
+            <td>{{ sondage.intitule }}</td>
+        </tr>
+        <tr>
+            <th>EtatSondage</th>
+            <td>{{ sondage.etatSondage }}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ sondage.description }}</td>
+        </tr>
+        <tr>
+            <th>ImageCouverture</th>
+            <td>{{ sondage.imageCouverture }}</td>
+        </tr>
+        <tr>
+            <th>DateCreation</th>
+            <td>{{ sondage.dateCreation ? sondage.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
+        </tr>
+        <tr>
+            <th>DateLancement</th>
+            <td>{{ sondage.dateLancement ? sondage.dateLancement|date('Y-m-d H:i:s') : '' }}</td>
+        </tr>
+        <tr>
+            <th>DateFin</th>
+            <td>{{ sondage.dateFin ? sondage.dateFin|date('Y-m-d H:i:s') : '' }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_sondeur_my_surveys') }}">back to list</a>
+
+    <a href="{{ path('app_sondeur_edit', {'id': sondage.id}) }}">edit</a>
+
+    {{ include('sondeur/_delete_form.html.twig') }}
+{% endblock %}

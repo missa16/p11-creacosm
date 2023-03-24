@@ -6,8 +6,10 @@ use App\Entity\Sondage;
 use App\Entity\User;
 use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
+use phpDocumentor\Reflection\Types\Collection;
 use PhpParser\Node\Expr\Array_;
 
 /**
@@ -181,6 +183,24 @@ class SondageRepository extends ServiceEntityRepository
         return $chart_data;  // indice 0 : les différents interval d'age, indice 1 le compte de personne pour chaque intervalle
     }
 
+    public function findAllSondageEnCours($user): array
+    {
+
+        $sondages = $this->findAll();
+        $now = new \DateTimeImmutable();
+        $sondagesEnCours= [];
+        foreach ($sondages as $sondage){
+            $usersSondageResult = $sondage->getLesSondes();
+            $sondes=[];
+            foreach ($usersSondageResult as $userSondageResult) {
+                $sondes[]=$userSondageResult->getSonde();
+            }
+            if ( !(in_array($user,$sondes)) && $sondage->getDateFin()<$now  ){
+                $sondagesEnCours[]=$sondage;
+            }
+        }
+        return $sondagesEnCours;
+    }
 
 
 }

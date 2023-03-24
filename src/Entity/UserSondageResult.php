@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\UserSondageResultRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: UserSondageResultRepository::class)]
@@ -15,9 +16,6 @@ class UserSondageResult
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'sondagesRepondus')]
-    #[ORM\JoinColumn(nullable: true)]
-    private ?User $sonde = null;
 
     #[ORM\ManyToOne(inversedBy: 'lesSondes')]
     #[ORM\JoinColumn(nullable: false)]
@@ -25,6 +23,13 @@ class UserSondageResult
 
     #[ORM\OneToMany(mappedBy: 'userSondageResult', targetEntity: UserSondageReponse::class, cascade: ['persist'], orphanRemoval: true)]
     private Collection $allReponses;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $dateReponse = null;
+
+    #[ORM\ManyToOne(inversedBy: 'sondagesRepondus')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $sonde = null;
 
     public function __construct()
     {
@@ -36,17 +41,7 @@ class UserSondageResult
         return $this->id;
     }
 
-    public function getSonde(): ?User
-    {
-        return $this->sonde;
-    }
 
-    public function setSonde(?User $sonde): self
-    {
-        $this->sonde = $sonde;
-
-        return $this;
-    }
 
     public function getSondage(): ?Sondage
     {
@@ -86,6 +81,30 @@ class UserSondageResult
                 $allReponse->setUserSondageResult(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDateReponse(): ?\DateTimeInterface
+    {
+        return $this->dateReponse;
+    }
+
+    public function setDateReponse(\DateTimeInterface $dateReponse): self
+    {
+        $this->dateReponse = $dateReponse;
+
+        return $this;
+    }
+
+    public function getSonde(): ?User
+    {
+        return $this->sonde;
+    }
+
+    public function setSonde(?User $sonde): self
+    {
+        $this->sonde = $sonde;
 
         return $this;
     }

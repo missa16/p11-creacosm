@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\User;
 use App\Entity\UserSondageResult;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -64,5 +65,17 @@ class UserSondageResultRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+    public function findSondageRepondus(User $user): array
+    {
+        $sondages = $this->findAll();
+        $sondagesRepondus=[];
+        foreach ($sondages as $sondage){
+            $sonde = $sondage->getSonde();
+            if ($sonde === $user){
+                $sondagesRepondus[]=$sondage;
+            }
+        }
+        return $sondagesRepondus;
+    }
 
 }

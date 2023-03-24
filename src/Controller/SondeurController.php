@@ -3,23 +3,24 @@
 namespace App\Controller;
 
 use App\Entity\Sondage;
-use App\Entity\User;
-use App\Entity\UserSondageResult;
+use App\Entity\StatsQuestion;
 use App\Form\creationSondage\SondageType;
 use App\Repository\FormationRepository;
 use App\Repository\QuestionRepository;
 use App\Repository\SondageRepository;
 use App\Repository\UserRepository;
-use App\Repository\UserSondageResultRepository;
-use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
-use DateTime;
+use App\Service\GenerateFile;
 use DateTimeImmutable;
+use PhpOffice\PhpSpreadsheet\Writer\Csv;
+use PhpOffice\PhpSpreadsheet\Writer\Exception;
+use PhpOffice\PhpSpreadsheet\Writer\Ods;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
-use Symfony\UX\Chartjs\Model\Chart;
 
 #[Route('/sondeur')]
 class SondeurController extends AbstractController
@@ -115,11 +116,14 @@ class SondeurController extends AbstractController
         $genreChart = $sondageRepository->findGenreSondes($sondage);
 
         $questions = $sondage->getQuestions();
-        $chartQuestions = [];
-        foreach ( $questions as $question){
-            $stats= $questionRepository->findStatsGlobales($question);
-            $question->addStatQuestion(json_encode($stats));
-            ;
+        foreach ( $questions as $i=> $question){
+            $statsGles= json_encode($questionRepository->findStatsGlobales($question));
+            $statsGlobalesQuestion= new StatsQuestion();
+            $statsGlobalesQuestion
+                ->setNomStat("Stat globale")
+                ->setDataJson($statsGles);
+            $question->addStatsQuestion($statsGlobalesQuestion);
+
         }
 
 
@@ -128,9 +132,42 @@ class SondeurController extends AbstractController
             'ageChart' => json_encode($ageChart),
             'formationChart' => json_encode($formationChart),
             'genreChart' => json_encode($genreChart),
-            'chartQuestions'=>$chartQuestions
         ]);
 
+    }
+
+    #[Route('/export/{id}', name: 'app_sondeur_export', methods: ['GET'])]
+    public function export(Request $request,GenerateFile $generateFile,Sondage $sondage): BinaryFileResponse
+    {
+        $spreadsheet= $generateFile->export($sondage);
+        $nomSondage= $sondage->getIntitule();
+        $nomFichier= str_replace(' ', '', $nomSondage);
+        $format= $request->query->get('format');
+        switch ($format){
+            case 'ods':
+                $writer = new Ods($spreadsheet);
+                $filename = $nomFichier.'.ods';
+                break;
+            case 'xlsx' :
+                $writer = new Xlsx($spreadsheet);
+                $filename = $nomFichier.'.xlsx';
+                break;
+            case 'csv' :
+                $writer = new Csv($spreadsheet);
+                $filename = $nomFichier.'.csv';
+                break;
+        }
+        $path = sys_get_temp_dir().'/'.$filename;
+        try {
+            $writer->save($path);
+        } catch (Exception $e) {
+            var_dump($e->getMessage());
+        }
+        // Send the file to the client for download
+        $response = new BinaryFileResponse($path);
+        $response->setContentDisposition(
+            ResponseHeaderBag::DISPOSITION_ATTACHMENT, $filename);
+        return $response;
     }
 
 }

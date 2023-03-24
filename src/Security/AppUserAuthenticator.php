@@ -52,7 +52,7 @@ class AppUserAuthenticator extends AbstractLoginFormAuthenticator
             return new RedirectResponse($this->urlGenerator->generate('app_sondeur_index'));
         }
         else if (in_array('ROLE_ADMIN', $roles)){
-            return new RedirectResponse($this->urlGenerator->generate('app_admin'));
+            return new RedirectResponse($this->urlGenerator->generate('app_admin_index'));
         }
         else{
             return new RedirectResponse($this->urlGenerator->generate('app_sondage_index'));
@@ -61,6 +61,12 @@ class AppUserAuthenticator extends AbstractLoginFormAuthenticator
         // For example:
         // return new RedirectResponse($this->urlGenerator->generate('some_route'));
         //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+    }
+
+    public function onAddSondeur(): ?Response
+    {
+        return new RedirectResponse($this->urlGenerator->generate('app_admin_show_sondeurs'));
+       
     }
 
     protected function getLoginUrl(Request $request): string
