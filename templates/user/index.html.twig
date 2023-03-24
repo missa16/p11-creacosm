@@ -3,10 +3,46 @@
 {% block title %}Page d'accueil CREACOSM{% endblock %}
 
 {% block body %}
+    <div class="grid-container-nav">
+        {{ include('composants/_nav_bar_sonde.html.twig') }}
+        <div class="content-home">
+            <div class="row-home">
+                <div class="d-flex justify-content-end">
+                    <button class="button"><a class="text-decoration-none a" href="{{ path('app_logout') }}">deconnexion</a></button>
+                </div>
+            </div>
+            <div class="row-home">
+                <h1 class="d-flex justify-content-center">Bienvenue {{ user.prenom }}</h1>
+            </div><div class="row-home">
+
+                <div class="image-grid">
+                    <div class="eng">
+                        <img src="{{ asset('build/images/produit_bio.jpg') }}" class="image-3"/>
+                        <div class="grid-container-5">
+                            <div class="grid-item-home d-flex align-items-center justify-content-center">
+                                <p class="card-text"><a class="c-black" href="{{ path('app_sondage_index') }}">Accueil</a></p>
+                            </div>
+                            <div class="grid-item-home d-flex align-items-center justify-content-center">
+                                <p class="card-text">
+                                    <a class="c-black" href="{{ path('app_sondage_now') }}">Voir les nouveaux sondages</a>
+                                </p>
+                            </div>
+                            <div class="grid-item-home d-flex align-items-center justify-content-center">
+                                <p class="card-text"><a class="c-black" href="#">Sondages en cours</a></p>
+                            </div>
+                            <div class="grid-item-home d-flex align-items-center justify-content-center">
+                                <p class="card-text"><a class="c-black" href="{{ path('app_sondage_historique') }}">Historique des sondages</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
 
-    <a href="{{ path('app_sondage_now') }}">Voir les nouveaux sondage</a>
 
-    <a href="{{ path('app_sondage_historique') }}">Historiques des sondages</a>
+
 
 {% endblock %}
