@@ -8,6 +8,7 @@
     <table class="table">
         <thead>
         <tr>
+            <th>Catégorie</th>
             <th>Intitule</th>
             <th>EtatSondage</th>
             <th>Description</th>
@@ -21,7 +22,10 @@
         <tbody>
         {% for sondage in sondages %}
             <tr>
-
+                <td>{% if sondage.categorieSondage.emoji is not null %}
+                        {{ sondage.categorieSondage.emoji }}
+                    {% endif %}
+                    {{ sondage.categorieSondage.nomCategorie }}   </td>
                 <td>{{ sondage.intitule }}</td>
                 <td>{{ sondage.etatSondage }}</td>
                 <td>{{ sondage.description }}</td>

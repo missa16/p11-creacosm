@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Formation;
 use App\Entity\Sondage;
 use App\Entity\StatsQuestion;
 use App\Entity\User;
 use App\Form\connexion\RegistrationFormType;
+use App\Form\FormationType;
 use App\Repository\FormationRepository;
 use App\Repository\QuestionRepository;
 use App\Repository\SondageRepository;
@@ -106,6 +108,70 @@ class AdminController extends AbstractController
             'genreChart' => json_encode($genreChart),
         ]);
 
+    }
+
+    // CRUD des formations
+    #[Route('/formation', name: 'app_formation_index', methods: ['GET'])]
+    public function indexFormation(FormationRepository $formationRepository): Response
+    {
+        return $this->render('admin/formation/index.html.twig', [
+            'formations' => $formationRepository->findAll(),
+        ]);
+    }
+
+    #[Route('/formation/new', name: 'app_formation_new', methods: ['GET', 'POST'])]
+    public function newFormation(Request $request, FormationRepository $formationRepository): Response
+    {
+        $formation = new Formation();
+        $form = $this->createForm(FormationType::class, $formation);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $formationRepository->save($formation, true);
+
+            return $this->redirectToRoute('app_formation_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('admin/formation/new.html.twig', [
+            'formation' => $formation,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/formation/{id}', name: 'app_formation_show', methods: ['GET'])]
+    public function showFormation(Formation $formation): Response
+    {
+        return $this->render('admin/formation/show.html.twig', [
+            'formation' => $formation,
+        ]);
+    }
+
+    #[Route('/formation/{id}/edit', name: 'app_formation_edit', methods: ['GET', 'POST'])]
+    public function editFormation(Request $request, Formation $formation, FormationRepository $formationRepository): Response
+    {
+        $form = $this->createForm(FormationType::class, $formation);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $formationRepository->save($formation, true);
+
+            return $this->redirectToRoute('app_formation_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('admin/formation/edit.html.twig', [
+            'formation' => $formation,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/formation/{id}', name: 'app_formation_delete', methods: ['POST'])]
+    public function deleteFormation(Request $request, Formation $formation, FormationRepository $formationRepository): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$formation->getId(), $request->request->get('_token'))) {
+            $formationRepository->remove($formation, true);
+        }
+
+        return $this->redirectToRoute('app_formation_index', [], Response::HTTP_SEE_OTHER);
     }
 
 
