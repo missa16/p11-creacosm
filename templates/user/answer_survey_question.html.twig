@@ -26,16 +26,27 @@
                             <div class="question" id="question-{{ questionNumber }}" {% if questionNumber != 1 %}style="display:none"{% endif %}>
                                 {{ form_row(form['question_' ~ question.id]) }}
 
-                                <button class="next-question-button button" data-next-question="{{ questionNumber + 1 }}">
-                                    Next question
-                                </button>
+                                <div class="question-navigation">
+                                    {% if questionNumber != 1 %}
+                                        <button class="previous-question-button button"  data-previous-question="{{ questionNumber - 1 }}">
+                                            Previous question
+                                        </button>
+                                        {% if questionNumber == totalQuestions %}
+                                            {{ form_row(form.submit, { 'label': 'Envoyer mes réponses' , 'class': 'button-success'}) }}
+                                        {% endif%}
+                                    {% endif %}
+
+                                    {% if questionNumber != totalQuestions %}
+                                        <button class="next-question-button button" data-total-questions="{{ totalQuestions }}" data-next-question="{{ questionNumber + 1 }}">
+                                            Next question
+                                        </button>
+                                    {% endif %}
+
+
+                                </div>
+
                             </div>
                         {% endfor %}
-
-                        <div id="confirmation-message" style="display:none">
-                            Merci d'avoir complété le sondage !
-                            {{ form_row(form.submit, { 'label': 'Envoyer mes réponses' }) }}
-                        </div>
 
                         {{ form_end(form) }}
                     </div>

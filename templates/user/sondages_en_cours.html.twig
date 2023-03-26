@@ -11,10 +11,10 @@
             <th>Intitule</th>
             <th>EtatSondage</th>
             <th>Description</th>
-            <th>ImageCouverture</th>
             <th>DateFin</th>
+            <th>Image</th>
             <th>Actions</th>
-            <th>image</th>
+
 
         </tr>
         </thead>
@@ -25,13 +25,18 @@
                 <td>{{ sondage.intitule }}</td>
                 <td>{{ sondage.etatSondage }}</td>
                 <td>{{ sondage.description }}</td>
-                <td>{{ sondage.imageCouverture }}</td>
                 <td>{{ sondage.dateFin|date('d-m-Y') }}</td>
-                <td><img src="{{ asset('assets/uploads/couverture-sondage/mini/300x300-'~sondage.imageCouverture)}}"/></td>
+                <td>
+                {% if sondage.imageCouverture is not null %}
+                    <img src="{{ asset('assets/uploads/couverture-sondage/mini/300x300-'~sondage.imageCouverture)}}" alt="Image {{ sondage.intitule }}"/>
+                {% else %}
+                    <img style="width: 300px;" src="{{ asset('build/images/image-defaut-couverture-sondage.jpg')}}" alt="Image par défaut"/>
+                {% endif%}
+
+                </td>
 
                 <td>
                     <a href="{{ path('app_sondage_answer', {'id': sondage.id}) }}">Répondre au sondage</a>
-
 
                 </td>
             </tr>

@@ -40,7 +40,8 @@ class SondageController extends AbstractController
     {
         $user = $this->getUser();
         return $this->render('user/sondages_en_cours.html.twig', [
-            'sondages' => $sondageRepository->findAllSondageEnCours($user),
+            //'sondages' => $sondageRepository->findAllSondageEnCours($user),
+            'sondages' => $sondageRepository->findAll(),
         ]);
     }
 
@@ -116,6 +117,7 @@ class SondageController extends AbstractController
             // save the userSondageResult entity
             $userSondageResultRepository->save($userSondageResult, true);
 
+            $this->addFlash('success',' Merci d\'avoir complété le sondage : '. $sondage->getIntitule());
             return $this->redirectToRoute('app_sondage_index', [], Response::HTTP_SEE_OTHER);
         }
 

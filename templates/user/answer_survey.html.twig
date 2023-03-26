@@ -30,9 +30,10 @@
                     </div>
                     <div class="child-2 d-flex">
                         <div>
-                        <button class="button-start"> <a class="c-white" href="{{ path('app_sondage_answer_questions', {'id': sondage.id}) }}">Commencer</a></button>
+
+                        <a  class="button button-start c-white" href="{{ path('app_sondage_answer_questions', {'id': sondage.id}) }}">Commencer</a>
                         </div>
-                            <a class="back" href="{{ path('app_sondage_index') }}"><img class="back-50" src="{{ asset('build/images/bouton-retour.png') }}"></a>
+                            <a class="back" href="{{ path('app_sondage_index') }}"><img class="back-50" src="{{ asset('build/images/bouton-retour.png') }}" alt=""></a>
                     </div>
                 </div>
 
