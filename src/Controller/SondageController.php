@@ -126,22 +126,6 @@ class SondageController extends AbstractController
 
     }
 
-
-    #[Route('/{id}/save-avances', name: 'app_sondage_save_avances', methods: ['GET'])]
-    public function comeBackLater(Request $request, Sondage $sondage): Response
-    {
-       // $user = $this->getUser();
-
-        $form = $this->createForm(RepondreSondageType::class, null, [
-            'sondage' => $sondage,
-        ]);
-
-        $form->handleRequest($request);
-
-        return $this->render('user/back_later.html.twig', [
-            'form' => $form
-        ]);
-    }
 }
 
 

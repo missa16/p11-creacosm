@@ -34,7 +34,17 @@
                 </div>
                 <div> {{ form_row(form.description) }}
                 </div>
-                <div> {{ form_row(form.imageCouverture) }}
+                <div>
+                    {#Si on est en mode edit on affiche les images#}
+                    {% if app.request.attributes.get('_route') == 'app_sondeur_edit' and test %}
+                        <h2>Image de couverture</h2>
+                        <img src="{{ asset('assets/uploads/couverture-sondage/mini/300x300-'~sondage.imageCouverture)}}" alt="Image {{ sondage.intitule }}"/>
+                        <button class="btn" form="delete-image-form">Supprimer l'image</button>
+
+                </div>
+                    {% else %}
+                        {{ form_row(form.imageCouverture) }}
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -84,14 +94,19 @@
                 <div class="df jcc">
                     {{ form_row(form.Enregistrer) }}
                     <div>
-                        <a href="#"><img class="retour" src="{{ asset('build/images/bouton-retour.png') }}"></a>
+                        <a href="#"><img class="retour" src="{{ asset('build/images/bouton-retour.png') }}" alt=""></a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-
     {{ form_end(form) }}
+
+{#Utilisation pour supprimer l'image en cours    #}
+<form id="delete-image-form" method="post" action="{{ path('app_sondeur_delete_image', {'id': sondage.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer cette image ?');">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ sondage.id) }}">
+</form>
+
 
 

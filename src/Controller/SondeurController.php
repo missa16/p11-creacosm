@@ -10,6 +10,7 @@ use App\Repository\QuestionRepository;
 use App\Repository\SondageRepository;
 use App\Repository\UserRepository;
 use App\Service\GenerateFile;
+use App\Service\PictureService;
 use DateTimeImmutable;
 use PhpOffice\PhpSpreadsheet\Writer\Csv;
 use PhpOffice\PhpSpreadsheet\Writer\Exception;
@@ -17,10 +18,12 @@ use PhpOffice\PhpSpreadsheet\Writer\Ods;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\Json;
 
 #[Route('/sondeur')]
 class SondeurController extends AbstractController
@@ -51,9 +54,11 @@ class SondeurController extends AbstractController
     }
 
 
-
+    /**
+     * @throws \Doctrine\DBAL\Exception
+     */
     #[Route('/new', name: 'app_sondeur_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, SondageRepository $sondageRepository): Response
+    public function new(PictureService $pictureService, Request $request, SondageRepository $sondageRepository): Response
     {
         $sondage = new Sondage();
         $user= $this->getUser();
@@ -61,6 +66,16 @@ class SondeurController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $image =  $form->get('imageCouverture')->getData();
+            if(!$image==null){
+                // On définit le dossier de destination
+                $folder = 'couverture-sondage';
+                //on appelle le service d'ajout
+                $fichier = $pictureService->add($image,$folder,300,300);
+                $sondage->setImageCouverture($fichier);
+            }
+
             $sondage->setDateCreation(new DateTimeImmutable());
             $sondage->setDateUpdate(new DateTimeImmutable());
             $sondage->setEtatSondage('EN_COURS');
@@ -80,21 +95,39 @@ class SondeurController extends AbstractController
     }
 
     #[Route('/mes-sondages/{id}/edit', name: 'app_sondeur_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Sondage $sondage, SondageRepository $sondageRepository): Response
+    public function edit(PictureService $pictureService,Request $request, Sondage $sondage, SondageRepository $sondageRepository): Response
     {
         $form = $this->createForm(SondageType::class, $sondage);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // on récupère l'image
+            $image =  $form->get('imageCouverture')->getData();
+            if(!$image==null){
+                // On définit le dossier de destination
+                $folder = 'couverture-sondage';
+                //on appelle le service d'ajout
+                $fichier = $pictureService->add($image,$folder,300,300);
+                $sondage->setImageCouverture($fichier);
+            }
+
             $sondage->setDateUpdate(new DateTimeImmutable());
             $sondageRepository->save($sondage, true);
             $this->addFlash('success', 'Sondage mis à jour !');
             return $this->redirectToRoute('app_sondeur_my_surveys', [], Response::HTTP_SEE_OTHER);
         }
 
+        if($sondage->getImageCouverture()==''){
+            $image = false;
+        }
+        else{
+            $image = true;
+        }
+
         return $this->renderForm('sondeur/edit.html.twig', [
             'sondage' => $sondage,
             'form' => $form,
+            'test' => $image
         ]);
     }
 
@@ -168,6 +201,23 @@ class SondeurController extends AbstractController
         $response->setContentDisposition(
             ResponseHeaderBag::DISPOSITION_ATTACHMENT, $filename);
         return $response;
+    }
+
+    #[Route('/mes-sondages/image/{id}', name: 'app_sondeur_delete_image', methods: ['POST'])]
+    public function deleteImage(PictureService $pictureService,Request $request, Sondage $sondage, SondageRepository $sondageRepository): Response
+    {
+
+        if ($this->isCsrfTokenValid('delete' . $sondage->getId(), $request->request->get('_token'))) {
+            $nom = $sondage->getImageCouverture();
+            $pictureService->delete($nom,'couverture-sondage',300,300);
+            $sondage->deleteImageCouverture();
+            $sondageRepository->save($sondage,true);
+        }
+        return $this->redirectToRoute('app_sondeur_edit',
+            [
+                'id'=> $sondage->getId(),
+            ],
+            Response::HTTP_SEE_OTHER);
     }
 
 }

@@ -31,6 +31,7 @@ class Sondage
     #[ORM\Column(length: 255)]
     private ?string $description = null;
 
+
     #[ORM\Column(nullable: true)]
     private ?string $imageCouverture = null;
 
@@ -120,7 +121,7 @@ class Sondage
         return $this->imageCouverture;
     }
 
-    public function setImageCouverture(string $imageCouverture): self
+    public function setImageCouverture(string|null $imageCouverture): self
     {
         $this->imageCouverture = $imageCouverture;
 
@@ -258,6 +259,13 @@ class Sondage
 
         return $this;
     }
+
+    public function deleteImageCouverture(): void
+    {
+        // Delete the image from the database (assuming you're using Doctrine ORM)
+        $this->setImageCouverture(null);
+    }
+
 
 
 

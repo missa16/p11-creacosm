@@ -195,12 +195,14 @@ class SondageRepository extends ServiceEntityRepository
             foreach ($usersSondageResult as $userSondageResult) {
                 $sondes[]=$userSondageResult->getSonde();
             }
-            if ( !(in_array($user,$sondes)) && $sondage->getDateFin()<$now  ){
+            if ( !(in_array($user,$sondes)) && $sondage->getDateFin()>$now  ){
                 $sondagesEnCours[]=$sondage;
             }
         }
         return $sondagesEnCours;
     }
+
+
 
 
 }

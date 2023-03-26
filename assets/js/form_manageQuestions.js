@@ -1,3 +1,5 @@
+
+console.log('test')
 function addAnswerFormDeleteLink(item) {
     const removeFormButton = document.createElement('button');
     removeFormButton.innerHTML = "<span class='bi  bi-trash'>Supprimer cette réponse</span>";

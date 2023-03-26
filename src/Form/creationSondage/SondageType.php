@@ -28,7 +28,7 @@ class SondageType extends AbstractType
                 'choice_label'=>'nomCategorie',
             ])
             ->add('imageCouverture',FileType::class,[
-                'label' =>' Photo de couverture du sondage (Image)',
+                'label' =>'Choisir une image de couverture',
                 'mapped' => false,
                 'required' => false,
             ])

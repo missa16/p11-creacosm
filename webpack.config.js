@@ -44,6 +44,7 @@ Encore
         to : 'images/[path][name].[ext]'
     })
 
+
     /*
      * FEATURE CONFIG
      *

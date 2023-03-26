@@ -14,6 +14,7 @@
             <th>ImageCouverture</th>
             <th>DateFin</th>
             <th>Actions</th>
+            <th>image</th>
 
         </tr>
         </thead>
@@ -26,8 +27,12 @@
                 <td>{{ sondage.description }}</td>
                 <td>{{ sondage.imageCouverture }}</td>
                 <td>{{ sondage.dateFin|date('d-m-Y') }}</td>
+                <td><img src="{{ asset('assets/uploads/couverture-sondage/mini/300x300-'~sondage.imageCouverture)}}"/></td>
+
                 <td>
                     <a href="{{ path('app_sondage_answer', {'id': sondage.id}) }}">Répondre au sondage</a>
+
+
                 </td>
             </tr>
         {% else %}
