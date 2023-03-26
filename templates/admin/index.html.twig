@@ -1,13 +1,79 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AdminController!{% endblock %}
+{% block title %}Sondage index{% endblock %}
 
 {% block body %}
-<h1>Bonjour ADMIN !</h1>
+    <div class="grid-container-nav">
+        {{ include('composants/_nav_bar.html.twig') }}
+        <div class="content-sond">
+            <div class="row">
+                <div class="df jce">
+                    <div class="">
+                        <button class="button"><a class="text-decoration-none a" href="{{ path('app_logout') }}">déconnexion</a></button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <h1 class="df jcc">Bienvenue chez creacosm</h1>
+            </div>
+            <div class="row">
+                <div class="grid-container-2">
+                    <div class="colonne1">
+                        <div class="img-container ">
+                            <img src="{{ asset('build/images/produit_bio.jpg') }}" class="image"/>
+                        </div>
+                    </div>
+                    <div class="colonne2 d-flex flex-column justify-content-evenly">
+                        <div class="row-3">
+                            <div class="d-flex justify-content-center align-items-center box">  <img src="{{ asset('build/images/produit_bio.jpg') }}" class="image-3"/>
+                                <div class="text">
+                                    <p><a href="{{ path('app_admin_all_surveys') }}">Voir tous les sondages</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-3">
+                            <div class="d-flex justify-content-center align-items-center box">
+                                <img src="{{ asset('build/images/produit_bio.jpg') }}" class="image-3"/>
+                                <div class="text">
+                                    <p><a href="{{ path('app_admin_new_sondeur') }}">Ajouter un sondeur</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-3">
+                            <div class="d-flex justify-content-center align-items-center box">
+                                <img src="{{ asset('build/images/produit_bio.jpg') }}" class="image-3"/>
+                                <div class="text">
+                                    <p><a href="{{ path('app_admin_show_sondeurs') }}">Voir tous les sondeurs</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-    <a href="{{ path('app_admin_all_surveys') }}">Voir tous les sondages</a>
+                </div>
+            </div>
 
-    <a href="{{ path('app_admin_new_sondeur') }}">Ajouter un sondeur</a>
 
-    <a href="{{ path('app_admin_show_sondeurs') }}">Voir tous les sondeurs</a>
+        </div>
+    </div>
+
+
+
+
+
+
 {% endblock %}
+
+
+{#{% extends 'base.html.twig' %}#}
+
+{#{% block title %}Hello AdminController!{% endblock %}#}
+
+{#{% block body %}#}
+{#<h1>Bonjour ADMIN !</h1>#}
+
+{#    <a href="{{ path('app_admin_all_surveys') }}">Voir tous les sondages</a>#}
+
+{#    <a href="{{ path('app_admin_new_sondeur') }}">Ajouter un sondeur</a>#}
+
+{#    <a href="{{ path('app_admin_show_sondeurs') }}">Voir tous les sondeurs</a>#}
+{#{% endblock %}#}

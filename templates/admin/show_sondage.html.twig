@@ -6,25 +6,36 @@
     <h1>Détails du sondage</h1>
 
     <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Intitule</th>
+            <th scope="col">Etat du sondage</th>
+            <th scope="col">Desciption</th>
+            <th scope="col">Date de création</th>
+            <th scope="col">Date de lancement</th>
+            <th scope="col">Date de fin</th>
+        </tr>
+        </thead>
         <tbody>
         <tr>
-            <th>Id</th>
+            <th scope="row">Id</th>
             <td>{{ sondage.id }}</td>
         </tr>
         <tr>
-            <th>Intitule</th>
+            <th scope="row">Intitule</th>
             <td>{{ sondage.intitule }}</td>
         </tr>
         <tr>
-            <th>EtatSondage</th>
+            <th scope="row">EtatSondage</th>
             <td>{{ sondage.etatSondage }}</td>
         </tr>
         <tr>
-            <th>Description</th>
+            <th scope="row">Description</th>
             <td>{{ sondage.description }}</td>
         </tr>
         <tr>
-            <th>ImageCouverture</th>
+            <th scope="row">ImageCouverture</th>
             <td>{{ sondage.imageCouverture }}</td>
         </tr>
         <tr>

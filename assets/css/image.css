@@ -75,6 +75,12 @@
 
 }
 
+.img-container-2 {
+    width: 100%;
+    position: relative;
+
+}
+
 .image {
     border-radius: 25px;
     width: 100%;

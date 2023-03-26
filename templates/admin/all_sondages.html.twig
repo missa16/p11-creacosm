@@ -1,35 +1,165 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Tous les sondages{% endblock %}
+{% block title %}Sondage index{% endblock %}
 
 {% block body %}
-    <h1>Tous les sondages</h1>
+    <div class="grid-container-nav">
+        {{ include('composants/_nav_bar.html.twig') }}
+        <div class="content-sond">
+            <div class="row">
+                <div class="df jce">
+                    <div class="">
+                        <button class="button"><a class="text-decoration-none a" href="{{ path('app_logout') }}">se
+                                deconnecter</a></button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <h1 class="df jcc">Bienvenue chez creacosm</h1>
+            </div>
+            <div class="row">
+                <div class="grid-container-8">
+                    {% for sondage in sondages %}
+                        <div class="card-sondage">
+                            <div class="img-container-2">
+                                <img src="{{ asset('build/images/produit_bio.jpg') }}" alt="image"/>
+                            </div>
 
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Intitule</th>
-            <th>EtatSondage</th>
-            <th>actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for sondage in sondages %}
-            <tr>
+                            <div><h2>{{ sondage.intitule }}</h2></div>
+                            <div><p>  {{ sondage.description }}</p></div>
+                            <div class="d-flex"><p>Lancement :</p>
+                                <p>{{ sondage.dateLancement ? sondage.dateLancement|date('d/m/Y') : '' }}</p></div>
+                            <div class="d-flex"><p>Fin :</p>
+                                <p>{{ sondage.dateFin ? sondage.dateFin|date('d/m/Y') : '' }}</p></div>
+                            <div>
+                                    <button class="button-t"><a class="c-black"
+                                                                href="{{ path('app_admin_show', {'id': sondage.id}) }}">Modifier</a>
+                                    </button>
+                                    <button class="button-t"><a class="c-black"
+                                                                href="{{ path('app_admin_stats_survey', {'id': sondage.id}) }}">Statistiques</a>
+                                    </button>
+                                </div>
+                        </div>
+                    {% endfor %}
+                </div>
 
-                <td><a href="{{ path('app_admin_show', {'id': sondage.id}) }}">{{ sondage.intitule }}</a></td>
-                <td>{{ sondage.etatSondage }}</td>
-                <td>
-                    <a href="{{ path('app_admin_stats_survey', {'id': sondage.id}) }}">Statistiques</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="9">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
 
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
+
+
+
+
+
+
+{#{% extends 'base.html.twig' %}#}
+
+{#{% block title %}Mes sondages{% endblock %}#}
+
+{#{% block body %}#}
+
+{#    <div class="grid-container-nav">#}
+{#        {{ include('composants/_nav_bar.html.twig') }}#}
+{#        <div class="content-sond">#}
+{#            <div class="row">#}
+{#                <div class="df jce">#}
+{#                    <div class="">#}
+{#                        <button class="button"><a class="text-decoration-none a" href="{{ path('app_logout') }}">se#}
+{#                                deconnecter</a></button>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="row">#}
+{#                <h1 class="df jcc">Bienvenue chez creacosm</h1>#}
+{#            </div>#}
+{#            <div class="row">#}
+{#                <div class="gtc">#}
+{#                    {% for sondage in sondages %}#}
+{#                    <div class="card">#}
+{#                        #}{#                        <div>{{ sondage.imageCouverture }}</div> #}
+{#                        <div class="img-container-2">#}
+{#                            <img src="{{ asset('build/images/produit_bio.jpg') }}" alt="image"/>#}
+{#                        </div>#}
+
+{#                        <div><h2><a href="{{ path('app_sondeur_show', {'id': sondage.id}) }}">{{ sondage.intitule }}</a>#}
+{#                            </h2></div>#}
+{#                        <div><p>  {{ sondage.description }}</p></div>#}
+{#                        <div class="d-flex"><p>Lancement :</p>#}
+{#                            <p>{{ sondage.dateLancement ? sondage.dateLancement|date('d/m/Y') : '' }}</p></div>#}
+{#                        <div class="d-flex"><p>Fin :</p>#}
+{#                            <p>{{ sondage.dateFin ? sondage.dateFin|date('d/m/Y') : '' }}</p></div>#}
+{#                        <div class="d-flex">#}
+{#                            <form action="{{ path('app_sondeur_export', {'id': sondage.id}) }}" method="GET">#}
+{#                                <div class="d-flex flex-grow-1"><label for="export-format">Exporter au format</label>#}
+{#                                    <select name="format" id="export-format">#}
+{#                                        <option value="ods">ODS</option>#}
+{#                                        <option value="xlsx">XLSX</option>#}
+{#                                        <option value="csv">CSV</option>#}
+{#                                    </select></div>#}
+{#                                <button class="button-t" type="submit">Exporter</button>#}
+{#                            </form>#}
+{#                            <div>#}
+{#                                <button class="button-t"><a class="c-black"#}
+{#                                                            href="{{ path('app_sondeur_edit', {'id': sondage.id}) }}">Modifier</a>#}
+{#                                </button>#}
+{#                                <button class="button-t"><a class="c-black"#}
+{#                                                            href="{{ path('app_sondeur_stats_survey', {'id': sondage.id}) }}">Statistiques</a>#}
+{#                                </button>#}
+{#                                #}{#                        <button class="button-t"><a class="c-black" href="{{ path('app_sondeur_new') }}">Creer sondage</a></button> #}
+{#                            </div>#}
+{#                        </div>#}
+{#                            #}{#                        <button class="button-t">Modifier</button> #}
+
+{#                            {% else %}#}
+{#                            <div>Aucun sondage en cours pour le moment</div>#}
+
+{#                        {% endfor %}#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#{% endblock %}#}
+
+
+
+
+
+{#{% extends 'base.html.twig' %}#}
+
+{#{% block title %}Tous les sondages{% endblock %}#}
+
+{#{% block body %}#}
+{#    <h1>Tous les sondages</h1>#}
+
+{#    <table class="table">#}
+{#        <thead>#}
+{#        <tr>#}
+{#            <th>Intitule</th>#}
+{#            <th>EtatSondage</th>#}
+{#            <th>actions</th>#}
+{#        </tr>#}
+{#        </thead>#}
+{#        <tbody>#}
+{#        {% for sondage in sondages %}#}
+{#            <tr>#}
+
+{#                <td><a href="{{ path('app_admin_show', {'id': sondage.id}) }}">{{ sondage.intitule }}</a></td>#}
+{#                <td>{{ sondage.etatSondage }}</td>#}
+{#                <td>#}
+{#                    <a href="{{ path('app_admin_stats_survey', {'id': sondage.id}) }}">Statistiques</a>#}
+{#                </td>#}
+{#            </tr>#}
+{#        {% else %}#}
+{#            <tr>#}
+{#                <td colspan="9">no records found</td>#}
+{#            </tr>#}
+{#        {% endfor %}#}
+{#        </tbody>#}
+{#    </table>#}
+
+
+{#{% endblock %}#}

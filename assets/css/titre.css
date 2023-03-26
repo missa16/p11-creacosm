@@ -31,3 +31,10 @@ p, h5,form{
     font-size: 25px;
 }
 
+a{
+    font-family: 'Montserrat', sans-serif;
+}
+
+.card-sondage button {
+    margin-top:1rem;
+}

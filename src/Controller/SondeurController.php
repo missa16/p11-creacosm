@@ -128,11 +128,13 @@ class SondeurController extends AbstractController
 
 
         return $this->render('sondeur/stats_sondage.html.twig', [
+
             'sondage' => $sondage,
             'ageChart' => json_encode($ageChart),
             'formationChart' => json_encode($formationChart),
             'genreChart' => json_encode($genreChart),
-        ]);
+            'globalesCharts'=>['formation'=>[ 'formationChart' => json_encode($formationChart)],'age'=> ['ageChart' => json_encode($ageChart)],'genre'=> ['genreChart' => json_encode($genreChart)]]
+            ]);
 
     }
 

@@ -20,7 +20,7 @@ import './css/creer-sondage.css';
 import './css/start-reponse.css';
 import './css/repondre-sondage.css';
 import './css/questionnaire.css';
-
+import './css/stats.css';
 
 // start the Stimulus application
 import './bootstrap';

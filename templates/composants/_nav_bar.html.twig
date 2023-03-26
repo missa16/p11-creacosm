@@ -9,7 +9,7 @@
                 <path
                         d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z"/>
             </svg>
-            <a href="#">Accueil</a>
+            <a href="{{ path('app_sondeur_index') }}">Accueil</a>
         </div>
         <div class="ma-1 d-flex align-items-center">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -19,7 +19,7 @@
                 <path fill-rule="evenodd"
                       d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
             </svg>
-            <a href="#">Créer sondage</a></div>
+            <a href="{{ path('app_sondeur_new') }}">Créer sondage</a></div>
         <div class="ma-1 d-flex align-items-center">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-reply-all"
                  viewBox="0 0 16 16">
@@ -28,7 +28,7 @@
                 <path
                         d="M5.232 4.293a.5.5 0 0 0-.7-.106L.54 7.127a1.147 1.147 0 0 0 0 1.946l3.994 2.94a.5.5 0 1 0 .593-.805L1.114 8.254a.503.503 0 0 0-.042-.028.147.147 0 0 1 0-.252.5.5 0 0 0 .042-.028l4.012-2.954a.5.5 0 0 0 .106-.699z"/>
             </svg>
-            <a href="#">Sondages créés</a></div>
+            <a href="{{ path('app_sondeur_my_surveys') }}">Afficher les sondages </a></div>
         <div class="ma-1 d-flex align-items-center">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bar-chart"
                  viewBox="0 0 16 16">

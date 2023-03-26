@@ -27,16 +27,20 @@ p{
 .card {
     display: flex;
     flex-direction: column;
-    max-height: 300px;
+    max-height: 500px;
     padding: 1rem;
     border: 1px solid #ccc;
     border-radius: 5px;
     background-image: linear-gradient(to right, #ECEBF0 0%, 37.31343150138855%, #EDF1F0 74.6268630027771%, 87.31343150138855%, #D8D7DD 100%);
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
 }
+
+
 /* Style pour l'image */
-.card img {
+.card img ,.card-sondage img {
     width: 100%;
+    height: 160px;
+    border-radius: 8px;
     float: none;
     margin-right: 0;
     margin-bottom: 10px;
