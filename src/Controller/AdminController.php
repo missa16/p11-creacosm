@@ -2,12 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\CategorieSondage;
 use App\Entity\Formation;
 use App\Entity\Sondage;
 use App\Entity\StatsQuestion;
 use App\Entity\User;
+use App\Form\CategorieSondageType;
 use App\Form\connexion\RegistrationFormType;
 use App\Form\FormationType;
+use App\Repository\CategorieSondageRepository;
 use App\Repository\FormationRepository;
 use App\Repository\QuestionRepository;
 use App\Repository\SondageRepository;
@@ -172,6 +175,72 @@ class AdminController extends AbstractController
         }
 
         return $this->redirectToRoute('app_formation_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+
+
+    // CRUD des categorie de sondage
+    #[Route('/categorie-sondage', name: 'app_categorie_sondage_index', methods: ['GET'])]
+    public function indexCategorieSondage(CategorieSondageRepository $categorieSondageRepository): Response
+    {
+        return $this->render('admin/categorie_sondage/index.html.twig', [
+            'categorie_sondages' => $categorieSondageRepository->findAll(),
+        ]);
+    }
+
+    #[Route('/categorie-sondage/new', name: 'app_categorie_sondage_new', methods: ['GET', 'POST'])]
+    public function newCategorieSondage(Request $request, CategorieSondageRepository $categorieSondageRepository): Response
+    {
+        $categorieSondage = new CategorieSondage();
+        $form = $this->createForm(CategorieSondageType::class, $categorieSondage);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $categorieSondageRepository->save($categorieSondage, true);
+
+            return $this->redirectToRoute('app_categorie_sondage_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('admin/categorie_sondage/new.html.twig', [
+            'categorie_sondage' => $categorieSondage,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/categorie-sondage/{id}', name: 'app_categorie_sondage_show', methods: ['GET'])]
+    public function showCategorieSondage(CategorieSondage $categorieSondage): Response
+    {
+        return $this->render('admin/categorie_sondage/show.html.twig', [
+            'categorie_sondage' => $categorieSondage,
+        ]);
+    }
+
+    #[Route('/categorie-sondage/{id}/edit', name: 'app_categorie_sondage_edit', methods: ['GET', 'POST'])]
+    public function editCategorieSondage(Request $request, CategorieSondage $categorieSondage, CategorieSondageRepository $categorieSondageRepository): Response
+    {
+        $form = $this->createForm(CategorieSondageType::class, $categorieSondage);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $categorieSondageRepository->save($categorieSondage, true);
+
+            return $this->redirectToRoute('app_categorie_sondage_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('admin/categorie_sondage/edit.html.twig', [
+            'categorie_sondage' => $categorieSondage,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/categorie-sondage/{id}', name: 'app_categorie_sondage_delete', methods: ['POST'])]
+    public function deleteCategorieSondage(Request $request, CategorieSondage $categorieSondage, CategorieSondageRepository $categorieSondageRepository): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$categorieSondage->getId(), $request->request->get('_token'))) {
+            $categorieSondageRepository->remove($categorieSondage, true);
+        }
+
+        return $this->redirectToRoute('app_categorie_sondage_index', [], Response::HTTP_SEE_OTHER);
     }
 
 
