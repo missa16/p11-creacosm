@@ -150,7 +150,7 @@ class SondageRepository extends ServiceEntityRepository
     {
         $results = $sondage->getLesSondes();
         $genres=[];  // initialise un tableau ou tous les ages sont repertoriés
-        $labels = ['Femme','Homme']; // les différents labels
+        $labels = ['Femme','Homme','Autre']; // les différents labels
         foreach ( $results as $result){
             $sonde= $result->getSonde();
             $genreSonde= $sonde->getGenre();
@@ -185,7 +185,6 @@ class SondageRepository extends ServiceEntityRepository
 
     public function findAllSondageEnCours($user): array
     {
-
         $sondages = $this->findAll();
         $now = new \DateTimeImmutable();
         $sondagesEnCours= [];

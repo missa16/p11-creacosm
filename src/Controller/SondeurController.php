@@ -23,6 +23,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Validator\Constraints\Json;
 
 #[Route('/sondeur')]
@@ -46,8 +48,16 @@ class SondeurController extends AbstractController
     }
 
     #[Route('/mes-sondages/{id}', name: 'app_sondeur_show', methods: ['GET'])]
-    public function show(Sondage $sondage): Response
+    public function show(SondageRepository $sondageRepository, Sondage $sondage): Response
     {
+        $user = $this->getUser();
+
+        // interdire l'accés si ce n'est pas le créateur du sondage
+        if($user !== $sondage->getSondeur()){
+                return $this->render('atelier/index.html.twig', [
+                    'ateliers' => $sondageRepository->findAll(),
+                ]);
+        }
         return $this->render('sondeur/show.html.twig', [
             'sondage' => $sondage,
         ]);
@@ -58,8 +68,10 @@ class SondeurController extends AbstractController
      * @throws \Doctrine\DBAL\Exception
      */
     #[Route('/new', name: 'app_sondeur_new', methods: ['GET', 'POST'])]
+
     public function new(PictureService $pictureService, Request $request, SondageRepository $sondageRepository): Response
     {
+
         $sondage = new Sondage();
         $user= $this->getUser();
         $form = $this->createForm(SondageType::class, $sondage);
@@ -149,13 +161,41 @@ class SondeurController extends AbstractController
         $genreChart = $sondageRepository->findGenreSondes($sondage);
 
         $questions = $sondage->getQuestions();
-        foreach ( $questions as $i=> $question){
+        foreach ( $questions as $question){
+            // stats globales
             $statsGles= json_encode($questionRepository->findStatsGlobales($question));
             $statsGlobalesQuestion= new StatsQuestion();
             $statsGlobalesQuestion
                 ->setNomStat("Stat globale")
                 ->setDataJson($statsGles);
             $question->addStatsQuestion($statsGlobalesQuestion);
+
+            //stats par genre
+
+            $statsGlesGenre= json_encode($questionRepository->findStatsParGenre($question));
+            $statsGenreQuestion= new StatsQuestion();
+            $statsGenreQuestion
+                ->setNomStat("Stat par genre")
+                ->setDataJson($statsGlesGenre);
+            $question->addStatsQuestion($statsGenreQuestion);
+
+
+            //stats par formation
+            $statsGlesFormation= json_encode($questionRepository->findStatsParFormation($question,$formationRepository));
+            $statsFormationQuestion= new StatsQuestion();
+            $statsFormationQuestion
+                ->setNomStat("Stat par formation")
+                ->setDataJson($statsGlesFormation);
+            $question->addStatsQuestion($statsFormationQuestion);
+
+
+            //stats par age
+            $statsGlesAge= json_encode($questionRepository->findStatsParTrancheAge($question));
+            $statsAgeQuestion= new StatsQuestion();
+            $statsAgeQuestion
+                ->setNomStat("Stat par tranche d'age")
+                ->setDataJson($statsGlesAge);
+            $question->addStatsQuestion($statsAgeQuestion);
 
         }
 
@@ -165,6 +205,7 @@ class SondeurController extends AbstractController
             'ageChart' => json_encode($ageChart),
             'formationChart' => json_encode($formationChart),
             'genreChart' => json_encode($genreChart),
+
         ]);
 
     }
@@ -173,8 +214,13 @@ class SondeurController extends AbstractController
     public function export(Request $request,GenerateFile $generateFile,Sondage $sondage): BinaryFileResponse
     {
         $spreadsheet= $generateFile->export($sondage);
-        $nomSondage= $sondage->getIntitule();
-        $nomFichier= str_replace(' ', '', $nomSondage);
+        $nomSondage = $sondage->getIntitule();
+
+        //Avoir un nom de fichier clair
+        $nomFichier = strtr(utf8_decode($nomSondage), utf8_decode('àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ'), 'aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY');
+        $nomFichier= strtolower(str_replace(' ', '_', $nomFichier));
+        $nomFichier = "donnees_sondage_creacosm_".$nomFichier;
+
         $format= $request->query->get('format');
         switch ($format){
             case 'ods':

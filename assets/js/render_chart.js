@@ -1,5 +1,3 @@
-
-
 // Fonction generatrice de chart
 import Chart from "chart.js/auto";
 
@@ -28,6 +26,14 @@ function makeChart(chartHTML, typeChart, titreGraphe){
         },
     });
 }
+
+
+
+
+
+
+
+
 
 
 // const select = document.getElementById("stats");
@@ -72,12 +78,64 @@ function makeChart(chartHTML, typeChart, titreGraphe){
 
 // Graphique classique des questions
 
-let listTypeGraphe=['bar','line']
 
 let listeCanvas = document
     .querySelectorAll('.chartQuestion');
 listeCanvas.forEach((canva) => {
     makeChart(canva, 'bar', canva.dataset.question);
+});
+
+
+// Chart avec deux variables
+
+function makeChartMix(chartHTML, typeChart, titreGraphe){
+    let chartCtx = chartHTML.getContext('2d');
+    let chartDATA = JSON.parse(chartHTML.dataset.chart)
+    console.log(chartDATA)
+
+
+
+
+    new Chart(chartCtx, {
+        type : typeChart,
+        data: chartDATA,
+        options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: titreGraphe
+                }
+            },
+            backgroundColor : ['rgb(75,140,75)','rgb(255, 99, 132)','rgb(85,128,189)'],
+            responsive: true,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        },
+    });
+}
+
+let listeCanvasGenre = document
+    .querySelectorAll('.chartQuestionGenre');
+listeCanvasGenre.forEach((canva) => {
+    makeChartMix(canva, 'bar', canva.dataset.question);
+});
+
+
+let listeCanvasFormation = document
+    .querySelectorAll('.chartQuestionFormation');
+listeCanvasFormation.forEach((canva) => {
+    makeChartMix(canva, 'bar', canva.dataset.question);
+});
+
+let listeCanvasAge = document
+    .querySelectorAll('.chartQuestionAge');
+listeCanvasAge.forEach((canva) => {
+    makeChartMix(canva, 'bar', canva.dataset.question);
 });
 
 

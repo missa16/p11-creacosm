@@ -12,7 +12,9 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
 use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\LessThanOrEqual;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 
@@ -29,7 +31,7 @@ class RegistrationFormType extends AbstractType
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a password',
+                        'message' => 'Veuillez entrez un mot de passe',
                     ]),
                     new Length([
                         'min' => 6,
@@ -43,12 +45,25 @@ class RegistrationFormType extends AbstractType
             ->add('prenom')
             ->add('genre', ChoiceType::class, [
                 'choices'  => [
-                    'Femme' => 'femme',
-                    'Homme' => 'homme',
+                    'Femme' => 'Femme',
+                    'Homme' => 'Homme',
+                    'Autre' => 'Autre',
                 ],])
-            ->add('dateNaissance',DateType::class,[
-                'widget'=>'single_text'
+
+            ->add('dateNaissance', DateType::class, [
+                'widget' => 'single_text',
+                'constraints' => [
+                    new GreaterThanOrEqual([
+                        'value' => new \DateTime('1900-01-01'),
+                        'message' => 'The date should not be before 1900-01-01',
+                    ]),
+                    new LessThanOrEqual([
+                        'value' => 'today',
+                        'message' => 'The date should not be after today',
+                    ]),
+                ],
             ])
+
             ->add('ville')
             ->add('formation',EntityType::class,[
                 'class'=>Formation::class,

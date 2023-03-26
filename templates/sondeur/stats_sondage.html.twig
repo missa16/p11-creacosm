@@ -18,17 +18,6 @@
                         </div>
                     </div>
 
-                    <div class="col-stat">
-                        <div>
-                            <select name="stats" id="stats">
-                                {% for nom,chart in globalesCharts %}
-                                    <option value="{{nom}}" data-chart="{{ chart }}" >{{nom}}</option>
-                                {%  endfor %}
-                            </select>
-                        </div>
-                        <div class="card">
-                            <canvas id="chartGlobale" ></canvas>
-                        </div>
                 </div>
                 <div class="row-stat">
                     <div class="col-stat">    {% set totalQuestions = sondage.questions|length %}
@@ -40,11 +29,21 @@
                                      {% if questionNumber != 1 %}style="display:none"{% endif %}>
                                     <h5>{{ question.intitule }}</h5>
                                     <canvas data-question="{{ question.intitule }}" data-type="{{ question.TypeQuestion.label }}" class="chartQuestion"
-                                            data-chart="{{ question.StatsQuestion[0] }}"></canvas>
+                                            data-chart="{{ question.StatsQuestions[0].dataJson }}"></canvas>
+
+                                    <canvas data-question="{{ question.intitule }}" data-type="{{ question.TypeQuestion.label }}" class="chartQuestionGenre"
+                                            data-chart="{{ question.StatsQuestions[1].dataJson }}"></canvas>
+
+                                    <canvas data-question="{{ question.intitule }}" data-type="{{ question.TypeQuestion.label }}" class="chartQuestionFormation"
+                                            data-chart="{{ question.StatsQuestions[2].dataJson }}"></canvas>
+
+                                    <canvas data-question="{{ question.intitule }}" data-type="{{ question.TypeQuestion.label }}" class="chartQuestionAge"
+                                            data-chart="{{ question.StatsQuestions[3].dataJson }}"></canvas>
+
+                                    {{ dump(question.StatsQuestions[3].dataJson) }}
+
                                     <button class="next-question-stat button"
-                                            data-next-question="{{ questionNumber + 1 }}">
-                                        Next question
-                                    </button>
+                                            data-next-question="{{ questionNumber + 1 }}"> Next question</button>
                                 </div>
                             {% endfor %}
                         </div>
