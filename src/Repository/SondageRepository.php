@@ -201,7 +201,16 @@ class SondageRepository extends ServiceEntityRepository
         return $sondagesEnCours;
     }
 
-
+    public function findSondageById(int $sondageId) : ?Sondage
+    {
+        $sondages = $this->findAll();
+        foreach ($sondages as $sondage){
+            if($sondage->getId()==$sondageId){
+                return $sondage;
+            }
+        }
+        return null;
+    }
 
 
 }

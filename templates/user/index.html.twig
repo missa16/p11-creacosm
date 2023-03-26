@@ -1,12 +1,48 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Page d'accueil CREACOSM{% endblock %}
+{% block title %}Sondage index{% endblock %}
 
 {% block body %}
 
 
-    <a href="{{ path('app_sondage_now') }}">Voir les nouveaux sondage</a>
+    {#        {{ sondage.id }} #}
 
-    <a href="{{ path('app_sondage_historique') }}">Historiques des sondages</a>
+    {#          {{ sondage.etatSondage }} #}
+
+
+    {#           {{ sondage.dateCreation ? sondage.dateCreation|date('Y-m-d H:i:s') : '' }} #}
+    {#    <div class="grid-container-nav"> #}
+    {#        {{ include('composants/_nav_bar.html.twig') }} #}
+    {#        <div class="content-sond"> #}
+    {#            <div class="row"> #}
+    {#                <div class="df jce"> #}
+    {#                    <div class=""> #}
+    {#                        <button class="button"><a class="text-decoration-none a" href="{{ path('app_logout') }}">se deconnecter</a></button> #}
+    {#                    </div> #}
+    {#                </div> #}
+    {#            </div> #}
+    {#            <div class="row"> #}
+    {#                <h1 class="df jcc">Bienvenue chez creacosm</h1> #}
+    {#            </div> #}
+    {#    <div class="row gtc"> #}
+    {#    {% for sondage in sondages %} #}
+    {#        <div class="card"> #}
+    {#            <div>{{ sondage.imageCouverture }}</div> #}
+    {#            <div><h2>{{ sondage.intitule }}</h2></div> #}
+    {#            <div><p>  {{ sondage.description }}</p></div> #}
+    {#            <div class="d-flex"><p>Lancement :</p><p>{{ sondage.dateLancement ? sondage.dateLancement|date('d/m/Y') : '' }}</p></div> #}
+    {#            <div class="d-flex"><p>Fin :</p><p>{{ sondage.dateFin ? sondage.dateFin|date('d/m/Y') : '' }}</p></div> #}
+    {#            <div> #}
+    {#                <button class="button-t"><a href="{{ path('app_sondage_answer', {'id': sondage.id}) }}">Répondre au #}
+    {#                        sondage</a></button> #}
+    {#                #}{#                <button class="button-t">Modifier</button> #}
+    {#            </div> #}
+    {#        </div> #}
+    {#    {% endfor %} #}
+    {#        </div> #}
+    {#        </div> #}
+    {#        </div> #}
+
+
 
 {% endblock %}

@@ -49,13 +49,12 @@ class SondageType extends AbstractType
                 'attr'=> [
                     'class'=> 'button-enregister'
                 ]
-            ])
-            ->addEventListener(FormEvents::PRE_SUBMIT,function ($event){
-                $data = $event->getData();
-                $data['Questions'] = array_values($data['Questions']);
-                $event->setData($data);
-                }
-            );
+            ]);
+//            ->addEventListener(FormEvents::PRE_SUBMIT,function ($event){
+//                $data = $event->getData();
+//                $data['Questions'] = array_values($data['Questions']);
+//                $event->setData($data);}
+//            );
 
     }
 

@@ -6,21 +6,39 @@
 {% import _self as formMacros %}
 {% macro printQuestion(question) %}
     {% set questionReponsesPrototype = formMacros2.printReponse(question.Reponses.vars.prototype) %}
+
+
     {{ form_row(question.intitule) }}
     {{ form_row(question.TypeQuestion) }}
+
+
+    {% if app.request.attributes.get('_route') == 'app_sondeur_edit' and question.vars.value.imageQuestion is defined and question.vars.value.imageQuestion is not empty  %}
+        <div class="d-flex justify-content-center align-items-center m-1">
+
+            <img class="me-3" src="{{ asset('assets/uploads/image-question/mini/300x300-'~question.vars.value.imageQuestion)}}" alt="Image"/>
+            <div><button data-question="{{ question.vars.value.id }}" class="btn btn-danger form-image-question-form">Supprimer l'image</button></div>
+            <div style="display: none">{{ form_row(question.imageQuestion) }} </div>
+        </div>
+    {% else %}
+        {{ form_row(question.imageQuestion) }}
+    {% endif %}
+
     <ul class="reponses-{{ question.vars.name }}" data-prototype="{{ questionReponsesPrototype|e('html_attr') }}"
         data-index="{{ question.Reponses|length ? question.Reponses|last.vars.name + 1 : 0 }}">
 
         {% for rep in question.Reponses %}
             <li>
-                {{ form_row(rep.laReponse) }}
-                {#                {{formMacros2.printReponse(rep)}} #}
+                {{formMacros2.printReponse(rep)}}
+{#                {{ form_row(rep.laReponse) }}#}
             </li>
         {% endfor %}
     </ul>
 {% endmacro %}
 
+
+
 {{ form_start(form) }}
+
 <div class="grid">
     <h3 class="size-25">Généralités :</h3>
     <div>
@@ -35,16 +53,17 @@
                 <div> {{ form_row(form.description) }}
                 </div>
                 <div>
-                    {#Si on est en mode edit on affiche les images#}
-                    {% if app.request.attributes.get('_route') == 'app_sondeur_edit' and test %}
+{#                    Si on est en mode edit on affiche les images#}
+                    {% if app.request.attributes.get('_route') == 'app_sondeur_edit' and sondage.imageCouverture is not null %}
                         <h2>Image de couverture</h2>
                         <img src="{{ asset('assets/uploads/couverture-sondage/mini/300x300-'~sondage.imageCouverture)}}" alt="Image {{ sondage.intitule }}"/>
-                        <button class="btn" form="delete-image-form">Supprimer l'image</button>
+                        <button data-sondage="{{ sondage.id }}" class="btn btn-danger delete-image-form">Supprimer l'image</button>
+                        <div style="display: none">{{ form_row(form.imageCouverture) }} </div>
 
+                        {% else %}
+                            {{ form_row(form.imageCouverture) }}
+                        {% endif %}
                 </div>
-                    {% else %}
-                        {{ form_row(form.imageCouverture) }}
-                    {% endif %}
                 </div>
             </div>
         </div>
@@ -72,8 +91,10 @@
                     data-prototype="{{ formMacros. printQuestion(form.Questions.vars.prototype)|e('html_attr') }}"
                     data-index="{{ form.Questions|length ? form.Questions|last.vars.name + 1 : 0 }}">
                     {% for question in form.Questions %}
-                        <li class="flex align-items-end" data-indice="{{ question.vars.name }}">
-                            {{ formMacros.printQuestion(question) }}
+                        <li class=" flex align-items-end m" data-indice="{{ question.vars.name }}">
+                                <div  >
+                                    {{ formMacros.printQuestion(question) }}
+                                </div>
                         </li>
                     {% endfor %}
                 </ul>
@@ -91,22 +112,31 @@
         <div class="card-q">
             <div class="rectangle"></div>
             <div class="content-q">
-                <div class="df jcc">
+                <div class="align-items-center justify-content-evenly df jcc">
                     {{ form_row(form.Enregistrer) }}
+                    {{ form_end(form.Questions) }}
+                    {{ form_end(form) }}
+                    {% if app.request.attributes.get('_route') == 'app_sondeur_edit'%}
+                        <div class="mb-3">
+                            <button data-sondage="{{ sondage.id }}" class="btn btn-danger" id="delete-survey">
+                                <i class="bi bi-trash"></i> Supprimer ce sondage</button>
+                        </div>
+                    {% endif %}
                     <div>
-                        <a href="#"><img class="retour" src="{{ asset('build/images/bouton-retour.png') }}" alt=""></a>
+                        <a href="{{ path('app_sondeur_my_surveys') }}"><img class="retour" src="{{ asset('build/images/bouton-retour.png') }}" alt=""></a>
                     </div>
+
+                    <div>
+                    </div>
+
                 </div>
             </div>
         </div>
+
     </div>
 
-    {{ form_end(form) }}
 
-{#Utilisation pour supprimer l'image en cours    #}
-<form id="delete-image-form" method="post" action="{{ path('app_sondeur_delete_image', {'id': sondage.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer cette image ?');">
-        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ sondage.id) }}">
-</form>
+
 
 
 

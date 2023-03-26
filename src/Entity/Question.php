@@ -194,11 +194,16 @@ class Question
         return $this->imageQuestion;
     }
 
-    public function setImageQuestion(?string $imageQuestion): self
+    public function setImageQuestion(string|null $imageQuestion): self
     {
         $this->imageQuestion = $imageQuestion;
 
         return $this;
+    }
+
+    public function deleteImageQuestion()
+    {
+        $this->setImageQuestion(null);
     }
 
 

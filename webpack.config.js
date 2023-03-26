@@ -27,6 +27,8 @@ Encore
     .addEntry('renderChart','./assets/js/render_chart.js')
     .addEntry('historique','./assets/js/historique.js')
     .addEntry('nextStats','./assets/js/form_nextStats.js')
+    .addEntry('eraseImage','./assets/js/erase_image_question.js')
+
 
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)

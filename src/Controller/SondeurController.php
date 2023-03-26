@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Question;
 use App\Entity\Sondage;
 use App\Entity\StatsQuestion;
 use App\Form\creationSondage\SondageType;
@@ -25,6 +26,7 @@ use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Validator\Constraints\Json;
 
 #[Route('/sondeur')]
@@ -78,6 +80,20 @@ class SondeurController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $questions=$sondage->getQuestions()->toArray();
+            foreach ($form->get('Questions') as $i=>$question) {
+                $imageQuestion = $question->get('imageQuestion')->getData();
+                $question = $questions[$i];
+                //dd($imageQuestion.$question);
+                if ($imageQuestion != null) {
+                    // On définit le dossier de destination
+                    $folder = 'image-question';
+                    //on appelle le service d'ajout
+                    $fichier = $pictureService->add($imageQuestion,$folder,300,300);
+                    $question->setImageQuestion($fichier);
+                }
+            }
+
 
             $image =  $form->get('imageCouverture')->getData();
             if(!$image==null){
@@ -106,6 +122,9 @@ class SondeurController extends AbstractController
         ]);
     }
 
+    /**
+     * @throws \Doctrine\DBAL\Exception
+     */
     #[Route('/mes-sondages/{id}/edit', name: 'app_sondeur_edit', methods: ['GET', 'POST'])]
     public function edit(PictureService $pictureService,Request $request, Sondage $sondage, SondageRepository $sondageRepository): Response
     {
@@ -113,6 +132,21 @@ class SondeurController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $questions=$sondage->getQuestions()->toArray();
+            foreach ($form->get('Questions') as $i=>$question) {
+                $imageQuestion = $question->get('imageQuestion')->getData();
+                $question = $questions[$i];
+                //dd($imageQuestion.$question);
+                if ($imageQuestion != null) {
+                    // On définit le dossier de destination
+                    $folderQ = 'image-question';
+                    //on appelle le service d'ajout
+                    $fichier = $pictureService->add($imageQuestion,$folderQ,300,300);
+                    $question->setImageQuestion($fichier);
+                }
+            }
+
             // on récupère l'image
             $image =  $form->get('imageCouverture')->getData();
             if(!$image==null){
@@ -129,27 +163,19 @@ class SondeurController extends AbstractController
             return $this->redirectToRoute('app_sondeur_my_surveys', [], Response::HTTP_SEE_OTHER);
         }
 
-        if($sondage->getImageCouverture()==''){
-            $image = false;
-        }
-        else{
-            $image = true;
-        }
 
         return $this->renderForm('sondeur/edit.html.twig', [
             'sondage' => $sondage,
             'form' => $form,
-            'test' => $image
         ]);
     }
 
-    #[Route('/mes-sondages/{id}', name: 'app_sondeur_delete', methods: ['POST'])]
-    public function delete(Request $request, Sondage $sondage, SondageRepository $sondageRepository): Response
+    #[Route('/mes-sondages/delete/{id}', name: 'app_sondeur_delete', methods: ['GET','POST'])]
+    public function delete(Request $request, SondageRepository $sondageRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete' . $sondage->getId(), $request->request->get('_token'))) {
-            $sondageRepository->remove($sondage, true);
-        }
-
+        $idSondage = (int)($request->get('id'));
+        $sondage= $sondageRepository->find($idSondage);
+        $sondageRepository->remove($sondage, true);
         return $this->redirectToRoute('app_sondeur_my_surveys', [], Response::HTTP_SEE_OTHER);
     }
 
@@ -249,16 +275,37 @@ class SondeurController extends AbstractController
         return $response;
     }
 
+
     #[Route('/mes-sondages/image/{id}', name: 'app_sondeur_delete_image', methods: ['POST'])]
-    public function deleteImage(PictureService $pictureService,Request $request, Sondage $sondage, SondageRepository $sondageRepository): Response
+    public function deleteImage(PictureService $pictureService,Request $request, SondageRepository $sondageRepository): Response
+    {
+        $idSondage = (int)($request->get('id'));
+        $sondage= $sondageRepository->find($idSondage);
+        $nom = $sondage->getImageCouverture();
+        $pictureService->delete($nom,'couverture-sondage',300,300);
+        $sondage->deleteImageCouverture();
+        $sondageRepository->save($sondage,true);
+
+        return $this->redirectToRoute('app_sondeur_edit',
+            [
+                'id'=> $sondage->getId(),
+            ],
+            Response::HTTP_SEE_OTHER);
+    }
+
+
+    #[Route('/mes-sondages/image-question/{id}', name: 'app_sondeur_delete_image_question', methods: ['GET','POST'])]
+    public function deleteImageQuestion(QuestionRepository $questionRepository,PictureService $pictureService,Request $request): Response
     {
 
-        if ($this->isCsrfTokenValid('delete' . $sondage->getId(), $request->request->get('_token'))) {
-            $nom = $sondage->getImageCouverture();
-            $pictureService->delete($nom,'couverture-sondage',300,300);
-            $sondage->deleteImageCouverture();
-            $sondageRepository->save($sondage,true);
-        }
+        $idQuestion = (int)($request->get('id'));
+        $question= $questionRepository->find($idQuestion);
+        $nom = $question->getImageQuestion();
+        $pictureService->delete($nom,'couverture-sondage',300,300);
+        $question->deleteImageQuestion();
+        $sondage=$question->getSondage();
+        $questionRepository->save($question,true);
+
         return $this->redirectToRoute('app_sondeur_edit',
             [
                 'id'=> $sondage->getId(),
