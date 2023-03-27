@@ -29,6 +29,8 @@ Encore
     .addEntry('nextStats','./assets/js/form_nextStats.js')
     .addEntry('stats','./assets/js/stats.js')
     .addEntry('eraseImage','./assets/js/erase_image_question.js')
+    .addEntry('renderChartQuestion','./assets/js/render_charts_questions.js')
+
 
 
 

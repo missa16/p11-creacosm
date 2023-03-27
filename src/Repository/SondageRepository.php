@@ -22,6 +22,7 @@ use PhpParser\Node\Expr\Array_;
  */
 class SondageRepository extends ServiceEntityRepository
 {
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Sondage::class);
@@ -69,7 +70,7 @@ class SondageRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
-    public function findAgeSondes(Sondage $sondage) : array
+    public function findAgeSondes(Sondage $sondage,array $colors) : array
     {
         $results = $sondage->getLesSondes();
         $ages=[];  // initialise un tableau ou tous les ages sont repertoriés
@@ -100,14 +101,16 @@ class SondageRepository extends ServiceEntityRepository
             'labels' => $labels,
             'datasets' => [
                 [
+                    'label'=> "Graphe des tranches d'âge des sondés",
                     'data' => $counts,
+                    'backgroundColor'=> [$colors[rand(0, 50)],$colors[rand(0, 50)],$colors[rand(0, 50)],$colors[rand(0, 50)]]
                 ],
             ],
         ];
         return $chart_data;  // indice 0 : les différents interval d'age, indice 1 le compte de personne pour chaque intervalle
     }
 
-    public function findFormationSondes(Sondage $sondage,FormationRepository $formationRepository) : array
+    public function findFormationSondes(Sondage $sondage,FormationRepository $formationRepository,array $colors) : array
     {
         $results = $sondage->getLesSondes();
         $sondesFormation = [];  // un tableau ou toutes les formations des sondes sont repertories
@@ -138,7 +141,9 @@ class SondageRepository extends ServiceEntityRepository
             'labels' => $labels,
             'datasets' => [
                 [
+                    'label'=> "Graphe des activités pro des sondés",
                     'data' => $counts,
+                    'backgroundColor'=> [$colors[rand(0, 50)],$colors[rand(0, 50)],$colors[rand(0, 50)],$colors[rand(0, 50)]]
                 ],
             ],
         ];
@@ -146,7 +151,7 @@ class SondageRepository extends ServiceEntityRepository
 
     }
 
-    public function findGenreSondes(Sondage $sondage) : array
+    public function findGenreSondes(Sondage $sondage,array $colors) : array
     {
         $results = $sondage->getLesSondes();
         $genres=[];  // initialise un tableau ou tous les ages sont repertoriés
@@ -176,7 +181,9 @@ class SondageRepository extends ServiceEntityRepository
             'labels' => $labels,
             'datasets' => [
                 [
+                    'label'=> "Graphe des genres des sondés",
                     'data' => $counts,
+                    'backgroundColor'=> [$colors[rand(0, 50)],$colors[rand(0, 50)],$colors[rand(0, 50)],$colors[rand(0, 50)]]
                 ],
             ],
         ];

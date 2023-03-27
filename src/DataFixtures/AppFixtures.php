@@ -93,18 +93,21 @@ class AppFixtures extends Fixture
         $allTypes=[];
         $type1= new TypeQuestion();
         $type1
-            ->setIntituleType("Liste déroulante");
+            ->setIntituleType("Liste déroulante")
+            ->setLabel('select');
         $allTypes[]=$type1;
 
         $type2= new TypeQuestion();
         $type2
             ->setIntituleType("Choix multiple")
             ->setIsMultiple(true);
-        $type2->setIsExpanded(true);
+
+        $type2->setLabel('choices')
+            ->setIsExpanded(true);
         $allTypes[]=$type2;
 
         $type3= new TypeQuestion();
-        $type3
+        $type3->setLabel('unique')
             ->setIntituleType("Choix unique")
             ->setIsExpanded(true);
         $allTypes[]=$type3;

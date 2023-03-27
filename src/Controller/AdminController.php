@@ -16,10 +16,18 @@ use App\Repository\QuestionRepository;
 use App\Repository\SondageRepository;
 use App\Repository\UserRepository;
 use App\Security\AppUserAuthenticator;
+use App\Service\ColorGenerator;
+use App\Service\GenerateFile;
 use Doctrine\ORM\EntityManagerInterface;
+use PhpOffice\PhpSpreadsheet\Writer\Csv;
+use PhpOffice\PhpSpreadsheet\Writer\Exception;
+use PhpOffice\PhpSpreadsheet\Writer\Ods;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -85,32 +93,6 @@ class AdminController extends AbstractController
         return $this->render('admin/show_sondage.html.twig', [
             'sondage' => $sondage,
         ]);
-    }
-
-    #[Route('/sondages/{id}/stats', name: 'app_admin_stats_survey', methods: ['GET', 'POST'])]
-    public function statSondage(SondageRepository $sondageRepository,FormationRepository $formationRepository,QuestionRepository $questionRepository, Sondage $sondage): Response
-    {
-        $ageChart= $sondageRepository->findAgeSondes($sondage);
-        $formationChart = $sondageRepository->findFormationSondes($sondage,$formationRepository);
-        $genreChart = $sondageRepository->findGenreSondes($sondage);
-
-        $questions = $sondage->getQuestions();
-        foreach ( $questions as $i=> $question){
-            $statsGles= json_encode($questionRepository->findStatsGlobales($question));
-            $statsGlobalesQuestion= new StatsQuestion();
-            $statsGlobalesQuestion
-                ->setNomStat("Stats globale")
-                ->setDataJson($statsGles);
-            $question->addStatsQuestion($statsGlobalesQuestion);
-        }
-
-        return $this->render('admin/stats_sondage.html.twig', [
-            'sondage' => $sondage,
-            'ageChart' => json_encode($ageChart),
-            'formationChart' => json_encode($formationChart),
-            'genreChart' => json_encode($genreChart),
-        ]);
-
     }
 
     // CRUD des formations
@@ -241,6 +223,113 @@ class AdminController extends AbstractController
         }
 
         return $this->redirectToRoute('app_categorie_sondage_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/mes-sondages/{id}/stats', name: 'app_admin_stats_survey', methods: ['GET', 'POST'])]
+    public function statSondage(SondageRepository $sondageRepository,FormationRepository $formationRepository,QuestionRepository $questionRepository, Sondage $sondage): Response
+    {
+        $colorGenerator = new ColorGenerator();
+        $colors = $colorGenerator->generatePastelColors();
+        $ageChart= $sondageRepository->findAgeSondes($sondage,$colors);
+        $formationChart = $sondageRepository->findFormationSondes($sondage,$formationRepository,$colors);
+        $genreChart = $sondageRepository->findGenreSondes($sondage,$colors);
+
+        return $this->render('admin/stats_sondage.html.twig', [
+            'sondage' => $sondage,
+            'ageChart' => json_encode($ageChart),
+            'formationChart' => json_encode($formationChart),
+            'genreChart' => json_encode($genreChart)
+
+        ]);
+
+    }
+
+    #[Route('/mes-sondages/{id}/stats-questions', name: 'app_admin_stats_question', methods: ['GET', 'POST'])]
+    public function statsQuestion(FormationRepository $formationRepository,QuestionRepository $questionRepository, Sondage $sondage): Response
+    {
+        $colorGenerator = new ColorGenerator();
+        $colors = $colorGenerator->generatePastelColors();
+
+        $questions = $sondage->getQuestions();
+        foreach ( $questions as $question){
+            // stats globales
+            $statsGles= json_encode($questionRepository->findStatsGlobales($question,$colors));
+            $statsGlobalesQuestion= new StatsQuestion();
+            $statsGlobalesQuestion
+                ->setNomStat("Stat globale")
+                ->setDataJson($statsGles);
+            $question->addStatsQuestion($statsGlobalesQuestion);
+
+            //stats par genre
+
+            $statsGlesGenre= json_encode($questionRepository->findStatsParGenre($question,$colors));
+            $statsGenreQuestion= new StatsQuestion();
+            $statsGenreQuestion
+                ->setNomStat("Stat par genre")
+                ->setDataJson($statsGlesGenre);
+            $question->addStatsQuestion($statsGenreQuestion);
+
+            //stats par formation
+            $statsGlesFormation= json_encode($questionRepository->findStatsParFormation($question,$formationRepository,$colors));
+            $statsFormationQuestion= new StatsQuestion();
+            $statsFormationQuestion
+                ->setNomStat("Stat par formation")
+                ->setDataJson($statsGlesFormation);
+            $question->addStatsQuestion($statsFormationQuestion);
+
+            //stats par age
+            $statsGlesAge= json_encode($questionRepository->findStatsParTrancheAge($question,$colors));
+            $statsAgeQuestion= new StatsQuestion();
+            $statsAgeQuestion
+                ->setNomStat("Stat par tranche d'age")
+                ->setDataJson($statsGlesAge);
+            $question->addStatsQuestion($statsAgeQuestion);
+
+        }
+
+        return $this->render('admin/stat_sondage_question.html.twig', [
+            'sondage' => $sondage,
+        ]);
+
+    }
+
+    #[Route('/export/{id}', name: 'app_admin_export', methods: ['GET'])]
+    public function export(Request $request,GenerateFile $generateFile,Sondage $sondage): BinaryFileResponse
+    {
+        $spreadsheet= $generateFile->export($sondage);
+        $nomSondage = $sondage->getIntitule();
+
+        //Avoir un nom de fichier clair
+        $nomFichier = strtr(utf8_decode($nomSondage), utf8_decode('àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ'), 'aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY');
+        $nomFichier= strtolower(str_replace(' ', '_', $nomFichier));
+        $nomFichier = "donnees_sondage_creacosm_".$nomFichier;
+
+        $format= $request->query->get('format');
+        switch ($format){
+            case 'ods':
+                $writer = new Ods($spreadsheet);
+                $filename = $nomFichier.'.ods';
+                break;
+            case 'xlsx' :
+                $writer = new Xlsx($spreadsheet);
+                $filename = $nomFichier.'.xlsx';
+                break;
+            case 'csv' :
+                $writer = new Csv($spreadsheet);
+                $filename = $nomFichier.'.csv';
+                break;
+        }
+        $path = sys_get_temp_dir().'/'.$filename;
+        try {
+            $writer->save($path);
+        } catch (Exception $e) {
+            var_dump($e->getMessage());
+        }
+        // Send the file to the client for download
+        $response = new BinaryFileResponse($path);
+        $response->setContentDisposition(
+            ResponseHeaderBag::DISPOSITION_ATTACHMENT, $filename);
+        return $response;
     }
 
 

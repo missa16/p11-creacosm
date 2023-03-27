@@ -67,7 +67,7 @@ class QuestionRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
-    public function findStatsGlobales(Question $question) : array
+    public function findStatsGlobales(Question $question,array $colors) : array
     {
         // Les réponses possibles
         $toutesLesReponses = $question->getReponses(); // une collection ou toutes les objets reponses sont repertorié
@@ -94,6 +94,7 @@ class QuestionRepository extends ServiceEntityRepository
             'datasets' => [
                 [
                     'data' => $responsesCounts,
+                    'backgroundColor'=> [$colors[rand(0, 50)],$colors[rand(0, 50)],$colors[rand(0, 50)],$colors[rand(0, 50)]]
                 ],
             ],
         ];
@@ -102,7 +103,7 @@ class QuestionRepository extends ServiceEntityRepository
     }
 
 
-    public function findStatsParGenre(Question $question) : array
+    public function findStatsParGenre(Question $question,array $colors) : array
     {
         // les genres
         $genres = ['Femme','Homme','Autre'];
@@ -145,7 +146,7 @@ class QuestionRepository extends ServiceEntityRepository
             $chart_data['datasets'][] = [
                 'label' => $genre,
                 'data' => $responsesByGenre[$genre],
-//                'backgroundColor' => self::COLORS[array_search($genre, $genres)],
+                'backgroundColor'=> $colors[rand(0, 50)],
             ];
         }
 
@@ -153,7 +154,7 @@ class QuestionRepository extends ServiceEntityRepository
     }
 
 
-    public function findStatsParFormation(Question $question,FormationRepository $formationRepository) : array
+    public function findStatsParFormation(Question $question,FormationRepository $formationRepository,array $colors) : array
     {
         $formationsPossibles=$formationRepository->findAll();  // initialise un tableau ou toutes les formations sont repertoriés
         $formations=[] ;
@@ -199,7 +200,7 @@ class QuestionRepository extends ServiceEntityRepository
             $chart_data['datasets'][] = [
                 'label' => $formation,
                 'data' => $responsesByFormation[$formation],
-//                'backgroundColor' => self::COLORS[array_search($genre, $genres)],
+                'backgroundColor'=> $colors[rand(0, 50)],
             ];
         }
 
@@ -207,7 +208,7 @@ class QuestionRepository extends ServiceEntityRepository
     }
 
 
-    public function findStatsParTrancheAge(Question $question) : array
+    public function findStatsParTrancheAge(Question $question,array $colors) : array
     {
         $toutesLesReponses = $question->getReponses(); // une collection ou toutes les objets reponses sont repertorié
         $reponsesPossibles=[];
@@ -260,6 +261,7 @@ class QuestionRepository extends ServiceEntityRepository
             $chart_data['datasets'][] = [
                 'label' => $age,
                 'data' => $responsesByAge[$age],
+                'backgroundColor'=> $colors[rand(0, 50)],
             ];
         }
 

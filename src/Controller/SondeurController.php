@@ -10,6 +10,7 @@ use App\Repository\FormationRepository;
 use App\Repository\QuestionRepository;
 use App\Repository\SondageRepository;
 use App\Repository\UserRepository;
+use App\Service\ColorGenerator;
 use App\Service\GenerateFile;
 use App\Service\PictureService;
 use DateTimeImmutable;
@@ -192,49 +193,11 @@ class SondeurController extends AbstractController
     #[Route('/mes-sondages/{id}/stats', name: 'app_sondeur_stats_survey', methods: ['GET', 'POST'])]
     public function statSondage(SondageRepository $sondageRepository,FormationRepository $formationRepository,QuestionRepository $questionRepository, Sondage $sondage): Response
     {
-        $ageChart= $sondageRepository->findAgeSondes($sondage);
-        $formationChart = $sondageRepository->findFormationSondes($sondage,$formationRepository);
-        $genreChart = $sondageRepository->findGenreSondes($sondage);
-
-        $questions = $sondage->getQuestions();
-        foreach ( $questions as $question){
-            // stats globales
-            $statsGles= json_encode($questionRepository->findStatsGlobales($question));
-            $statsGlobalesQuestion= new StatsQuestion();
-            $statsGlobalesQuestion
-                ->setNomStat("Stat globale")
-                ->setDataJson($statsGles);
-            $question->addStatsQuestion($statsGlobalesQuestion);
-
-            //stats par genre
-
-            $statsGlesGenre= json_encode($questionRepository->findStatsParGenre($question));
-            $statsGenreQuestion= new StatsQuestion();
-            $statsGenreQuestion
-                ->setNomStat("Stat par genre")
-                ->setDataJson($statsGlesGenre);
-            $question->addStatsQuestion($statsGenreQuestion);
-
-
-            //stats par formation
-            $statsGlesFormation= json_encode($questionRepository->findStatsParFormation($question,$formationRepository));
-            $statsFormationQuestion= new StatsQuestion();
-            $statsFormationQuestion
-                ->setNomStat("Stat par formation")
-                ->setDataJson($statsGlesFormation);
-            $question->addStatsQuestion($statsFormationQuestion);
-
-
-            //stats par age
-            $statsGlesAge= json_encode($questionRepository->findStatsParTrancheAge($question));
-            $statsAgeQuestion= new StatsQuestion();
-            $statsAgeQuestion
-                ->setNomStat("Stat par tranche d'age")
-                ->setDataJson($statsGlesAge);
-            $question->addStatsQuestion($statsAgeQuestion);
-
-        }
-
+        $colorGenerator = new ColorGenerator();
+        $colors = $colorGenerator->generatePastelColors();
+        $ageChart= $sondageRepository->findAgeSondes($sondage,$colors);
+        $formationChart = $sondageRepository->findFormationSondes($sondage,$formationRepository,$colors);
+        $genreChart = $sondageRepository->findGenreSondes($sondage,$colors);
 
         return $this->render('sondeur/stats_sondage.html.twig', [
             'sondage' => $sondage,
@@ -249,10 +212,13 @@ class SondeurController extends AbstractController
     #[Route('/mes-sondages/{id}/stats-questions', name: 'app_sondeur_stats_question', methods: ['GET', 'POST'])]
     public function statsQuestion(FormationRepository $formationRepository,QuestionRepository $questionRepository, Sondage $sondage): Response
     {
+        $colorGenerator = new ColorGenerator();
+        $colors = $colorGenerator->generatePastelColors();
+
         $questions = $sondage->getQuestions();
         foreach ( $questions as $question){
             // stats globales
-            $statsGles= json_encode($questionRepository->findStatsGlobales($question));
+            $statsGles= json_encode($questionRepository->findStatsGlobales($question,$colors));
             $statsGlobalesQuestion= new StatsQuestion();
             $statsGlobalesQuestion
                 ->setNomStat("Stat globale")
@@ -261,7 +227,7 @@ class SondeurController extends AbstractController
 
             //stats par genre
 
-            $statsGlesGenre= json_encode($questionRepository->findStatsParGenre($question));
+            $statsGlesGenre= json_encode($questionRepository->findStatsParGenre($question,$colors));
             $statsGenreQuestion= new StatsQuestion();
             $statsGenreQuestion
                 ->setNomStat("Stat par genre")
@@ -269,7 +235,7 @@ class SondeurController extends AbstractController
             $question->addStatsQuestion($statsGenreQuestion);
 
             //stats par formation
-            $statsGlesFormation= json_encode($questionRepository->findStatsParFormation($question,$formationRepository));
+            $statsGlesFormation= json_encode($questionRepository->findStatsParFormation($question,$formationRepository,$colors));
             $statsFormationQuestion= new StatsQuestion();
             $statsFormationQuestion
                 ->setNomStat("Stat par formation")
@@ -277,7 +243,7 @@ class SondeurController extends AbstractController
             $question->addStatsQuestion($statsFormationQuestion);
 
             //stats par age
-            $statsGlesAge= json_encode($questionRepository->findStatsParTrancheAge($question));
+            $statsGlesAge= json_encode($questionRepository->findStatsParTrancheAge($question,$colors));
             $statsAgeQuestion= new StatsQuestion();
             $statsAgeQuestion
                 ->setNomStat("Stat par tranche d'age")
