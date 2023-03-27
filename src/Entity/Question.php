@@ -41,6 +41,9 @@ class Question
     #[ORM\OneToMany(mappedBy: 'Question', targetEntity: StatsQuestion::class)]
     private Collection $statsQuestions;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $imageQuestion = null;
+
 
 
 
@@ -184,6 +187,23 @@ class Question
         }
 
         return $this;
+    }
+
+    public function getImageQuestion(): ?string
+    {
+        return $this->imageQuestion;
+    }
+
+    public function setImageQuestion(string|null $imageQuestion): self
+    {
+        $this->imageQuestion = $imageQuestion;
+
+        return $this;
+    }
+
+    public function deleteImageQuestion()
+    {
+        $this->setImageQuestion(null);
     }
 
 

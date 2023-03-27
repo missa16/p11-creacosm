@@ -28,6 +28,9 @@ Encore
     .addEntry('historique','./assets/js/historique.js')
     .addEntry('nextStats','./assets/js/form_nextStats.js')
     .addEntry('stats','./assets/js/stats.js')
+    .addEntry('eraseImage','./assets/js/erase_image_question.js')
+
+
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')
@@ -43,6 +46,7 @@ Encore
         from:'./assets/images',
         to : 'images/[path][name].[ext]'
     })
+
 
     /*
      * FEATURE CONFIG

@@ -5,15 +5,32 @@
 
 
 {% block body %}
-    <h1>Edit Sondage</h1>
-
-    {{ include('sondeur/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('app_sondeur_my_surveys') }}">Retour au menu</a>
-
-    {{ include('sondeur/_delete_form.html.twig') }}
+    <div class="grid-container-nav">
+        {{ include('composants/_nav_bar.html.twig') }}
+        <div class="content">
+            <div class="row">
+                <div class="df jce">
+                    {% if app.user %}
+                        <div class="">
+                            <button class="button"><a class="text-decoration-none a" href="{{ path('app_logout') }}">se deconnecter</a></button>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row">
+                <h1 class="size-40 df jcc">Modifier le sondage</h1>
+                {#                <div class="logo">#}
+                {#                    <img src="{{ asset('build/images/ampoule.png') }}"/>#}
+                {#                </div>#}
+            </div>
+            <div class="row">
+                {{ include('sondeur/_form.html.twig') }}
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 {% block javascripts %}
     {{ encore_entry_script_tags('manageQuestions') }}
+    {{ encore_entry_script_tags('eraseImage') }}
 {% endblock %}

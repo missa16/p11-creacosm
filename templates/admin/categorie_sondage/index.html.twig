@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CategorieSondage index{% endblock %}
+
+{% block body %}
+    <h1>CategorieSondage index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>NomCategorie</th>
+                <th>Emoji</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for categorie_sondage in categorie_sondages %}
+            <tr>
+                <td>{{ categorie_sondage.id }}</td>
+                <td>{{ categorie_sondage.nomCategorie }}</td>
+                <td>{{ categorie_sondage.emoji }}</td>
+                <td>
+                    <a href="{{ path('app_categorie_sondage_show', {'id': categorie_sondage.id}) }}">show</a>
+                    <a href="{{ path('app_categorie_sondage_edit', {'id': categorie_sondage.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_categorie_sondage_new') }}">Create new</a>
+{% endblock %}

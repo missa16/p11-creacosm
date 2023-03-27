@@ -8,7 +8,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CategorieSondageRepository::class)]
-class CategorieSondage
+class
+CategorieSondage
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -20,6 +21,9 @@ class CategorieSondage
 
     #[ORM\OneToMany(mappedBy: 'categorieSondage', targetEntity: Sondage::class)]
     private Collection $Sondage;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $emoji = null;
 
     public function __construct()
     {
@@ -69,6 +73,18 @@ class CategorieSondage
                 $sondage->setCategorieSondage(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getEmoji(): ?string
+    {
+        return $this->emoji;
+    }
+
+    public function setEmoji(?string $emoji): self
+    {
+        $this->emoji = $emoji;
 
         return $this;
     }

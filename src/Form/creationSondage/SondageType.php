@@ -28,7 +28,7 @@ class SondageType extends AbstractType
                 'choice_label'=>'nomCategorie',
             ])
             ->add('imageCouverture',FileType::class,[
-                'label' =>' Photo de couverture du sondage (Image)',
+                'label' =>'Choisir une image de couverture',
                 'mapped' => false,
                 'required' => false,
             ])
@@ -50,12 +50,17 @@ class SondageType extends AbstractType
                     'class'=> 'button-enregister'
                 ]
             ])
-            ->addEventListener(FormEvents::PRE_SUBMIT,function ($event){
-                $data = $event->getData();
-                $data['Questions'] = array_values($data['Questions']);
-                $event->setData($data);
-                }
-            );
+            ->add('Brouillon',SubmitType::class,[
+                'attr'=> [
+                    'class'=> 'button-enregister',
+                    'label'=> 'Enregistrer en brouillon'
+                ]
+            ]);
+//            ->addEventListener(FormEvents::PRE_SUBMIT,function ($event){
+//                $data = $event->getData();
+//                $data['Questions'] = array_values($data['Questions']);
+//                $event->setData($data);}
+//            );
 
     }
 
