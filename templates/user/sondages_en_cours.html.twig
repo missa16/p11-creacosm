@@ -6,18 +6,17 @@
     <div class="grid-container-nav">
     {{ include('composants/_nav_bar_sonde.html.twig') }}
         <div class="content-sond">
-            <div class="row-2">
+            <div class="row-home">
                 <div class="df jce">
                     <div class="">
-                        <button class="button"><a class="text-decoration-none a" href="{{ path('app_logout') }}">se
-                                deconnecter</a></button>
+                        <button class="button"><a class="text-decoration-none a" href="{{ path('app_logout') }}">connexion</a></button>
                     </div>
                 </div>
             </div>
-            <div class="row-2">
+            <div class="row-home">
                 <h1 class="df jcc">Bienvenue chez Creacosm</h1>
             </div>
-            <div class="row-2">
+            <div class="row-home">
                 <div class="grid-container-8">
                 {% for sondage in sondages %}
                     <div class="card-sondage">
@@ -43,7 +42,7 @@
             </div>
         </div>
     </div>
-
+    </div>
 
 {% endblock %}
 
