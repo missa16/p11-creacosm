@@ -12,11 +12,17 @@
     {{ form_row(question.TypeQuestion) }}
 
 
-    {% if app.request.attributes.get('_route') == 'app_sondeur_edit' and question.vars.value.imageQuestion is defined and question.vars.value.imageQuestion is not empty  %}
+    {% if app.request.attributes.get('_route') == 'app_sondeur_edit' and question.vars.value.imageQuestion is defined and question.vars.value.imageQuestion is not empty %}
         <div class="d-flex justify-content-center align-items-center m-1">
 
-            <img class="me-3" src="{{ asset('assets/uploads/image-question/mini/300x300-'~question.vars.value.imageQuestion)}}" alt="Image"/>
-            <div><button data-question="{{ question.vars.value.id }}" class="btn btn-danger form-image-question-form">Supprimer l'image</button></div>
+            <img class="me-3"
+                 src="{{ asset('assets/uploads/image-question/mini/300x300-'~question.vars.value.imageQuestion) }}"
+                 alt="Image"/>
+            <div>
+                <button data-question="{{ question.vars.value.id }}" class="btn btn-danger form-image-question-form">
+                    Supprimer l'image
+                </button>
+            </div>
             <div style="display: none">{{ form_row(question.imageQuestion) }} </div>
         </div>
     {% else %}
@@ -28,8 +34,8 @@
 
         {% for rep in question.Reponses %}
             <li>
-                {{formMacros2.printReponse(rep)}}
-{#                {{ form_row(rep.laReponse) }}#}
+                {{ formMacros2.printReponse(rep) }}
+                {#                {{ form_row(rep.laReponse) }} #}
             </li>
         {% endfor %}
     </ul>
@@ -53,86 +59,92 @@
                 <div> {{ form_row(form.description) }}
                 </div>
                 <div>
-{#                    Si on est en mode edit on affiche les images#}
+                    {#                    Si on est en mode edit on affiche les images #}
                     {% if app.request.attributes.get('_route') == 'app_sondeur_edit' and sondage.imageCouverture is not null %}
                         <h2>Image de couverture</h2>
-                        <img src="{{ asset('assets/uploads/couverture-sondage/mini/300x300-'~sondage.imageCouverture)}}" alt="Image {{ sondage.intitule }}"/>
-                        <button data-sondage="{{ sondage.id }}" class="btn btn-danger delete-image-form">Supprimer l'image</button>
+                        <img src="{{ asset('assets/uploads/couverture-sondage/mini/300x300-'~sondage.imageCouverture) }}"
+                             alt="Image {{ sondage.intitule }}"/>
+                        <button data-sondage="{{ sondage.id }}" class="btn btn-danger delete-image-form">Supprimer
+                            l'image
+                        </button>
                         <div style="display: none">{{ form_row(form.imageCouverture) }} </div>
 
-                        {% else %}
-                            {{ form_row(form.imageCouverture) }}
-                        {% endif %}
-                </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <h3 class="size-25">Date : </h3>
-
-    <div>
-        <div class="card-q">
-            <div class="rectangle"></div>
-            <div class="content-q">
-                <div> {{ form_row(form.dateFin) }}
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <h3 class="size-25">Questions :</h3>
-    <div>
-        <div class="card-q">
-            <div class="rectangle"></div>
-            <div class="content-q">
-                <ul class="questions"
-                    data-prototype="{{ formMacros. printQuestion(form.Questions.vars.prototype)|e('html_attr') }}"
-                    data-index="{{ form.Questions|length ? form.Questions|last.vars.name + 1 : 0 }}">
-                    {% for question in form.Questions %}
-                        <li class=" flex align-items-end m" data-indice="{{ question.vars.name }}">
-                                <div  >
-                                    {{ formMacros.printQuestion(question) }}
-                                </div>
-                        </li>
-                    {% endfor %}
-                </ul>
-                <div class="df jcc">
-                    <button type="button" class="button-enregister add_item_link"
-                            data-collection-holder-class="questions"><span
-                                class="bi bi-plus-circle"></span> Ajouter une question
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div>
-        <div class="card-q">
-            <div class="rectangle"></div>
-            <div class="content-q">
-                <div class="align-items-center justify-content-evenly df jcc">
-                    {{ form_row(form.Enregistrer) }}
-                    {{ form_row(form.Brouillon) }}
-                    {{ form_end(form.Questions) }}
-                    {{ form_end(form) }}
-                    {% if app.request.attributes.get('_route') == 'app_sondeur_edit'%}
-                        <div class="mb-3">
-                            <button data-sondage="{{ sondage.id }}" class="btn btn-danger" id="delete-survey">
-                                <i class="bi bi-trash"></i> Supprimer ce sondage</button>
-                        </div>
+                    {% else %}
+                        {{ form_row(form.imageCouverture) }}
                     {% endif %}
-                    <div>
-                        <a href="{{ path('app_sondeur_my_surveys') }}"><img class="retour" src="{{ asset('build/images/bouton-retour.png') }}" alt=""></a>
-                    </div>
-
-                    <div>
-                    </div>
-
                 </div>
             </div>
         </div>
-
     </div>
+
+<h3 class="size-25">Date : </h3>
+
+<div>
+    <div class="card-q">
+        <div class="rectangle"></div>
+        <div class="content-q">
+            <div> {{ form_row(form.dateFin) }}
+            </div>
+        </div>
+    </div>
+</div>
+
+<h3 class="size-25">Questions :</h3>
+<div>
+    <div class="card-q">
+        <div class="rectangle"></div>
+        <div class="content-q">
+            <ul class="questions"
+                data-prototype="{{ formMacros. printQuestion(form.Questions.vars.prototype)|e('html_attr') }}"
+                data-index="{{ form.Questions|length ? form.Questions|last.vars.name + 1 : 0 }}">
+                {% for question in form.Questions %}
+                    <li class=" flex align-items-end m" data-indice="{{ question.vars.name }}">
+                        <div>
+                            {{ formMacros.printQuestion(question) }}
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+            <div class="df jcc">
+                <button type="button" class="button-enregister add_item_link"
+                        data-collection-holder-class="questions"><span
+                            class="bi bi-plus-circle"></span> Ajouter une question
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <div class="card-q">
+        <div class="rectangle"></div>
+        <div class="content-q">
+            <div class="align-items-center justify-content-evenly df jcc">
+                {{ form_row(form.Enregistrer) }}
+                {{ form_row(form.Brouillon) }}
+                {{ form_end(form.Questions) }}
+                {{ form_end(form) }}
+                {% if app.request.attributes.get('_route') == 'app_sondeur_edit' %}
+                    <div class="mb-3">
+                        <button data-sondage="{{ sondage.id }}" class="btn btn-danger" id="delete-survey">
+                            <i class="bi bi-trash"></i> Supprimer ce sondage
+                        </button>
+                    </div>
+                {% endif %}
+                <div>
+                    <a href="{{ path('app_sondeur_my_surveys') }}"><img class="retour"
+                                                                        src="{{ asset('build/images/bouton-retour.png') }}"
+                                                                        alt=""></a>
+                </div>
+
+                <div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
 
 
 
