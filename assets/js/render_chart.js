@@ -4,6 +4,7 @@ import Chart from "chart.js/auto";
 function makeChart(chartHTML, typeChart, titreGraphe){
     let chartCtx = chartHTML.getContext('2d');
     let chartDATA = JSON.parse(chartHTML.dataset.chart)
+    console.log(chartDATA);
     new Chart(chartCtx, {
         type : typeChart,
         data: chartDATA,
@@ -14,22 +15,21 @@ function makeChart(chartHTML, typeChart, titreGraphe){
                     text: titreGraphe
                 }
             },
-            backgroundColor : ['rgb(75,140,75)','rgb(255, 99, 132)'],
             responsive: true,
             scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
-            }
+                y: {
+                    type: 'linear',
+                    min: 0,
+                    max: 50
+                }
+            },
         },
     });
 }
 
 // Graphique des ages
 const chartAgeHTML = document.getElementById('ageChart');
-console.log(chartAgeHTML);
+
 makeChart(chartAgeHTML,'bar','Age moyens des sondés');
 
 // Graphique des formations
@@ -38,10 +38,9 @@ makeChart(chartFormationHTML,'bar','Activité professionnelle des sondés');
 
 // Graphique des genres
 const chartGenreHTML = document.getElementById('genreChart');
-makeChart(chartGenreHTML,'bar','Genre des sondés');
+makeChart(chartGenreHTML,'polarArea','Genre des sondés');
 
 
-// Graphique classique des questions
 
 
 

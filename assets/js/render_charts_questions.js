@@ -32,9 +32,59 @@ import Chart from "chart.js/auto";
 //     }
 // });
 
+function makeChart(chartHTML,typeChart, titreGraphe){
+    let chartCtx = chartHTML.getContext('2d');
+    let chartDATA = JSON.parse(chartHTML.dataset.chart)
+    new Chart(chartCtx, {
+        type : typeChart,
+        data: chartDATA,
+        options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: titreGraphe
+                }
+            },
+            backgroundColor : ['rgb(75,140,75)','rgb(255, 99, 132)'],
+            responsive: true,
+            scales: {
+                y: {
+                    type: 'linear',
+                    min: 0,
+                    max: 50
+                }
+            },
+        },
+    });
+}
 
+// globales questions
 let listeCanvas = document
     .querySelectorAll('.chartQuestion');
 listeCanvas.forEach((canva) => {
-    makeChart(canva, 'bar', canva.dataset.question);
+    makeChart(canva,'pie', canva.dataset.question);
 });
+
+// globales questions formation
+let listeCanvas2 = document
+    .querySelectorAll('.chartQuestionFormation');
+listeCanvas2.forEach((canva) => {
+    makeChart(canva,'bar', canva.dataset.question);
+});
+
+// globales questions age
+let listeCanvas3 = document
+    .querySelectorAll('.chartQuestionAge');
+listeCanvas3.forEach((canva) => {
+    makeChart(canva,'bar', canva.dataset.question);
+});
+
+
+// globales questions age
+let listeCanvas4 = document
+    .querySelectorAll('.chartQuestionGenre');
+listeCanvas4.forEach((canva) => {
+    makeChart(canva,'bar', canva.dataset.question);
+});
+
+

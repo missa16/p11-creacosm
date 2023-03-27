@@ -16,6 +16,7 @@
 .tab-container {
     display: flex;
     flex-direction: column;
+   width: 80%;
 }
 
 .tab-header {
@@ -63,9 +64,13 @@
     color: #007bff;
 
 }
+.titre-graphe-sondage{
+    text-align :center
+}
 
 .tab-content {
     flex: 1;
+    width:100%
 }
 
 .tab-panel {

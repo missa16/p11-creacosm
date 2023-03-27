@@ -3,45 +3,62 @@
 {% block title %}Statistiques d'un sondage {% endblock %}
 
 {% block body %}
-
-    <h1>Pour le sondage : {{ sondage.intitule }}</h1>
-    <h3> Nombre de personnes ayant répondu : {{ sondage.lesSondes.count }} </h3>
-
-    <div>
-        <canvas id="ageChart" data-chart="{{ ageChart }}"></canvas>
-    </div>
-
-    <div>
-        <canvas id="formationChart" data-chart="{{ formationChart }}"></canvas>
-    </div>
-
-    <div>
-        <canvas id="genreChart" data-chart="{{ genreChart }}"></canvas>
-    </div>
-
-    <div>
-        <canvas id="mixChart" data-chart="{{ genreChart }}"></canvas>
-    </div>
-
-
-
-
-    <div>
-        {% for question in sondage.Questions %}
-            <h2>{{ question.intitule }}</h2>
-
-            <canvas data-question="{{ question.intitule }}" class="chartQuestion" data-chart="{{ question.StatsQuestions[0].dataJson }}"></canvas>
-            {#            <canvas data-question="{{ question.intitule }}" class="chartQuestionMix" data-chart="{{question.StatsQuestions[1].dataJson }}"></canvas>#}
-        {% endfor %}
-
-    </div>
-
+    <div class="grid-container-nav">
+        {{ include('composants/_nav_bar.html.twig') }}
+        <div class="content">
+            <div class="df jce">
+                <button class="button">Déconnexion</button>
+            </div>
+            <h1 class="df jcc">Statistiques globlale du sondage : {{ sondage.intitule }}</h1>
+            <div>
+                <a href="{{ path('app_sondeur_stats_question', {'id': sondage.id}) }}">
+                <button class="btn">
+                    Voir les statistiques pour chaque question
+                </button>
+                </a>
+            </div>
+                    <div class="tab-container align-items-center justify-content-center">
+                        <div class="tab-header">
+                            <button class="tab-button active" data-tab="tab1">Nombre de sondés</button>
+                            <button class="tab-button" data-tab="tab2">Statistiques par ages</button>
+                            <button class="tab-button" data-tab="tab3">Statistiques par formations</button>
+                            <button class="tab-button" data-tab="tab4">Statistiques par genres</button>
+                        </div>
+                        <div class="tab-content">
+                            <div class="tab-panel active" id="tab1">
+                                <div class="chart-container d-flex justify-content-center">
+                                        <h2 class="d-flex justify-content-center">
+                                            Nombre de personnes ayant répondu :  {{ sondage.lesSondes.count }} </h2>
+                                </div>
+                            </div>
+                            <div class="tab-panel" id="tab2">
+                                <h3 class="titre-graphe-sondage">Réponses en fonction de l'âge</h3>
+                                <div class="chart-container">
+                                    <canvas data-question="{{ sondage.intitule }}"  id="ageChart" data-chart="{{ ageChart }}"></canvas>
+                                </div>
+                            </div>
+                            <div class="tab-panel" id="tab3">
+                                <h3 class="titre-graphe-sondage" >Réponses en fonction de la formation</h3>
+                                <div class="chart-container">
+                                <canvas data-question="{{ sondage.intitule }}"  id="formationChart" data-chart="{{ formationChart }}"></canvas>
+                            </div>
+                            </div>
+                            <div class="tab-panel" id="tab4">
+                                <h3 class="titre-graphe-sondage" >Réponses en fonction du genre</h3>
+                                <div class="chart-container">
+                                    <canvas data-question="{{ sondage.intitule }}"  id="genreChart" data-chart="{{ genreChart }}"></canvas>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        </div>
 {% endblock %}
 
 
 {% block javascripts %}
     {{ parent() }}
     {{ encore_entry_script_tags('renderChart') }}
+{#    {{ encore_entry_script_tags('nextStats') }}#}
+    {{ encore_entry_script_tags('stats') }}
 {% endblock %}
-
-{#<canvas data-question="{{ question.intitule }}" class="chartQuestion" data-chart="{{ chartQuestion }}"></canvas>#}
