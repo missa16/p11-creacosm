@@ -2,78 +2,48 @@
 
 {% block title %}Sondage en cours{% endblock %}
 
-{% block body %}<div class="grid-container-nav">
+{% block body %}
+    <div class="grid-container-nav">
     {{ include('composants/_nav_bar_sonde.html.twig') }}
-    <div class="content-sond">
-        <div class="row">
-            <div class="df jce">
-                <div class="">
-                    <button class="button"><a class="text-decoration-none a" href="{{ path('app_logout') }}">se
-                            deconnecter</a></button>
+        <div class="content-sond">
+            <div class="row-home">
+                <div class="df jce">
+                    <div class="">
+                        <button class="button"><a class="text-decoration-none a" href="{{ path('app_logout') }}">connexion</a></button>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <h1 class="df jcc">Bienvenue chez creacosm</h1>
-        </div>
-        <div class="row">
-            <div class="grid-container-6">
+            <div class="row-home">
+                <h1 class="df jcc">Bienvenue chez Creacosm</h1>
+            </div>
+            <div class="row-home">
+                <div class="grid-container-8">
                 {% for sondage in sondages %}
-                    <div class="card">
-{#                        <div>{{ sondage.imageCouverture }}</div>#}
-                    <div class="img-container-2">
-                        <img src="{{ asset('build/images/produit_bio.jpg') }}" alt="image"/>
+                    <div class="card-sondage">
+                       <div class="img-container-2">
+                        {% if sondage.imageCouverture is not null %}
+                            <img src="{{ asset('assets/uploads/couverture-sondage/mini/300x300-'~sondage.imageCouverture)}}" alt="Image {{ sondage.intitule }}"/>
+                        {% else %}
+                            <img style="width: 100%;" src="{{ asset('build/images/image-defaut-couverture-sondage.jpg')}}" alt="Image par défaut"/>
+                        {% endif%}
                     </div>
-                        <div><h2>{{ sondage.intitule }}</h2></div>
+                        <div><h5>{{ sondage.intitule }}</h5></div>
                         <div><p>  {{ sondage.description }}</p></div>
                         <div class="d-flex"><p>Fin :</p>
                             <p>{{ sondage.dateFin ? sondage.dateFin|date('d/m/Y') : '' }}</p></div>
                         <div>
                             <button class="button-t"><a class="c-black" href="{{ path('app_sondage_answer', {'id': sondage.id}) }}">Répondre
                                     au sondage</a></button>
-                            {#                        <button class="button-t">Modifier</button>#}
                         </div>
                         {% else %}
                                 <div>Aucun sondage en cours pour le moment</div>
                     </div>
                 {% endfor %}
             </div>
-
-
         </div>
     </div>
     </div>
 
-{#    <table class="table">#}
-{#        <thead>#}
-{#        <tr>#}
-{#            <th>Intitule</th>#}
-{#            <th>EtatSondage</th>#}
-{#            <th>Description</th>#}
-{#            <th>ImageCouverture</th>#}
-{#            <th>DateFin</th>#}
-{#            <th>Actions</th>#}
-
-{#        </tr>#}
-{#        </thead>#}
-{#        <tbody>#}
-{#        {% for sondage in sondages %}#}
-{#            <tr>#}
-
-{#                <td>{{ sondage.intitule }}</td>#}
-{#                <td>{{ sondage.etatSondage }}</td>#}
-{#                <td>{{ sondage.description }}</td>#}
-{#                <td>{{ sondage.imageCouverture }}</td>#}
-{#                <td>{{ sondage.dateFin|date('d-m-Y') }}</td>#}
-{#                <td>#}
-{#                    <a href="{{ path('app_sondage_answer', {'id': sondage.id}) }}">Répondre au sondage</a>#}
-{#                </td>#}
-{#            </tr>#}
-{#        {% else %}#}
-{#            <tr>#}
-{#                <td colspan="9">Aucun sondage en cours pour le moment</td>#}
-{#            </tr>#}
-{#        {% endfor %}#}
-{#        </tbody>#}
-{#    </table>#}
 {% endblock %}
+
+
