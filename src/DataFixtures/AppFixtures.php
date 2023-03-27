@@ -141,7 +141,7 @@ class AppFixtures extends Fixture
             ->setSondeur($sondeur)
             ->setCategorieSondage($cat2)
             ->setDateLancement(new DateTimeImmutable())
-            ->setDateFin(new DateTimeImmutable())
+            ->setDateFin(new DateTimeImmutable('yesterday'))
             ->setEtatSondage("EN_COURS")
             ->setDateUpdate(new DateTimeImmutable())
             ->setDateCreation(new DateTimeImmutable());

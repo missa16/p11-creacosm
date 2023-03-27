@@ -40,8 +40,8 @@ class SondageController extends AbstractController
     {
         $user = $this->getUser();
         return $this->render('user/sondages_en_cours.html.twig', [
-            //'sondages' => $sondageRepository->findAllSondageEnCours($user),
-            'sondages' => $sondageRepository->findAll(),
+            'sondages' => $sondageRepository->findAllSondageEnCours($user),
+            //'sondages' => $sondageRepository->findAll(),
         ]);
     }
 

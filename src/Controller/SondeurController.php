@@ -164,6 +164,9 @@ class SondeurController extends AbstractController
             if($form->get('Brouillon')->isClicked()){
                 $sondage->setEtatSondage('BROUILLON');
             }
+            else{
+                $sondage->setEtatSondage('EN_COURS');
+            }
             $sondage->setDateUpdate(new DateTimeImmutable());
             $sondageRepository->save($sondage, true);
             $this->addFlash('success', 'Sondage mis à jour !');

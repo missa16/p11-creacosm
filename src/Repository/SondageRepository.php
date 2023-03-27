@@ -194,23 +194,14 @@ class SondageRepository extends ServiceEntityRepository
             foreach ($usersSondageResult as $userSondageResult) {
                 $sondes[]=$userSondageResult->getSonde();
             }
-            if ( !(in_array($user,$sondes)) && $sondage->getDateFin()>$now  ){
+            if ( !(in_array($user,$sondes)) && $sondage->getEtatSondage()=='EN_COURS'){
                 $sondagesEnCours[]=$sondage;
             }
         }
         return $sondagesEnCours;
     }
 
-    public function findSondageById(int $sondageId) : ?Sondage
-    {
-        $sondages = $this->findAll();
-        foreach ($sondages as $sondage){
-            if($sondage->getId()==$sondageId){
-                return $sondage;
-            }
-        }
-        return null;
-    }
+
 
 
 }
