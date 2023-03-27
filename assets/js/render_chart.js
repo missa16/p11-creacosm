@@ -27,9 +27,9 @@ function makeChart(chartHTML, typeChart, titreGraphe){
     });
 }
 
-
 // Graphique des ages
 const chartAgeHTML = document.getElementById('ageChart');
+console.log(chartAgeHTML);
 makeChart(chartAgeHTML,'bar','Age moyens des sondés');
 
 // Graphique des formations

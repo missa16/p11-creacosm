@@ -26,7 +26,7 @@
                         {% else %}
                             <img style="width: 100%;" src="{{ asset('build/images/image-defaut-couverture-sondage.jpg')}}" alt="Image par défaut"/>
                         {% endif%}
-                    </div>
+                        </div>
                         <div><h5>{{ sondage.intitule }}</h5></div>
                         <div><p>  {{ sondage.description }}</p></div>
                         <div class="d-flex"><p>Fin :</p>
@@ -35,13 +35,13 @@
                             <button class="button-t"><a class="c-black" href="{{ path('app_sondage_answer', {'id': sondage.id}) }}">Répondre
                                     au sondage</a></button>
                         </div>
+                    </div>
                         {% else %}
                                 <div>Aucun sondage en cours pour le moment</div>
                     </div>
                 {% endfor %}
             </div>
         </div>
-    </div>
     </div>
 
 {% endblock %}

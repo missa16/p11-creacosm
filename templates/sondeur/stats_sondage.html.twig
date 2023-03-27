@@ -24,32 +24,35 @@
                             <div class="tab-panel active" id="tab1">
                                 <div class="chart-container d-flex justify-content-center">
                                     <div class="card-stat">
-                                        <p class="d-flex justify-content-center"> Nombre de personnes ayant répondu
-                                            :</p>
+                                        <p class="d-flex justify-content-center"> Nombre de personnes ayant répondu :</p>
                                         <p class="d-flex justify-content-center">{{ sondage.lesSondes.count }}</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="tab-panel" id="tab2">
+                                <h3>Réponses en fonction de l'âge</h3>
                                 <div class="chart-container">
-                                <canvas id="ageChart" data-chart="{{ ageChart }}"></canvas>
+                                    <canvas data-question="{{ sondage.intitule }}"  id="ageChart" data-chart="{{ ageChart }}"></canvas>
                                 </div>
                             </div>
                             <div class="tab-panel" id="tab3">
+                                <h3>Réponses en fonction de la formation</h3>
                                 <div class="chart-container">
-                                <canvas id="formationChart" data-chart="{{ formationChart }}"></canvas>
+                                <canvas data-question="{{ sondage.intitule }}"  id="formationChart" data-chart="{{ formationChart }}"></canvas>
                             </div>
                             </div>
                             <div class="tab-panel" id="tab4">
+                                <h3>Réponses en fonction du genre</h3>
                                 <div class="chart-container">
-                                <canvas id="genreChart" data-chart="{{ genreChart }}"></canvas>
+                                    <canvas data-question="{{ sondage.intitule }}"  id="genreChart" data-chart="{{ genreChart }}"></canvas>
+                                </div>
+
                                 </div>
                             </div>
                         </div>
                     </div>
 
         </div>
-    </div>
 {% endblock %}
 
 

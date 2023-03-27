@@ -4,13 +4,7 @@ html,body {
 }
 
 
-.sidebar {
-    position: static;
-    grid-column: 1; /* La sidebar occupe la première colonne */
-    height: 100%; /* La deuxième colonne occupe toute la hauteur de la grille */
-    background-color: #f1f1f1;
 
-}
 
 /* Logo */
 /*.logo {*/

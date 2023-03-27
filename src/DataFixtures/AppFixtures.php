@@ -140,7 +140,7 @@ class AppFixtures extends Fixture
             ->setDescription("oui oui")
             ->setSondeur($sondeur)
             ->setCategorieSondage($cat2)
-            ->setDateFin(new DateTimeImmutable('yesterday'))
+            ->setDateFin(new DateTimeImmutable())  //'yesterday'
             ->setEtatSondage("EN_COURS")
             ->setDateUpdate(new DateTimeImmutable())
             ->setDateCreation(new DateTimeImmutable());
@@ -163,6 +163,36 @@ class AppFixtures extends Fixture
             $manager->persist($question);
         }
         $manager->persist($sondage);
+
+
+        $sondage2 = new Sondage();
+        $sondage2->setIntitule("Un trés beau sondage")
+            ->setDescription("oui oui")
+            ->setSondeur($sondeur)
+            ->setCategorieSondage($cat2)
+            ->setDateFin(new DateTimeImmutable())  //'yesterday'
+            ->setEtatSondage("EN_COURS")
+            ->setDateUpdate(new DateTimeImmutable())
+            ->setDateCreation(new DateTimeImmutable());
+
+        for ($i=0; $i<5;$i++){
+            $question=new Question();
+            $question
+                ->setIntitule("Question numero ".$i)
+                ->setTypeQuestion($allTypes[($i%3)]);
+
+            for ($j=0; $j<3;$j++){
+                $reponse = new Reponse();
+                $reponse->setLaReponse("la reponse ".$j);
+                $reponse->setQuestion($question);
+                $question->addReponse($reponse);
+                $manager->persist($reponse);
+            }
+            $question->setSondage($sondage);
+            $sondage->addQuestion($question);
+            $manager->persist($question);
+        }
+        $manager->persist($sondage2);
         $manager->flush();
 
     }

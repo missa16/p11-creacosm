@@ -240,7 +240,7 @@ class SondeurController extends AbstractController
             'sondage' => $sondage,
             'ageChart' => json_encode($ageChart),
             'formationChart' => json_encode($formationChart),
-            'genreChart' => json_encode($genreChart),
+            'genreChart' => json_encode($genreChart)
 
         ]);
 
