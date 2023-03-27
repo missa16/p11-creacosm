@@ -11,6 +11,7 @@
             </div>
 
             <h1 class="df jcc">Statistiques globlale du sondage : {{ sondage.intitule }}</h1>
+            <button>  <a href="{{ path('app_sondeur_stats_question', {'id': sondage.id}) }}">Voir les statistiques pour chaque question </a></button>
 
                     <div class="tab-container align-items-center justify-content-center">
                         <div class="tab-header">
@@ -46,7 +47,7 @@
                             </div>
                         </div>
                     </div>
-            <button class="button-t" href="{{ path('app_sondeur_stats_question', {'id': sondage.id}) }}">Voir les statistiques pour chaque question</button>
+
         </div>
     </div>
 {% endblock %}
