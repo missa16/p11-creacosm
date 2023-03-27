@@ -49,6 +49,12 @@ class SondageType extends AbstractType
                 'attr'=> [
                     'class'=> 'button-enregister'
                 ]
+            ])
+            ->add('Brouillon',SubmitType::class,[
+                'attr'=> [
+                    'class'=> 'button-enregister',
+                    'label'=> 'Enregistrer en brouillon'
+                ]
             ]);
 //            ->addEventListener(FormEvents::PRE_SUBMIT,function ($event){
 //                $data = $event->getData();

@@ -80,6 +80,7 @@ class SondeurController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            //dd();
             $questions=$sondage->getQuestions()->toArray();
             foreach ($form->get('Questions') as $i=>$question) {
                 $imageQuestion = $question->get('imageQuestion')->getData();
@@ -94,7 +95,6 @@ class SondeurController extends AbstractController
                 }
             }
 
-
             $image =  $form->get('imageCouverture')->getData();
             if(!$image==null){
                 // On définit le dossier de destination
@@ -106,7 +106,12 @@ class SondeurController extends AbstractController
 
             $sondage->setDateCreation(new DateTimeImmutable());
             $sondage->setDateUpdate(new DateTimeImmutable());
-            $sondage->setEtatSondage('EN_COURS');
+            if($form->get('Brouillon')->isClicked()){
+                $sondage->setEtatSondage('BROUILLON');
+            }
+            else{
+                $sondage->setEtatSondage('EN_COURS');
+            }
             $sondage->setSondeur($user);
             $sondageRepository->save($sondage, true);
 
@@ -156,7 +161,9 @@ class SondeurController extends AbstractController
                 $fichier = $pictureService->add($image,$folder,300,300);
                 $sondage->setImageCouverture($fichier);
             }
-
+            if($form->get('Brouillon')->isClicked()){
+                $sondage->setEtatSondage('BROUILLON');
+            }
             $sondage->setDateUpdate(new DateTimeImmutable());
             $sondageRepository->save($sondage, true);
             $this->addFlash('success', 'Sondage mis à jour !');

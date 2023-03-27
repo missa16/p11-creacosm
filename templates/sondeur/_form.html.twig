@@ -114,6 +114,7 @@
             <div class="content-q">
                 <div class="align-items-center justify-content-evenly df jcc">
                     {{ form_row(form.Enregistrer) }}
+                    {{ form_row(form.Brouillon) }}
                     {{ form_end(form.Questions) }}
                     {{ form_end(form) }}
                     {% if app.request.attributes.get('_route') == 'app_sondeur_edit'%}
