@@ -124,7 +124,8 @@ class AppFixtures extends Fixture
 
         $cat2= new CategorieSondage();
         $cat2
-            ->setNomCategorie("Maquillage");
+            ->setNomCategorie("Maquillage")
+            ->setEmoji('💄');
         $allCats[]=$cat2;
 
         $size= count($allCats);
@@ -140,7 +141,7 @@ class AppFixtures extends Fixture
             ->setSondeur($sondeur)
             ->setCategorieSondage($cat2)
             ->setDateLancement(new DateTimeImmutable())
-            ->setDateFin(new DateTimeImmutable())
+            ->setDateFin(new DateTimeImmutable('yesterday'))
             ->setEtatSondage("EN_COURS")
             ->setDateUpdate(new DateTimeImmutable())
             ->setDateCreation(new DateTimeImmutable());

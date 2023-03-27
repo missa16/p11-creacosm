@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New CategorieSondage{% endblock %}
+
+{% block body %}
+    <h1>Create new CategorieSondage</h1>
+
+    {{ include('admin/categorie_sondage/_form.html.twig') }}
+
+    <a href="{{ path('app_categorie_sondage_index') }}">back to list</a>
+{% endblock %}

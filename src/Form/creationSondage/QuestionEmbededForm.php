@@ -7,6 +7,7 @@ use App\Entity\TypeQuestion;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -22,6 +23,11 @@ class QuestionEmbededForm extends AbstractType
             ->add('TypeQuestion',EntityType::class,[
                 'class'=>TypeQuestion::class,
                 'choice_label'=>'intituleType',
+            ])
+            ->add('imageQuestion',FileType::class,[
+                'label' =>'Choisir une image',
+                'mapped' => false,
+                'required' => false,
             ])
             ->add('Reponses',CollectionType::class, [
             'entry_type' => ReponseEmbededForm::class,
