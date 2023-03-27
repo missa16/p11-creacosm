@@ -6,26 +6,34 @@
 
     <div class="grid-container-nav" >
         {{ include('composants/_nav_bar_admin.html.twig') }}
-        <div class="table-responsive  ">
-            <table class="table table-striped table-hover">
-                <thead class="thead-light">
 
-                <tr>
-                    <th scope="col">Nom</th>
-                    <th scope="col">Prénom</th>
-                </tr>
-                </thead>
-                {% for s in sondeurs %}
-                    <tr>
+        <div class="content-nav">
+            <div class="content-sond">
+                <div class="row">
+                <h1 class="df jcc">Tous les sondeurs</h1>
+            </div>
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Prénom</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for s in sondeurs %}
+                            <tr>
 
-                        <td>{{ s.nom }}</td>
-                        <td>{{ s.prenom }}</td>
-                    </tr>
-                {% endfor %}
-            </table>
-        </div>
+                                <td>{{ s.nom }}</td>
+                                <td>{{ s.prenom }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div></div> </div>
+
     </div>
-
+{% endblock %}
 {#        <div class="row">#}
 {#            <div class="col-12">#}
 
@@ -65,4 +73,4 @@
 
 
 
-{% endblock %}
+
