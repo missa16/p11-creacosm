@@ -25,7 +25,7 @@
                                 {% if sondage.imageCouverture is not null %}
                                     <img src="{{ asset('assets/uploads/couverture-sondage/mini/300x300-'~sondage.imageCouverture)}}" alt="Image {{ sondage.intitule }}"/>
                                 {% else %}
-                                    <img style="width: 300px;" src="{{ asset('build/images/image-defaut-couverture-sondage.jpg')}}" alt="Image par défaut"/>
+                                    <img style="width: 100%;" src="{{ asset('build/images/image-defaut-couverture-sondage.jpg')}}" alt="Image par défaut"/>
                                 {% endif%}
                             </div>
 
