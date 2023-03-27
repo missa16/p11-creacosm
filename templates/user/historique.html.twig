@@ -3,32 +3,63 @@
 {% block title %}Sondage terminées{% endblock %}
 
 {% block body %}
-    <h1>Historique de mes sondages</h1>
+<div class="grid-container-nav">
+    {{ include('composants/_nav_bar_sonde.html.twig') }}
+    <div class="content-home">
+        <div class="row-home">
+            <div class="d-flex justify-content-end">
+                <button class="button"><a class="text-decoration-none a" href="{{ path('app_logout') }}">déconnexion</a></button>
+            </div>
+        </div>
+        <div class="row-home">
+            <h1 class="df jcc">Historique de mes sondages</h1>
+        </div>
+        <div class="row-home">
+            <div class="grid-container-2">
+                <div class="colonne1-x">
+                    <h2 class="d-flex justify-content-center">Sondages terminés</h2>
+                    <ul>
+                        {% for sondage in sondages %}
 
-    <h2>Sondages terminés</h2>
-    <ul>
-        {% for sondage in sondages %}
+                            <li class="sondageDone">
+                                <div>
+                                    <a href="#"> {{ sondage.sondage.intitule }} </a>
 
-            <li class="sondageDone">
-               <div>
-                   <a href="#"> {{ sondage.sondage.intitule }} </a>
+                                    {{ sondage.dateReponse|date('d-m-Y')}}
+                                </div>
 
-                   {{ sondage.dateReponse|date('d-m-Y')}}
-               </div>
-                <div class="reponses" style="display: none">
-                    {% for userSondageReponse in sondage.allReponses %}
-                        {{ userSondageReponse.question.intitule }}
-                       <ul>
-                           {% for rep in userSondageReponse.reponses %}
-                              <li> {{ rep.laReponse }}</li>
-                           {% endfor %}
+                            </li>
+                        {% endfor %}
+                    </ul>
 
-                       </ul>
-                    {% endfor %}
                 </div>
-            </li>
-        {% endfor %}
-    </ul>
+                <div class="colonne2 bg-light">
+                    <div id="displayQuestion"  >
+                        <h2 class="d-flex justify-content-center">Vos réponses</h2>
+                        {% for sondage in sondages %}
+                            <div class="reponses d-flex flex-column align-items-center" style="display: none">
+                                {% for userSondageReponse in sondage.allReponses %}
+                                    {{ userSondageReponse.question.intitule }}
+                                    <ul>
+                                        {% for rep in userSondageReponse.reponses %}
+                                            <li> {{ rep.laReponse }}</li>
+                                        {% endfor %}
+
+                                    </ul>
+                                {% endfor %}
+                            </div>
+                    {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
 
 
 {% endblock %}
