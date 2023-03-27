@@ -286,7 +286,7 @@ class SondeurController extends AbstractController
 
         }
 
-        return $this->render('sondeur/stats_sondage_question.html.twig', [
+        return $this->render('sondeur/stat_sondage_question.html.twig', [
             'sondage' => $sondage,
         ]);
 
