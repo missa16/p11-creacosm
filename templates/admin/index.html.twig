@@ -4,7 +4,7 @@
 
 {% block body %}
     <div class="grid-container-nav">
-        {{ include('composants/_nav_bar.html.twig') }}
+        {{ include('composants/_nav_bar_admin.html.twig') }}
         <div class="content-sond">
             <div class="row">
                 <div class="df jce">
@@ -27,7 +27,7 @@
                         <div class="row-3">
                             <div class="d-flex justify-content-center align-items-center box">  <img src="{{ asset('build/images/produit_bio.jpg') }}" class="image-3"/>
                                 <div class="text">
-                                    <p><a href="{{ path('app_admin_all_surveys') }}">Voir tous les sondages</a></p>
+                                    <p><a class='c-white' href="{{ path('app_admin_all_surveys') }}">Afficher les sondages</a></p>
                                 </div>
                             </div>
                         </div>
@@ -35,7 +35,7 @@
                             <div class="d-flex justify-content-center align-items-center box">
                                 <img src="{{ asset('build/images/produit_bio.jpg') }}" class="image-3"/>
                                 <div class="text">
-                                    <p><a href="{{ path('app_admin_new_sondeur') }}">Ajouter un sondeur</a></p>
+                                    <p><a class='c-white' href="{{ path('app_admin_new_sondeur') }}">Ajouter un sondeur</a></p>
                                 </div>
                             </div>
                         </div>
@@ -43,7 +43,7 @@
                             <div class="d-flex justify-content-center align-items-center box">
                                 <img src="{{ asset('build/images/produit_bio.jpg') }}" class="image-3"/>
                                 <div class="text">
-                                    <p><a href="{{ path('app_admin_show_sondeurs') }}">Voir tous les sondeurs</a></p>
+                                    <p><a class='c-white' href="{{ path('app_admin_show_sondeurs') }}">Voir tous les sondeurs</a></p>
                                 </div>
                             </div>
                         </div>
