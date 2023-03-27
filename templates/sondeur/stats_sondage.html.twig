@@ -7,21 +7,17 @@
         {{ include('composants/_nav_bar.html.twig') }}
         <div class="content">
             <div class="df jce">
-                <button class="button">deconnexion</button>
+                <button class="button">Déconnexion</button>
             </div>
 
-            <h1 class="df jcc">Statistiques de tous les sondages</h1>
+            <h1 class="df jcc">Statistiques globlale du sondage : {{ sondage.intitule }}</h1>
 
-
-            <div class="grid-container-2">
-                <div class="colonne1-stat">
-                    <div class="tab-container">
+                    <div class="tab-container align-items-center justify-content-center">
                         <div class="tab-header">
                             <button class="tab-button active" data-tab="tab1">Nombre d' utilisateurs</button>
                             <button class="tab-button" data-tab="tab2">Statistiques par ages</button>
                             <button class="tab-button" data-tab="tab3">Statistiques par formations</button>
                             <button class="tab-button" data-tab="tab4">Statistiques par genres</button>
-                            <button class="tab-button" data-tab="tab5">Statistiques par questions</button>
                         </div>
                         <div class="tab-content">
                             <div class="tab-panel active" id="tab1">
@@ -37,22 +33,6 @@
                                 <div class="chart-container">
                                 <canvas id="ageChart" data-chart="{{ ageChart }}"></canvas>
                                 </div>
-{#                                <select name="stats" id="stats">#}
-{#                                    {% for key,val in globalesCharts %}#}
-{#                                        {% for subkey, subvalue in val %}#}
-{#                                            <option value="{{ key }}" data-chart="{{ subvalue }}">{{ key }}</option>#}
-{#                                        {% endfor %}#}
-{#                                    {% endfor %}#}
-{#                                </select>#}
-{#                                <div class="card">#}
-{#                                    {% for cle,val in globalesCharts %}#}
-{#                                        {% for subkey, subvalue in val %}#}
-{#                                            <canvas class="display" id="{{ subkey }}"#}
-{#                                                    data-chart="{{ subvalue }}"></canvas>#}
-{#                                        {% endfor %}#}
-{#                                    {% endfor %}#}
-{#                                </div>#}
-
                             </div>
                             <div class="tab-panel" id="tab3">
                                 <div class="chart-container">
@@ -64,104 +44,18 @@
                                 <canvas id="genreChart" data-chart="{{ genreChart }}"></canvas>
                                 </div>
                             </div>
-                            <div class="tab-panel" id="tab5">
-                                <div class="chart-container">
-                                {% set totalQuestions = sondage.questions|length %}
-                                <div id="question-container">
-                                    {% set questionNumber = 0 %}
-                                    {% for question in sondage.Questions %}
-                                        {% set questionNumber = questionNumber + 1 %}
-                                        <div class="question" id="question-{{ questionNumber }}"
-                                             {% if questionNumber != 1 %}style="display:none"{% endif %}>
-                                            <h5>{{ question.intitule }}</h5>
-                                            <canvas data-question="{{ question.intitule }}"
-                                                    data-type="{{ question.TypeQuestion.label }}" class="chartQuestion"
-                                                    data-chart="{{ question.StatsQuestions[0].dataJson }}"></canvas>
-                                            <button class="next-question-stat button-stat"
-                                                    data-next-question="{{ questionNumber + 1 }}">
-                                                Next question
-                                            </button>
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                            </div>
-                            <div class="tab-panel" id="tab6">
-                                <p>Content for Tab 6</p>
-                            </div>
                         </div>
                     </div>
-                </div>
-{#                <div class="colonne2">#}
-{#                    hello#}
-{#                </div>#}
-            </div>
+            <button class="button-t" href="{{ path('app_sondeur_stats_question', {'id': sondage.id}) }}">Voir les statistiques pour chaque question</button>
         </div>
     </div>
 {% endblock %}
-    {#    <div class="content-sond"> #}
-    {#        <div class="grid-container-4"> #}
-    {#            <div class="row-stat"> #}
-    {#            <h3 class="d-flex justify-content-center">Pour le sondage : {{ sondage.intitule }}</h3> #}
-    {#            </div> #}
-    {#                <div class="row-stat-1"> #}
-    {#                    <div class="col-stat"> #}
-    {#                        <div class="card"> #}
-    {#                            <h5 class="d-flex justify-content-center"> Nombre de personnes ayant répondu :</h5> #}
-    {#                                <p class="d-flex justify-content-center">{{ sondage.lesSondes.count }}</p> #}
-    {#                        </div> #}
-    {#                    </div> #}
-
-    {#                    <div class="col-stat"> #}
-    {#                        <div> #}
-    {#                            <select name="stats" id="stats"> #}
-    {#                                {% for key,val in globalesCharts %} #}
-    {#                                {% for subkey, subvalue in val %} #}
-    {#                                    <option value="{{key}}" data-chart="{{subvalue}}" >{{key}}</option> #}
-    {#                                {% endfor %} #}
-    {#                                {%  endfor %} #}
-    {#                            </select> #}
-    {#                        </div> #}
-    {#                        <div class="card"> #}
-    {#                            {% for cle,val in globalesCharts %} #}
-    {#                            {% for subkey, subvalue in val %} #}
-    {#                            <canvas class="display" id="{{ subkey }}" data-chart="{{ subvalue }}"></canvas> #}
-    {#                            {%  endfor %} #}
-    {#                            {%  endfor %} #}
-    {#                        </div> #}
-    {#                </div> #}
-    {#                <div class="row-stat"> #}
-    {#                    <div class="col-stat">    {% set totalQuestions = sondage.questions|length %} #}
-    {#                        <div id="question-container"> #}
-    {#                            {% set questionNumber = 0 %} #}
-    {#                            {% for question in sondage.Questions %} #}
-    {#                                {% set questionNumber = questionNumber + 1 %} #}
-    {#                                <div class="question" id="question-{{ questionNumber }}" #}
-    {#                                     {% if questionNumber != 1 %}style="display:none"{% endif %}> #}
-    {#                                    <h5>{{ question.intitule }}</h5> #}
-    {#                                    <canvas data-question="{{ question.intitule }}" data-type="{{ question.TypeQuestion.label }}" class="chartQuestion" #}
-    {#                                            data-chart="{{ question.StatsQuestions[0].dataJson}}"></canvas> #}
-    {#                                    <button class="next-question-stat button" #}
-    {#                                            data-next-question="{{ questionNumber + 1 }}"> #}
-    {#                                        Next question #}
-    {#                                    </button> #}
-    {#                                </div> #}
-    {#                            {% endfor %} #}
-    {#                        </div> #}
-    {#                    </div> #}
-    {#                </div> #}
-    {#            </div> #}
-
-    {#        </div> #}
-
-    {#    </div> #}
 
 
 
-    {% block javascripts %}
-        {{ parent() }}
-        {{ encore_entry_script_tags('renderChart') }}
-        {{ encore_entry_script_tags('nextStats') }}
-        {{ encore_entry_script_tags('stats') }}
-
-    {% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('renderChart') }}
+{#    {{ encore_entry_script_tags('nextStats') }}#}
+    {{ encore_entry_script_tags('stats') }}
+{% endblock %}

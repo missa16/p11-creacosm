@@ -32,9 +32,6 @@ class SondageType extends AbstractType
                 'mapped' => false,
                 'required' => false,
             ])
-            ->add('dateLancement',DateType::class,[
-                'widget'=>'single_text'
-            ])
             ->add('dateFin',DateType::class,[
                 'widget'=>'single_text'
             ])

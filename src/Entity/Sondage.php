@@ -38,9 +38,6 @@ class Sondage
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $dateCreation = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    #[Assert\NotBlank]
-    private ?\DateTimeInterface $dateLancement = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     #[Assert\NotBlank]
@@ -140,17 +137,7 @@ class Sondage
         return $this;
     }
 
-    public function getDateLancement(): ?\DateTimeInterface
-    {
-        return $this->dateLancement;
-    }
 
-    public function setDateLancement(\DateTimeInterface $dateLancement): self
-    {
-        $this->dateLancement = $dateLancement;
-
-        return $this;
-    }
 
     public function getDateFin(): ?\DateTimeInterface
     {

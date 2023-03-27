@@ -1,0 +1,135 @@
+{#{% extends 'base.html.twig' %}#}
+
+{#{% block title %}Statistiques des questions du sondage {% endblock %}#}
+
+{#{% block body %}#}
+
+{#<div class="grid-container-nav">#}
+{#    {{ include('composants/_nav_bar.html.twig') }}#}
+{#    <div class="content">#}
+{#        <div class="df jce">#}
+{#            <button class="button">Déconnexion</button>#}
+{#        </div>#}
+
+{#        <h1 class="df jcc">Statistiques des questions du sondage {{ sondage.intitule }}</h1>#}
+
+{#        {% set totalQuestions = sondage.questions|length %}#}
+{#        #}
+{#        <div id="question-container">#}
+{#            {% set questionNumber = 0 %}#}
+{#            #}
+{#            {% for question in sondage.Questions %}#}
+{#            {% set questionNumber = questionNumber + 1 %}#}
+{#            #}
+{#            <div class="question" id="question-{{ questionNumber }}" {% if questionNumber != 1 %}style="display:none"{% endif %}> #}
+{#                <h5>{{ question.intitule }}</h5>#}
+{#                <div class="tab-container align-items-center justify-content-center">#}
+{#                    <div class="tab-header">#}
+{#                        <button class="tab-button" data-tab="tab2">Statistiques par ages</button>#}
+{#                        <button class="tab-button" data-tab="tab3">Statistiques par formations</button>#}
+{#                        <button class="tab-button" data-tab="tab4">Statistiques par genres</button>#}
+{#                    </div>#}
+{#                    <div class="tab-content">#}
+{#                        <div class="tab-panel active" id="tab1">#}
+{#                        </div>#}
+{#                        <div class="tab-panel" id="tab2">#}
+{#                            <div class="chart-container">#}
+{#                                <canvas data-question="{{ question.intitule }}" data-type="{{ question.TypeQuestion.label }}" class="chartQuestion"#}
+{#                                        data-chart="{{ question.StatsQuestions[0].dataJson }}"></canvas>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <div class="tab-panel" id="tab3">#}
+{#                            <div class="chart-container">#}
+{#                                <canvas id="formationChart" data-chart="{{ formationChart }}"></canvas>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <div class="tab-panel" id="tab4">#}
+{#                            <div class="chart-container">#}
+{#                                <canvas id="genreChart" data-chart="{{ genreChart }}"></canvas>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <button class="next-question-stat button-stat"#}
+{#                        data-next-question="{{ questionNumber + 1 }}">#}
+{#                    Next question#}
+{#                </button>#}
+
+{#                <button class="next-question-stat button-stat">#}
+{#                    Previous Question#}
+{#                </button>#}
+{#            </div>#}
+{#                #}
+{#                #}
+{#                #}
+{#                #}
+{#                #}
+{#                #}
+{#                #}
+{#                #}
+{#               #}
+{#                <div class="question" id="question-{{ questionNumber }}"#}
+{#                     {% if questionNumber != 1 %}style="display:none"{% endif %}>#}
+{#                    <h5>{{ question.intitule }}</h5>#}
+{#                    <canvas data-question="{{ question.intitule }}"#}
+{#                            data-type="{{ question.TypeQuestion.label }}" class="chartQuestion"#}
+{#                            data-chart="{{ question.StatsQuestions[0].dataJson }}"></canvas>#}
+{#                  #}
+{#                </div>#}
+{#            {% endfor %}#}
+
+
+{#        <div class="tab-container align-items-center justify-content-center">#}
+{#            <div class="tab-header">#}
+{#                <button class="tab-button" data-tab="tab2">Statistiques par ages</button>#}
+{#                <button class="tab-button" data-tab="tab3">Statistiques par formations</button>#}
+{#                <button class="tab-button" data-tab="tab4">Statistiques par genres</button>#}
+{#            </div>#}
+{#            <div class="tab-content">#}
+{#                <div class="tab-panel active" id="tab1">#}
+{#                </div>#}
+{#                <div class="tab-panel" id="tab2">#}
+{#                    <div class="chart-container">#}
+{#                        <canvas data-question="{{ question.intitule }}" data-type="{{ question.TypeQuestion.label }}" class="chartQuestion"#}
+{#                                data-chart="{{ question.StatsQuestions[0].dataJson }}"></canvas>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="tab-panel" id="tab3">#}
+{#                    <div class="chart-container">#}
+{#                        <canvas id="formationChart" data-chart="{{ formationChart }}"></canvas>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="tab-panel" id="tab4">#}
+{#                    <div class="chart-container">#}
+{#                        <canvas id="genreChart" data-chart="{{ genreChart }}"></canvas>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+
+{#    <div class="chart-container">#}
+{#        {% set totalQuestions = sondage.questions|length %}#}
+{#        <div id="question-container">#}
+{#            {% set questionNumber = 0 %}#}
+{#            {% for question in sondage.Questions %}#}
+{#                {% set questionNumber = questionNumber + 1 %}#}
+{#                <div class="question" id="question-{{ questionNumber }}"#}
+{#                     {% if questionNumber != 1 %}style="display:none"{% endif %}>#}
+{#                    <h5>{{ question.intitule }}</h5>#}
+{#                    <canvas data-question="{{ question.intitule }}"#}
+{#                            data-type="{{ question.TypeQuestion.label }}" class="chartQuestion"#}
+{#                            data-chart="{{ question.StatsQuestions[0].dataJson }}"></canvas>#}
+{#                    <button class="next-question-stat button-stat"#}
+{#                            data-next-question="{{ questionNumber + 1 }}">#}
+{#                        Next question#}
+{#                    </button>#}
+
+{#                    <button class="next-question-stat button-stat">#}
+{#                       Previous Question#}
+{#                    </button>#}
+{#                </div>#}
+{#            {% endfor %}#}
+{#        </div>#}
+{#    </div>#}
+
+{#{% block body %}#}

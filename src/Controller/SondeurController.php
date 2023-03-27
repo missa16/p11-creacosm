@@ -246,6 +246,52 @@ class SondeurController extends AbstractController
 
     }
 
+    #[Route('/mes-sondages/{id}/stats-questions', name: 'app_sondeur_stats_question', methods: ['GET', 'POST'])]
+    public function statsQuestion(FormationRepository $formationRepository,QuestionRepository $questionRepository, Sondage $sondage): Response
+    {
+        $questions = $sondage->getQuestions();
+        foreach ( $questions as $question){
+            // stats globales
+            $statsGles= json_encode($questionRepository->findStatsGlobales($question));
+            $statsGlobalesQuestion= new StatsQuestion();
+            $statsGlobalesQuestion
+                ->setNomStat("Stat globale")
+                ->setDataJson($statsGles);
+            $question->addStatsQuestion($statsGlobalesQuestion);
+
+            //stats par genre
+
+            $statsGlesGenre= json_encode($questionRepository->findStatsParGenre($question));
+            $statsGenreQuestion= new StatsQuestion();
+            $statsGenreQuestion
+                ->setNomStat("Stat par genre")
+                ->setDataJson($statsGlesGenre);
+            $question->addStatsQuestion($statsGenreQuestion);
+
+            //stats par formation
+            $statsGlesFormation= json_encode($questionRepository->findStatsParFormation($question,$formationRepository));
+            $statsFormationQuestion= new StatsQuestion();
+            $statsFormationQuestion
+                ->setNomStat("Stat par formation")
+                ->setDataJson($statsGlesFormation);
+            $question->addStatsQuestion($statsFormationQuestion);
+
+            //stats par age
+            $statsGlesAge= json_encode($questionRepository->findStatsParTrancheAge($question));
+            $statsAgeQuestion= new StatsQuestion();
+            $statsAgeQuestion
+                ->setNomStat("Stat par tranche d'age")
+                ->setDataJson($statsGlesAge);
+            $question->addStatsQuestion($statsAgeQuestion);
+
+        }
+
+        return $this->render('sondeur/stats_sondage_question.html.twig', [
+            'sondage' => $sondage,
+        ]);
+
+    }
+
     #[Route('/export/{id}', name: 'app_sondeur_export', methods: ['GET'])]
     public function export(Request $request,GenerateFile $generateFile,Sondage $sondage): BinaryFileResponse
     {
