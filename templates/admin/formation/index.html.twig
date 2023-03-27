@@ -1,35 +1,39 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Formation index{% endblock %}
-
 {% block body %}
-    <h1>Formation index</h1>
 
-    <table class="table">
-        <thead>
+<div class="grid-container-nav">
+    {{ include('composants/_nav_bar_admin.html.twig') }}
+    <div class="content-sond">
+        <div class="row">
+            <h1 class="df jcc">Toutes les formations</h1>
+        </div>
+        <table class="table">
+            <thead>
             <tr>
                 <th>Id</th>
                 <th>NomFormation</th>
                 <th>actions</th>
             </tr>
-        </thead>
-        <tbody>
-        {% for formation in formations %}
-            <tr>
-                <td>{{ formation.id }}</td>
-                <td>{{ formation.nomFormation }}</td>
-                <td>
-                    <a href="{{ path('app_formation_show', {'id': formation.id}) }}">show</a>
-                    <a href="{{ path('app_formation_edit', {'id': formation.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for formation in formations %}
+                <tr>
+                    <td>{{ formation.id }}</td>
+                    <td>{{ formation.nomFormation }}</td>
+                    <td>
+                        <a href="{{ path('app_formation_show', {'id': formation.id}) }}">show</a>
+                        <a href="{{ path('app_formation_edit', {'id': formation.id}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <a href="{{ path('app_formation_new') }}">Create new</a> </div>
 
-    <a href="{{ path('app_formation_new') }}">Create new</a>
+</div>
 {% endblock %}

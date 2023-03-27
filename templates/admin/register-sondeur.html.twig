@@ -16,9 +16,9 @@
         <div class="content">
             <div class="row">
                 <div class="df jce">
-                    <button class="button"><a class="text-decoration-none a" href="{{ path('app_login') }}">
-                            connexion
-                        </a></button>
+{#                    <button class="button"><a class="text-decoration-none a" href="{{ path('app_login') }}">#}
+{#                            connexion#}
+{#                        </a></button>#}
 
                 </div>
             </div>
@@ -27,10 +27,7 @@
             </div>
 
             <div class="form">
-                    <button class="btn btn-outline-info">
-                        <a  href="{{ path('app_admin_show_sondeurs') }}" class="text-decoration-none">
-                            <i class="bi bi-arrow-return-left"></i>Retour </a>
-                    </button>
+
 
                 {{ form_start(registrationForm) }}
                 <div class="grid-form">
@@ -67,6 +64,9 @@
                 </div>
                 <div class="gt-1 df jcc">
                     <button  type="submit" class="button-enregister">Valider</button>
+                    <button class="button-enregister">
+                        <a class="c-white" href="{{ path('app_admin_show_sondeurs') }}" class="text-decoration-none">Retour </a>
+                    </button>
                 </div>
                 {{ form_end(registrationForm) }}
 
