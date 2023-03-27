@@ -57,6 +57,16 @@
 }
 
 
+.grid-container-10 {
+    position: relative;
+    display: grid;
+    height: 100vh;
+    grid-template-columns: 1fr 6fr; /* Première colonne = 1/3, deuxième colonne = 2/3 */
+    grid-template-rows: 100vh;
+
+}
+
+
 .content-home {
     grid-column: 2; /* Le contenu occupe la deuxième colonne */
     display: grid;

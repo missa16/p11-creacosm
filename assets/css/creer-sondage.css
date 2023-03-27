@@ -28,7 +28,7 @@ html,body {
 
 
 
-.content {
+.content-2 {
     grid-column: 2; /* Le contenu occupe la deuxième colonne */
     display: grid;
     grid-gap: 20px; /* Espacement entre les lignes */
