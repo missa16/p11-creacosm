@@ -21,7 +21,15 @@
                     <ul>
                         {% for sondage in sondages %}
 
-                            <li class="sondageDone">
+                            <li class="sondageDone" data-reponses="{% for userSondageReponse in sondage.allReponses %}
+                                    {{ userSondageReponse.question.intitule }}
+                                    <ul>
+                                        {% for rep in userSondageReponse.reponses %}
+                                            <li> {{ rep.laReponse }}</li>
+                                        {% endfor %}
+
+                                    </ul>
+                                {% endfor %}">
                                 <div>
                                     <a href="#"> {{ sondage.sondage.intitule }} </a>
 
@@ -38,15 +46,15 @@
                         <h2 class="d-flex justify-content-center">Vos réponses</h2>
                         {% for sondage in sondages %}
                             <div class="reponses d-flex flex-column align-items-center" style="display: none">
-                                {% for userSondageReponse in sondage.allReponses %}
-                                    {{ userSondageReponse.question.intitule }}
-                                    <ul>
-                                        {% for rep in userSondageReponse.reponses %}
-                                            <li> {{ rep.laReponse }}</li>
-                                        {% endfor %}
+{#                                {% for userSondageReponse in sondage.allReponses %}#}
+{#                                    {{ userSondageReponse.question.intitule }}#}
+{#                                    <ul>#}
+{#                                        {% for rep in userSondageReponse.reponses %}#}
+{#                                            <li> {{ rep.laReponse }}</li>#}
+{#                                        {% endfor %}#}
 
-                                    </ul>
-                                {% endfor %}
+{#                                    </ul>#}
+{#                                {% endfor %}#}
                             </div>
                     {% endfor %}
                     </div>
