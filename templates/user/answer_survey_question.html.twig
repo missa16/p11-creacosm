@@ -48,14 +48,18 @@
                                             Next question
                                         </button>
                                     {% endif %}
-
-
                                 </div>
 
                             </div>
                         {% endfor %}
 
                         {{ form_end(form) }}
+
+                        <a href="{{ path('app_sondage_index')}}">
+                            <button class="btn btn-outline-danger">
+                                Cancel
+                            </button>
+                        </a>
                     </div>
                 </div>
 

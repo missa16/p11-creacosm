@@ -5,7 +5,7 @@
 {% block body %}
 
 <div class="grid-container-nav">
-    {{ include('composants/_nav_bar.html.twig') }}
+    {{ include('composants/_nav_bar_admin.html.twig') }}
     <div class="content">
         <div class="df jce">
             <button class="button">Déconnexion</button>
@@ -22,7 +22,7 @@
                 <div class="question" id="question-{{ questionNumber }}" {% if questionNumber != 1 %}style="display:none"{% endif %}>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="d-flex align-items-center">
-                            <a href="{{ path('app_sondeur_stats_survey', {'id': sondage.id}) }}">
+                            <a href="{{ path('app_admin_stats_survey', {'id': sondage.id}) }}">
                                 <button class="btn btn-outline-dark">
                                     <i class="bi bi-arrow-return-left fa-10x "></i>  Retour
                                 </button>

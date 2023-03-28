@@ -4,14 +4,14 @@
 
 {% block body %}
     <div class="grid-container-nav">
-        {{ include('composants/_nav_bar.html.twig') }}
+        {{ include('composants/_nav_bar_admin.html.twig') }}
         <div class="content">
             <div class="df jce">
                 <button class="button">Déconnexion</button>
             </div>
             <h1 class="df jcc">Statistiques globlale du sondage : {{ sondage.intitule }}</h1>
             <div>
-                <a href="{{ path('app_sondeur_stats_question', {'id': sondage.id}) }}">
+                <a href="{{ path('app_admin_stats_question', {'id': sondage.id}) }}">
                 <button class="btn">
                     Voir les statistiques pour chaque question
                 </button>
