@@ -29,5 +29,7 @@
 * ROLE_SONDE -> mail: bob.leponge@carre.com & password : password
 * ROLE_SONDEUR -> mail: james.bond@skyfall.com  & password : password
 * ROLE_ADMIN -> mail: admin@creacosm.com & password : password
+* Donc se rendre à /login pour la connexion
+
 
 
