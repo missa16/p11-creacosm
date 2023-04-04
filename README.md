@@ -1,22 +1,33 @@
-#### Mise en place du projet sur sa machine
-* Cloner le repository sur sa machine
-  * 
+#### Utilisation de feuilles de style css et js
+* Charger celle-ci
+* ``` npm run dev```
 
 #### La base de donnée
+* Utilisation de PostgresSQL
 * username :  p11  
 * password : 11
-* nom de la BDD : creacosm
+* nom de la BDD : creacosm 
+* `symfony console make:migration`
+* `symfony console doctrine:migrations:migrate`
+* `symfony console dotrine:fixtures:load`
 
 #### Packages pour le projet
-* Mise en place de boostrap
+* Mise en place de boostrap ``npm i bootstrap``
+* Mise en place de chart.js `npm i chart.js`
+* Mise en place de php-spreadsheet  `composer require phpoffice/phpspreadsheet`
 
-#### Création d'un sondage
-* Création de l'entité sondage avec tous les champs spécifiés dans le rapport du S1
-  * Ajout du champ dateCréation
-  * _etatSondage_ doit plutôt entre de type enum **À VOIR**
-* CRUD de cette entité
-* Permettre de choisir des fichiers 
-  * ``composer require vich/uploader-bundle``
+#### Quelques dépendances composer
+* ``composer install``
+* ``composer require vich/uploader-bundle``
 
-#### Création d'un sondage
-* mise en place d'un fichier js donc si mise à jour faire` npm run dev`
+#### Créations de deux services
+* L'un permet de generer des tableurs (xls, csv ..)
+* L'autre permet d'enregistrer des images en deux formats : original et 300x300 (ceux-ci sont enregistrer dans public/assets)
+
+
+#### Résumé des users
+* ROLE_SONDE -> mail: bob.leponge@carre.com & password : password
+* ROLE_SONDEUR -> mail: james.bond@skyfall.com  & password : password
+* ROLE_ADMIN -> mail: admin@creacosm.com & password : password
+
+

@@ -26,8 +26,8 @@
 
                             <div><h2>{{ sondage.intitule }}</h2></div>
                             <div><p>  {{ sondage.description }}</p></div>
-                            <div class="d-flex"><p>Auteur</p>
-                                <p>{{ sondage.Sondeur.nom }} {{ sondage.Sondeur.prenom}}</p></div>
+                            <div class="d-flex">
+                                <p>   Auteur :  {{ sondage.Sondeur.nom }} {{ sondage.Sondeur.prenom}}</p></div>
                             <div class="d-flex"><p>Fin :</p>
                                 <p>{{ sondage.dateFin ? sondage.dateFin|date('d/m/Y') : '' }}</p></div>
                             <div>

@@ -31,6 +31,7 @@
 
                             <div><h2>{{ sondage.intitule }}</h2></div>
                             <div><p>  {{ sondage.description }}</p></div>
+                            <div><p>{{ sondage.etatSondage }}</p></div>
                             <div class="d-flex"><p>Date de fin : </p>
                                 <p> {{ sondage.dateFin ? sondage.dateFin|date('d/m/Y') : '' }}</p></div>
                             <div>                            <form action="{{ path('app_sondeur_export', {'id': sondage.id}) }}" method="GET">
